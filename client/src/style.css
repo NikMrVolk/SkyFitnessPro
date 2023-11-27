@@ -1,10 +1,3 @@
-Добавлено обнуление CSS стилей. Файл style.css подключен в index.js
-
-feat: added style.css (reset styles)
-
-
-
-
 /*Обнуление*/
 * {
   padding: 0;
