@@ -1,5 +1,33 @@
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "./store/slices/counterSlice";
+import "./App.css";
+
 function App() {
-	return <div className="App">Work</div>
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <div className="counter-block">
+        <button
+		className="counter-block__increment"
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Прибавить
+        </button>
+        <span className="counter-block__value">{count}</span>
+        <button
+		className="counter-block__decrement"
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Отнять
+        </button>
+        <br />
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
