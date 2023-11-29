@@ -55,6 +55,15 @@ button::-moz-focus-inner {
     border: 0;
 }
 a,
+
+    font-weight: 400;
+}
+/*--------------------*/
+.App {
+    color: green;
+    font-size: 40px;
+}
+
 a:visited {
     text-decoration: none;
 }
@@ -75,10 +84,3 @@ h4,
 h5,
 h6 {
     font-size: inherit;
-    font-weight: 400;
-}
-/*--------------------*/
-.App {
-    color: green;
-    font-size: 40px;
-}
