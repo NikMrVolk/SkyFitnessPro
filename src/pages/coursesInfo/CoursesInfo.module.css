@@ -1,0 +1,16 @@
+.coursesDiv {
+    padding-top: 30px;
+    height: 100vh;
+}
+
+.center {
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
+}
+
+@media (max-width: 1479px) {
+    .center {
+        padding-left: 140px;
+        padding-right: 140px;
+    }
+}
