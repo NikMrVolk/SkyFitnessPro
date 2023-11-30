@@ -1,7 +1,7 @@
 import styleTitle from "../coursesInfoFitting/FittingCourses.module.css";
-import s from "./DirectionCourses.module.css";
+import s from "./DirectionsCourses.module.css";
 
-export default function DirectionCoursesInfo() {
+export default function DirectionsCoursesInfo() {
     return (
         <div>
             <h2 className={styleTitle.h2+" "+s.titlePadding}>Направления:</h2>

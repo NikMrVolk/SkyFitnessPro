@@ -1,0 +1,162 @@
+.s.application {
+    display: none;
+    background-color: #e9d4ff;
+    min-height: 300px;
+}
+
+.applicationContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 46px;
+    position: absolute;
+    padding-left: 52px;
+    padding-top: 46px;
+}
+.applicationText {
+    max-width: 823px;
+    color: #000;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: StratosSkyeng;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+}
+.applicationButton {
+    width: 275px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 46px;
+    background: var(--palette-purple-90, #580ea2);
+    color: #fff;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: StratosSkyeng;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.05px;
+}
+
+/* @media (max-width: 1470px) {
+    .applicationContainer {        
+        gap: 40px;       
+        padding-top: 40px;
+    }
+    .applicationText {
+        font-size: 30px;       
+    }
+} */
+
+@media (max-width: 1470px) {
+    .applicationContainer {
+        gap: 40px;
+        padding-top: 40px;
+    }
+    .applicationText {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 1362px) {
+    .applicationContainer {
+        padding-top: 40px;
+    }
+    .applicationText {
+        font-size: 25px;
+        max-width: 750px;
+        line-height: 30px;
+    }
+}
+
+@media (max-width: 1134px) {
+    .applicationContainer {
+        padding-top: 20px;
+    }
+    .applicationText {
+        max-width: 600px;
+        line-height: 25px;
+    }
+    .applicationButton {
+        width: 270px;
+        height: 45px;
+        font-size: 15px;
+    }
+}
+@media (max-width: 937px) {
+    .applicationContainer {
+        /* padding-top: 10px; */
+        gap: 10px;
+    }
+    .applicationText {
+        max-width: 500px;
+        line-height: 25px;
+        font-size: 20px;
+    }
+    .applicationButton {
+        width: 270px;
+        height: 40px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 802px) {
+    .applicationContainer {
+        padding-top: 30px;
+    }
+    .applicationText {
+        max-width: 400px;
+        line-height: 15px;
+        font-size: 15px;
+    }
+    .applicationButton {
+        width: 270px;
+        height: 40px;
+        font-size: 15px;
+    }
+}
+@media (max-width: 754px) {
+    .ul {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 694px) {
+    .applicationContainer {
+        padding-top: 20px;
+        padding-left: 0px;
+        padding-top: 0px;
+    }
+    .applicationText {
+        max-width: 600px;
+        line-height: 15px;
+        font-size: 20px;
+    }
+    .applicationButton {
+        width: 250px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .s.application {
+        display: block;
+    }
+    svg {
+        display: none;
+    }
+}
+
+@media (max-width: 662px) {
+    .applicationText {
+        max-width: 500px;
+        line-height: 15px;
+        font-size: 20px;
+    }
+    .h2 {
+        text-align: center;
+    }
+
+    .ul {
+        justify-content: center;
+    }
+}
