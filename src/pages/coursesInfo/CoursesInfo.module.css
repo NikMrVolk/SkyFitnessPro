@@ -14,3 +14,17 @@
         padding-right: 140px;
     }
 }
+@media (max-width: 1279px) {
+    .center {
+        padding-left: 120px;
+        padding-right: 120px;
+    }
+}
+@media (max-width: 1207px) {
+    .center {
+        padding-left: 75px;
+        padding-right: 75px;
+    }
+}
+
+
