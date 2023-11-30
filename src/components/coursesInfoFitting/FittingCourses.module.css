@@ -92,16 +92,30 @@
 }
 
 @media (max-width: 1145px) {
-    
     .h2 {
         padding-top: 65px;
         padding-bottom: 20px;
-        font-size: 25px;
     }
     .div {
         gap: 20px;
     }
     .ul {
         gap: 65px;
+    }
+}
+
+@media (max-width: 754px) {
+    .ul {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 662px) {
+    .h2 {
+       text-align: center;
+    }
+
+    .ul {
+        justify-content: center;
     }
 }
