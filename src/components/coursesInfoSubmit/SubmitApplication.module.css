@@ -10,7 +10,7 @@
     max-width: 823px;
     color: #000;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: "StratosSkyeng", sans-serif;
+    /* font-family: "StratosSkyeng", sans-serif; */
     font-size: 32px;
     font-style: normal;
     font-weight: 400;
@@ -24,7 +24,7 @@
     background: var(--palette-purple-90, #580ea2);
     color: #fff;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: "StratosSkyeng", sans-serif;
+    /* font-family: "StratosSkyeng", sans-serif; */
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
