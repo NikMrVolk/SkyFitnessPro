@@ -26,15 +26,50 @@
     letter-spacing: -0.05px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 1470px) {
     .applicationContainer {
-        padding-top: 30px;
+        gap: 40px;
+        padding-top: 40px;
+    }
+    .applicationText {
+        font-size: 30px;
+    }
+} */
+
+@media (max-width: 1362px) {
+    .applicationContainer {
+        padding-top: 40px;
+    }
+    .applicationText {
+        font-size: 25px;
+        max-width: 750px;
+        line-height: 30px;
+    }
+}
+
+@media (max-width: 1134px) {
+    .applicationContainer {
+        padding-top: 20px;
+    }
+    .applicationText {
+        max-width: 600px;
+        line-height: 25px;
+    }
+    .applicationButton {
+        width: 270px;
+        height: 45px;
+        font-size: 15px;
+    }
+}
+@media (max-width: 937px) {
+    .applicationContainer {
+        /* padding-top: 10px; */
         gap: 10px;
     }
     .applicationText {
-        max-width: 400px;
-        line-height: 20px;
-        font-size: 15px;
+        max-width: 500px;
+        line-height: 25px;
+        font-size: 20px;
     }
     .applicationButton {
         width: 270px;
@@ -43,36 +78,58 @@
     }
 }
 
-
-@media (max-width: 694px) {
+@media (max-width: 802px) {
     .applicationContainer {
-        padding-top: 20px;
-        padding-left: 0px;
-        padding-top: 0px;
+        padding-top: 30px;
     }
     .applicationText {
-        max-width: 600px;
-        font-size: 20px;
-    }
-    .applicationButton {
-        width: 250px;
-        height: 40px;
+        max-width: 400px;
+        line-height: 15px;
         font-size: 15px;
     }
-
-    .s.application {
-        background-color: #e9d4ff;
-        min-height: 300px;
+    .applicationButton {
+        font-size: 15px;
     }
+}
+@media (max-width: 754px) {
+    .ul {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 694px) {
+    .applicationText {
+        max-width: 600px;
+        line-height: 15px;
+        font-size: 20px;
+    }
+
     .applicationContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 46px;
         position: relative;
+        padding-left: 0px;
+        padding-top: 0px;
     }
     .applicationSvg {
         display: none;
     }
 }
 
+@media (max-width: 662px) {
+    .applicationText {
+        max-width: 500px;
+        line-height: 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 468px) {
+    .applicationButton {
+        width: 230px;
+        height: 30px;
+        font-size: 15px;
+    }
+}

@@ -23,5 +23,7 @@
 @media (max-width: 530px) {
     .title {
         font-size: 30px;
-    }
+        padding-left: 10px;
+        padding-top: 0px;
+    }    
 }
