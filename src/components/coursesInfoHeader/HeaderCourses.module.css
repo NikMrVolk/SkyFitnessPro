@@ -6,7 +6,7 @@
 .title {
     color: #000;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: StratosSkyeng;
+    font-family: "StratosSkyeng", sans-serif;
     font-size: 60px;
     font-style: normal;
     font-weight: 400;
@@ -26,5 +26,15 @@
 @media (max-width: 1145px) {
     .title {
         font-size: 40px;
+    }
+}
+@media (max-width: 694px) {
+    .title {
+        color: white;
+    }
+
+    .header {
+        min-height: 150px;
+        background-color: #9a48f1;
     }
 }

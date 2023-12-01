@@ -62,13 +62,20 @@
 .li {
     color: #000;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: StratosSkyeng;
-    font-size: 23px;
+    font-family: "StratosSkyeng", sans-serif;
+    font-size: 24px;
     font-style: normal;
     font-weight: 400;
     line-height: 32px; /* 133.333% */
-    max-width: 210px;
+    max-width: 240px;
     min-height: 96px;
+}
+
+@media (max-width: 1416px) {
+    .li {
+        font-size: 22px;
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 1356px) {
@@ -118,4 +125,30 @@
     .ul {
         justify-content: center;
     }
+}
+
+@media (max-width: 530px) {
+    .h2 {
+        padding-top: 50px;
+        padding-bottom: 15px;
+    }
+    .h2 {
+        font-size: 25px;
+    }
+    .li {
+        font-size: 15px;
+        min-height: 50px;
+    }
+    .numberDiv {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .numberSpan {
+        font-size: 20px;
+    }
+    .ul {
+        gap: 15px;
+    }
+    
 }

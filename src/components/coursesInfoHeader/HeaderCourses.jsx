@@ -6,7 +6,7 @@ export default function HeaderCoursesInfo() {
         <header className={s.header}>
             <Logo />
 
-            <div>
+            <div className={s.header}>
                 <h1 className={s.title}>Йога</h1>
                 <svg
                     width="100%"
