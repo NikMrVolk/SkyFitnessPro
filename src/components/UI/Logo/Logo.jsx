@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import s from "./Logo.module.css";
 
 export default function Logo() {
     return (
         <Link to="/">
             <svg
+                className={s.logoSvg}
                 width="223"
                 height="36"
                 viewBox="0 0 223 36"

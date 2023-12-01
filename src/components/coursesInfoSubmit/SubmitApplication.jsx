@@ -24,6 +24,7 @@ export default function SubmitApplication() {
                 viewBox="0 0 1160 300"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className={s.applicationSvg}
             >
                 <g clipPath="url(#clip0_26_1448)">
                     <rect width="1160" height="300" rx="30" fill="#F9EBFF" />

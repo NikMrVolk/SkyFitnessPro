@@ -6,9 +6,9 @@ import SubmitApplication from "../../components/coursesInfoSubmit/SubmitApplicat
 
 export default function CoursesInfoPage() {
     return (
-        <div className={s.coursesDiv + " " + s.center}>
-            <section>
+        <div className={s.coursesDiv + " " + s.center}>           
                 <HeaderCoursesInfo />
+                <section>
                 <FittingCoursesInfo />
                 <DirectionsCoursesInfo />
                 <p className={s.description}>

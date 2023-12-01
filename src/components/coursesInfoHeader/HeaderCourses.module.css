@@ -6,35 +6,22 @@
 .title {
     color: #000;
     font-variant-numeric: lining-nums proportional-nums;
-    /* font-family: "StratosSkyeng", sans-serif; */
     font-size: 60px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 72px; /* 112.5% */
+    line-height: 72px;
     letter-spacing: -0.8px;
     position: absolute;
     padding-left: 30px;
     padding-top: 30px;
 }
 
-@media (max-width: 1356px) {
+@media (max-width: 768px) {
     .title {
-        font-size: 55px;
+        font-size: 50px;
     }
 }
 
-@media (max-width: 1145px) {
+@media (max-width: 530px) {
     .title {
-        font-size: 40px;
-    }
-}
-@media (max-width: 694px) {
-    .title {
-        color: white;
-    }
-
-    .header {
-        min-height: 150px;
-        background-color: #9a48f1;
+        font-size: 30px;
     }
 }

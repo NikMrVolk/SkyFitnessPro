@@ -1,10 +1,8 @@
 import Auth from "../pages/Auth";
-import Course from "../pages/Course";
 import MainPage from "../pages/MainPage";
 import CoursesInfoPage from "../pages/coursesInfo/CoursesInfo";
 
 import {
-    COURSE_ROUTE,
     MAIN_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
@@ -23,10 +21,6 @@ export const publicRoutes = [
     {
         element: <MainPage />,
         path: MAIN_ROUTE,
-    },
-    {
-        element: <Course />,
-        path: COURSE_ROUTE,
     },
     {
         element: <CoursesInfoPage />,
