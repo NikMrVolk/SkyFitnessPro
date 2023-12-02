@@ -1,11 +1,13 @@
 import Auth from "../pages/Auth";
 import MainPage from "../pages/MainPage";
-import CoursesInfoPage from "../pages/coursesInfo/CoursesInfo";
+import Profile from "../pages/profile/Profile";
+
 
 import {
     MAIN_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
+    PROFILE_ROUTE,
     COURSES_INFO_ROUTE,
 } from "../utils/constants";
 
@@ -25,5 +27,9 @@ export const publicRoutes = [
     {
         element: <CoursesInfoPage />,
         path: COURSES_INFO_ROUTE,
+    },
+    {
+        element: <Profile />,
+        path: PROFILE_ROUTE,
     },
 ];
