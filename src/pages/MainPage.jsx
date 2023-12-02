@@ -1,31 +1,38 @@
-import { NavLink } from "react-router-dom";
-import s from "./MainPage.module.css";
-import { ArrCards } from "../helpers";
+import s from '../styles/pages/MainPage.module.css'
 
-function Main() {
+const ArrCards = [
+    {
+        id: 1,
+        img: '/img/card1.svg',
+    },
+    {
+        id: 2,
+        img: '/img/card2.svg',
+    },
+    {
+        id: 3,
+        img: '/img/card3.svg',
+    },
+    {
+        id: 4,
+        img: '/img/card4.svg',
+    },
+    {
+        id: 5,
+        img: '/img/card5.svg',
+    },
+]
+
+function MainPage() {
     const handleTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth",
-        });
-    };
+            behavior: 'smooth',
+        })
+    }
 
     return (
-        <main className={s.main}>
-            <div className={s.header}>
-                <NavLink to="/">
-                    <img
-                        className={s.main__top_logo}
-                        src="/img/logo.svg"
-                        alt="logo"
-                    />
-                </NavLink>
-                <NavLink className="link" to="/Login">
-                    <button className={s.button} type="button">
-                        Войти
-                    </button>
-                </NavLink>
-            </div>
+        <div className={s.main}>
             <div className={s.content}>
                 <div className={s.content_header}>
                     <div>
@@ -42,49 +49,11 @@ function Main() {
                         alt="sticker"
                     />
                 </div>
-
-                {/* <div className={s.box}>
-                    <NavLink to="">
-                        <img
-                            className={s.card}
-                            src="/img/card1.svg"
-                            alt="card1"
-                        />
-                    </NavLink>
-                    <NavLink to="">
-                        <img
-                            className={s.card}
-                            src="/img/card2.svg"
-                            alt="card2"
-                        />
-                    </NavLink>
-                    <NavLink to="">
-                        <img
-                            className={s.card}
-                            src="/img/card3.svg"
-                            alt="card3"
-                        />
-                    </NavLink>
-                    <NavLink to="">
-                        <img
-                            className={s.card}
-                            src="/img/card4.svg"
-                            alt="card4"
-                        />
-                    </NavLink>
-                    <NavLink to="">
-                        <img
-                            className={s.card}
-                            src="/img/card5.svg"
-                            alt="card5"
-                        />
-                    </NavLink>
-                    </div> */}
             </div>
 
             <div>
                 {ArrCards.map((card) => (
-                    <div> {card.img} </div>
+                    <img key={card.id} src={card.img} />
                 ))}
             </div>
             <footer className={s.footer}>
@@ -96,7 +65,7 @@ function Main() {
                     Наверх ↑
                 </button>
             </footer>
-        </main>
-    );
+        </div>
+    )
 }
-export default Main;
+export default MainPage

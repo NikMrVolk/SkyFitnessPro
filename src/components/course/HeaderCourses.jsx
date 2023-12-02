@@ -1,11 +1,8 @@
-import Logo from "../../components/UI/Logo/Logo";
-import s from "./HeaderCourses.module.css";
+import s from './HeaderCourses.module.css'
 
 export default function HeaderCoursesInfo() {
     return (
         <header className={s.header}>
-            <Logo />
-
             <div className={s.header}>
                 <h1 className={s.title}>Йога</h1>
                 <svg
@@ -50,7 +47,7 @@ export default function HeaderCoursesInfo() {
                         <g
                             opacity="0.36"
                             filter="url(#filter1_i_4145_1236)"
-                            style={{ mixBlendMode: "multiply" }}
+                            style={{ mixBlendMode: 'multiply' }}
                         >
                             <path
                                 fillRule="evenodd"
@@ -145,5 +142,5 @@ export default function HeaderCoursesInfo() {
                 </svg>
             </div>
         </header>
-    );
+    )
 }

@@ -1,0 +1,45 @@
+.userName,
+.userLogin,
+.userPassword {
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 40px;
+    padding-bottom: 75px;
+}
+
+.title {
+    font-size: 48px;
+
+    line-height: 56px;
+    color: #000000;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+}
+
+.button {
+    width: 275px;
+    height: 52px;
+    border: none;
+    border-radius: 46px;
+    background-color: #580ea2;
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 24px;
+}

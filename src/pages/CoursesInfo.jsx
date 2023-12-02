@@ -1,14 +1,14 @@
-import s from "./CoursesInfo.module.css";
-import HeaderCoursesInfo from "../../components/coursesInfoHeader/HeaderCourses";
-import FittingCoursesInfo from "../../components/coursesInfoFitting/FittingCourses";
-import DirectionsCoursesInfo from "../../components/coursesInfoDirections/DirectionsCourses";
-import SubmitApplication from "../../components/coursesInfoSubmit/SubmitApplication";
+import HeaderCoursesInfo from '../components/course/HeaderCourses'
+import FittingCoursesInfo from '../components/course/FittingCourses'
+import DirectionsCoursesInfo from '../components/course/DirectionsCourses'
+import SubmitApplication from '../components/course/SubmitApplication'
+import s from '../styles/pages/CoursesInfo.module.css'
 
 export default function CoursesInfoPage() {
     return (
-        <div className={s.coursesDiv + " " + s.center}>           
-                <HeaderCoursesInfo />
-                <section>
+        <div className={s.coursesDiv + ' ' + s.center}>
+            <HeaderCoursesInfo />
+            <section>
                 <FittingCoursesInfo />
                 <DirectionsCoursesInfo />
                 <p className={s.description}>
@@ -24,5 +24,5 @@ export default function CoursesInfoPage() {
                 <SubmitApplication />
             </section>
         </div>
-    );
+    )
 }

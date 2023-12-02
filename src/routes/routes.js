@@ -1,16 +1,15 @@
-import{ Auth} from "../pages/Auth";
-import Course from "../pages/Course";
-import MainPage from "../pages/MainPage";
-import Profile from "../pages/profile/Profile";
-
+import { Auth } from '../pages/Auth'
+import MainPage from '../pages/MainPage'
+import CoursesInfoPage from '../pages/CoursesInfo'
+import Profile from '../pages/Profile'
 
 import {
     MAIN_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
     PROFILE_ROUTE,
-    COURSES_INFO_ROUTE,
-} from "../utils/constants";
+    COURSE_ROUTE,
+} from '../utils/constants'
 
 export const publicRoutes = [
     {
@@ -27,10 +26,13 @@ export const publicRoutes = [
     },
     {
         element: <CoursesInfoPage />,
-        path: COURSES_INFO_ROUTE,
+        path: COURSE_ROUTE,
     },
+]
+
+export const privateRoutes = [
     {
         element: <Profile />,
         path: PROFILE_ROUTE,
     },
-];
+]
