@@ -1,0 +1,15 @@
+.wrapper {
+    padding: 0 10px;
+    background: #fafafa;
+}
+
+.main {
+    background-color: #271a58;
+    color: #fff;
+}
+
+@media (min-width: 1160px) {
+    .wrapper {
+        padding: 0 calc(50% - 580px);
+    }
+}

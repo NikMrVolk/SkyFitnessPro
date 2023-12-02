@@ -1,7 +1,7 @@
-import { Auth } from '../pages/Auth'
-import MainPage from '../pages/MainPage'
-import CoursesInfoPage from '../pages/CoursesInfo'
-import Profile from '../pages/Profile'
+import { Auth } from '../pages/Auth/Auth'
+import MainPage from '../pages/MainPage/MainPage'
+import CoursesInfoPage from '../pages/CoursesInfo/CoursesInfo'
+import Profile from '../pages/Profile/Profile'
 
 import {
     MAIN_ROUTE,

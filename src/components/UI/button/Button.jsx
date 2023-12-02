@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { MAIN_ROUTE } from '../../../utils/constants'
-import s from '../../../styles/components/UI/button/Button.module.css'
+import s from './Button.module.css'
 
 const Button = ({ children, ...props }) => {
     const { pathname } = useLocation()

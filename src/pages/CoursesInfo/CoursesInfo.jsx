@@ -1,10 +1,11 @@
-import HeaderCoursesInfo from '../components/course/HeaderCourses'
-import FittingCoursesInfo from '../components/course/FittingCourses'
-import DirectionsCoursesInfo from '../components/course/DirectionsCourses'
-import SubmitApplication from '../components/course/SubmitApplication'
-import s from '../styles/pages/CoursesInfo.module.css'
+import HeaderCoursesInfo from '../../components/course/HeaderCourses/HeaderCourses'
+import FittingCoursesInfo from '../../components/course/FittingCourses/FittingCourses'
+import DirectionsCoursesInfo from '../../components/course/DirectionsCourses/DirectionsCourses'
+import SubmitApplication from '../../components/course/SubmitApplication/SubmitApplication'
+import s from './CoursesInfo.module.css'
 
 export default function CoursesInfoPage() {
+
     return (
         <div className={s.coursesDiv + ' ' + s.center}>
             <HeaderCoursesInfo />

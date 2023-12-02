@@ -1,11 +1,11 @@
 /*Обнуление*/
 @font-face {
-    font-family: "StratosSkyeng";
+    font-family: 'StratosSkyeng';
     src:
-        local("StratosSkyeng"),
-        local("StratosSkyeng"),
-        url("/public/fonts/StratosSkyeng.woff2") format("woff2"),
-        url("/public/fonts/StratosSkyeng.woff") format("woff");
+        local('StratosSkyeng'),
+        local('StratosSkyeng'),
+        url('/public/fonts/StratosSkyeng.woff2') format('woff2'),
+        url('/public/fonts/StratosSkyeng.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
@@ -38,7 +38,6 @@ aside {
     display: block;
 }
 
-
 html,
 body {
     height: 100%;
@@ -49,7 +48,8 @@ body {
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    font-family: "StratosSkyeng", sans-serif;
+    font-family: 'StratosSkyeng', sans-serif;
+    background: #fafafa;
 }
 
 input,
@@ -71,7 +71,7 @@ button::-moz-focus-inner {
 a,
 a:visited {
     text-decoration: none;
-    font-family: "StratosSkyeng", sans-serif;
+    font-family: 'StratosSkyeng', sans-serif;
 }
 a:hover {
     text-decoration: none;
@@ -92,4 +92,3 @@ h6 {
     font-size: inherit;
     font-weight: 400;
 }
-
