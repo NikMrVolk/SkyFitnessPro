@@ -1,0 +1,27 @@
+.menu {
+    display: block;
+    visibility: visible;
+}
+
+.menuList {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+}
+
+.menuItem {
+    padding: 5px 0;
+}
+
+.menuLink {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #000000;
+}
+
+.menuLink:hover {
+    text-decoration: underline;
+    color: rgb(105, 105, 105);
+}
