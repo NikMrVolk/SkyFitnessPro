@@ -20,7 +20,7 @@ function Main() {
                         alt="logo"
                     />
                 </NavLink>
-                <NavLink className="link" to="/Auth">
+                <NavLink className="link" to="/Login">
                     <button className={s.button} type="button">
                         Войти
                     </button>
