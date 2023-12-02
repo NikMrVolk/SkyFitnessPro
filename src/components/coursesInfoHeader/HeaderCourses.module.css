@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 75px;
+}
+.title {
+    color: #000;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 60px;
+    line-height: 72px;
+    letter-spacing: -0.8px;
+    position: absolute;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 530px) {
+    .title {
+        font-size: 30px;
+        padding-left: 10px;
+        padding-top: 0px;
+    }    
+}

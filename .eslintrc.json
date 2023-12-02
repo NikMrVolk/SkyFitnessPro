@@ -6,7 +6,7 @@
     "extends": [
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
-        "airbnb",
+        // "airbnb",
         "prettier",
         "plugin:react/jsx-runtime"
     ],
@@ -23,10 +23,10 @@
         "react/prop-types": 0,
         "react/destructuring-assignment": [0],
         "import/prefer-default-export": "off",
-        "import/no-extraneous-dependencies": [
-            "error",
-            { "includeInternal": true, "includeTypes": true }
-        ],
+        // "import/no-extraneous-dependencies": [
+        //     "error",
+        //     { "includeInternal": true, "includeTypes": true }
+        // ],
         "consistent-return": "off",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",

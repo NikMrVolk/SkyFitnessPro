@@ -5,4 +5,4 @@ export const COURSE_ROUTE = '/course/:id'
 export const PROFILE_ROUTE = '/profile'
 
 
-export const API_ROUTE = 'https://skypro-music-api.skyeng.tech/'
+export const API_ROUTE = "https://skypro-music-api.skyeng.tech/";
