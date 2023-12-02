@@ -1,4 +1,5 @@
-import Auth from "../pages/Auth";
+import{ Auth} from "../pages/Auth";
+import Course from "../pages/Course";
 import MainPage from "../pages/MainPage";
 import Profile from "../pages/profile/Profile";
 
