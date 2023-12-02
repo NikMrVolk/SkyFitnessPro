@@ -1,41 +1,52 @@
-// import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import s from "./Auth.module.css";
 
-function Auth() {
-    return (
-        <div className={s.wrapper}>
-        <div className={s.container}>
-          <div className={s.modal}>
-            <form className={s.modal__form_login}>
-              <div className={s.modal__logo}>
-                  <img className={s.modal__logo_img} src="/img/logo.svg" alt="logo" />
-                </div>
-           
-              <input
-              className={s.modal__input_login}
-              type="text"
-              name="login"
-              placeholder="Почта"
-            />
-              <input
-              className={s.modal__input_password_first}
-              type="password"
-              name="password"
-              placeholder="Пароль"
-            />
-             <input
-              className={s.modal__input_password_double}
-              type="password"
-              name="password"
-              placeholder="Повторите пароль"
-            />
-            <button  className={s.modal__btn_signup_ent} type="button" to="/">Войти </button>
-            <button  className={s.modal__btn_signup_ent} type="button" to="/"> Зарегистрироваться </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    )
-}
 
-export default Auth;
+export function Auth() {
+  const [showSignupInput, setShowSignupInput] = useState(false);
+
+  const handleSignupClick = (e) => {
+    e.preventDefault();
+    setShowSignupInput(true);
+  };
+
+  return (
+    <div className={s.login}>
+     
+      <form className={s.loginForm}>
+        <Link to="/">
+          <img className={s.login__form_img} src="img/logo.svg" alt="" />
+        </Link>
+
+        <input
+          placeholder="Логин"
+          className={s.login__form_input}
+          type="text"
+        />
+        <input
+          placeholder="Пароль"
+          className={s.login__form_input}
+          type="password"
+        />
+        {showSignupInput ? (
+          <input
+            placeholder="Повторите пароль"
+            className={s.login__form_input}
+            type="password"
+          />
+        ) : (
+          <button className={s.login__form_signin} type="button">Войти</button>
+        )}
+        <button
+          className={
+            showSignupInput ? s.login__form_signin : s.login__form_signup
+          } type="button"
+          onClick={handleSignupClick}
+        >
+          Зарегистрироваться
+        </button>
+      </form>
+    </div>
+  );
+}

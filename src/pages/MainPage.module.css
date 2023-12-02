@@ -145,6 +145,13 @@
   background: #ebffab;
   transition: 0.2s;
 }
+.mainList {
+  display: grid;
+  grid-template: auto/ repeat(3, 360px);
+  justify-content: space-between;
+  row-gap: 44px;
+  margin-bottom: 34px;
+}
 
 @media (max-width: 1356px) {
   .subtitle {

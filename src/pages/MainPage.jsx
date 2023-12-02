@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import s from "./MainPage.module.css";
+import { ArrCards } from "../helpers";
 
 function Main() {
     const handleTop = () => {
@@ -8,6 +9,7 @@ function Main() {
             behavior: "smooth",
         });
     };
+
     return (
         <main className={s.main}>
             <div className={s.header}>
@@ -36,12 +38,12 @@ function Main() {
                     </div>
                     <img
                         className={s.main__title_sticker}
-                        src="/img/sale_sticker_1 (1).svg"
+                        src="/img/sale_sticker_1.svg"
                         alt="sticker"
                     />
                 </div>
-               
-               <div className={s.box}>
+
+                {/* <div className={s.box}>
                     <NavLink to="">
                         <img
                             className={s.card}
@@ -77,19 +79,22 @@ function Main() {
                             alt="card5"
                         />
                     </NavLink>
-                    </div>
-            
+                    </div> */}
+            </div>
+
+            <div>
+                {ArrCards.map((card) => (
+                    <div> {card.img} </div>
+                ))}
             </div>
             <footer className={s.footer}>
-               
-                    <button
-                        className={s.button_two}
-                        type="button"
-                        onClick={handleTop}
-                    >
-                        Наверх ↑
-                    </button>
-           
+                <button
+                    className={s.button_two}
+                    type="button"
+                    onClick={handleTop}
+                >
+                    Наверх ↑
+                </button>
             </footer>
         </main>
     );

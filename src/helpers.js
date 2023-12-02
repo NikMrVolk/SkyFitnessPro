@@ -1,16 +1,17 @@
-export const handleImg = (item) => {
-    switch (item.name) {
-      case "Стретчинг":
-        return "/img/stratching.png";
-      case "Бодифлекс":
-        return "/img/bodyflex.png";
-      case "Йога":
-        return "/img/yoga.png";
-      case "Танцевальный фитнес ":
-        return "/img/dance.png";
-      case "Степ-аэробика":
-        return "/img/stap.png";
-      default:
-        return "/img/stap.png";
-    }
-  };
+export const ArrCards = [
+    {
+        img: "/img/card1.svg",
+    },
+    {
+        img: "/img/card2.svg",
+    },
+    {
+        img: "/img/card3.svg",
+    },
+    {
+        img: "/img/card4.svg",
+    },
+    {
+        img: "/img/card5.svg",
+    },
+];
