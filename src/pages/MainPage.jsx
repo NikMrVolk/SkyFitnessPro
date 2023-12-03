@@ -1,27 +1,6 @@
+import { AllCourses } from '../components/course/CoursesList/CoursesData'
+import CoursesList from '../components/course/CoursesList/CoursesList'
 import s from '../styles/pages/MainPage.module.css'
-
-const ArrCards = [
-    {
-        id: 1,
-        img: '/img/card1.svg',
-    },
-    {
-        id: 2,
-        img: '/img/card2.svg',
-    },
-    {
-        id: 3,
-        img: '/img/card3.svg',
-    },
-    {
-        id: 4,
-        img: '/img/card4.svg',
-    },
-    {
-        id: 5,
-        img: '/img/card5.svg',
-    },
-]
 
 function MainPage() {
     const handleTop = () => {
@@ -50,12 +29,7 @@ function MainPage() {
                     />
                 </div>
             </div>
-
-            <div>
-                {ArrCards.map((card) => (
-                    <img key={card.id} src={card.img} />
-                ))}
-            </div>
+            <CoursesList courses={AllCourses} />
             <footer className={s.footer}>
                 <button
                     className={s.button_two}

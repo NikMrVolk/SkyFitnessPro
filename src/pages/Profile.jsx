@@ -1,11 +1,10 @@
 import s from '../styles/pages/Profile.module.css'
-import UserCourses from '../components/course/UserCourses'
+import CoursesList from '../components/course/CoursesList/CoursesList'
+import { UserCourses } from '../components/course/CoursesList/CoursesData'
 
 function Profile() {
-
     return (
         <div className={s.wrapper}>
-
             <div className={s.box}>
                 <h1 className={s.title}>Мой профиль</h1>
                 <div className={s.user}>
@@ -20,7 +19,7 @@ function Profile() {
 
             <div className={s.box}>
                 <h1 className={s.title}>Мои курсы</h1>
-                <UserCourses />
+                <CoursesList courses={UserCourses} />
             </div>
         </div>
     )
