@@ -1,4 +1,5 @@
-import s from "./UserCourses.module.css";
+import s from "./UserCourses.module.css"
+
 
 function UserCourses() {
     return (

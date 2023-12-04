@@ -1,7 +1,5 @@
 import { useLocation } from 'react-router-dom'
 import { MAIN_ROUTE } from '../../../utils/constants'
-import {LOGIN_ROUTE } from '../../../utils/constants'
-import {REGISTRATION_ROUTE } from '../../../utils/constants'
 import s from '../../../styles/components/UI/button/Button.module.css'
 
 const Button = ({type,text, login, children, ...props }) => {

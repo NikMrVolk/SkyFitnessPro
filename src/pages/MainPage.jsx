@@ -1,5 +1,6 @@
 import s from '../styles/pages/MainPage.module.css'
 import Button from "../components/UI/button/Button"
+import MoveButton from '../components/UI/button/MoveButton'
 
 const ArrCards = [
     {
@@ -25,12 +26,7 @@ const ArrCards = [
 ]
 
 function MainPage() {
-    const handleTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        })
-    }
+  
     return (
         <div className={s.main}>
             <div className={s.content}>
@@ -58,13 +54,7 @@ function MainPage() {
                 ))}
             </div>
             <footer className={s.footer}>
-                <button
-                    className={s.button_two}
-                    type="button"
-                    onClick={handleTop}
-                >
-                    Наверх ↑
-                </button>
+            <MoveButton></MoveButton>
             </footer>
         </div>
     )

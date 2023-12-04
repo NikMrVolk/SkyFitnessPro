@@ -1,8 +1,9 @@
-.wrapper {
-    background-size: cover;
-    min-height: 100vh;
-    max-width: 100hm;
-    background: #271A58; 
+.page {
+    background: #271A58;
+}
+.wrapper{
+    padding-left: calc(50% - 580px);
+    padding-right: calc(50% - 580px);
 }
 .modalBlock {
     position: absolute;
