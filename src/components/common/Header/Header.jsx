@@ -1,10 +1,14 @@
 import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/constants'
+import {
+    LOGIN_ROUTE,
+    MAIN_ROUTE,
+    REGISTRATION_ROUTE,
+} from '../../../utils/constants'
 import { useState } from 'react'
-import NavMenu from '../UI/navbar/NavMenu'
-import s from '../../styles/components/common/Header.module.css'
-import Button from '../UI/button/Button'
+import NavMenu from '../../UI/navbar/NavMenu'
+import s from './Header.module.css'
+import Button from '../../UI/button/Button'
 
 function Header() {
     const { pathname } = useLocation()
@@ -17,7 +21,8 @@ function Header() {
         ? '/img/logo/whiteLogo.svg'
         : '/img/logo/blackLogo.svg'
 
-    if (pathname === LOGIN_ROUTE || pathname === REGISTRATION_ROUTE) return <></>
+    if (pathname === LOGIN_ROUTE || pathname === REGISTRATION_ROUTE)
+        return <></>
 
     return (
         <div className={s.header}>

@@ -1,4 +1,4 @@
-import s from '../styles/pages/MainPage.module.css'
+import s from './MainPage.module.css'
 
 const ArrCards = [
     {

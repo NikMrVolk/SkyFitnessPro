@@ -1,11 +1,9 @@
-import s from '../styles/pages/Profile.module.css'
-import UserCourses from '../components/course/UserCourses'
+import s from './Profile.module.css'
+import UserCourses from '../../components/course/UserCourses/UserCourses'
 
 function Profile() {
-
     return (
         <div className={s.wrapper}>
-
             <div className={s.box}>
                 <h1 className={s.title}>Мой профиль</h1>
                 <div className={s.user}>

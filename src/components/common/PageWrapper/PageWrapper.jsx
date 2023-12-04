@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
-import { MAIN_ROUTE } from '../../utils/constants'
-import s from '../../styles/components/common/PageWrapper.module.css'
+import { MAIN_ROUTE } from '../../../utils/constants'
+import s from './PageWrapper.module.css'
 
 function PageWrapper({ children }) {
     const { pathname } = useLocation()
