@@ -1,4 +1,5 @@
 import s from '../styles/pages/MainPage.module.css'
+import Button from "../components/UI/button/Button"
 
 const ArrCards = [
     {
@@ -30,7 +31,6 @@ function MainPage() {
             behavior: 'smooth',
         })
     }
-
     return (
         <div className={s.main}>
             <div className={s.content}>
@@ -49,11 +49,12 @@ function MainPage() {
                         alt="sticker"
                     />
                 </div>
+                
             </div>
 
-            <div>
+            <div className={s.cardBox}>
                 {ArrCards.map((card) => (
-                    <img key={card.id} src={card.img} />
+                    <img className={s.img} key={card.id} src={card.img} />
                 ))}
             </div>
             <footer className={s.footer}>
