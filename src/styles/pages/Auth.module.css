@@ -1,10 +1,12 @@
 .page {
-    background: #271A58;
+    background-color: #271a58;
 }
-.wrapper{
+.wrapper {
     padding-left: calc(50% - 580px);
     padding-right: calc(50% - 580px);
 }
+
+
 .modalBlock {
     position: absolute;
     z-index: 2;

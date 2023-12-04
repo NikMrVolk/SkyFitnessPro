@@ -26,7 +26,12 @@ function Header() {
             </Link>
             {isPageMain ? (
                 <Link to='/login' >
-                <Button>Войти</Button>
+                       <Button
+            text={"Войти"}
+            color={"mainpurple"}
+          
+          >
+            </Button>
                 </Link>
             ) : (
                 <div className={s.user} onClick={toggleVisibility}>

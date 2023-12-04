@@ -11,7 +11,7 @@ export function Auth() {
         setShowSignupInput(true);
       };
     return (
-   <div className={s.page}>
+  <div  className={s.page}>
       <div className={s.wrapper}>
                 <div className={s.modalBlock}>
                     <form className={s.form}>
@@ -39,21 +39,22 @@ export function Auth() {
            />
            ) : (
            
-            <Button >
-               Войти
-           </Button>
-            
-            )}
-            
-            <Button onClick={handleSignupClick}>
-              Зарегистрироваться
-
+            <Button
+            text={"Войти"}
+            color={"purple"}
+          >
             </Button>
             
+            )}
+            <Button
+            text={" Зарегистрироваться"}
+            color={"light"}
+            onClick={handleSignupClick}>
+            </Button>
                     </form>
                 </div>
                 </div>
-                </div>   
+                </div> 
     );
 }
 

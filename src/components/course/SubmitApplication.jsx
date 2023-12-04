@@ -1,4 +1,5 @@
 import s from "./SubmitApplication.module.css";
+import Button from "../UI/button/Button";
 
 export default function SubmitApplication() {
     return (
@@ -9,13 +10,12 @@ export default function SubmitApplication() {
                     поможем с выбором направления и тренера, с которым
                     тренировки принесут здоровье и радость!
                 </p>
-                <button
-                    type="submit"
-                    className={s.applicationButton}
+                <Button
+                   text={"Записаться на тренировку"}
+                   color={"purple"}
                     onClick={() => console.log("Необходимо авторизоваться!")}
-                >
-                    Записаться на тренировку
-                </button>
+                >   
+            </Button>
             </div>
 
             <svg
