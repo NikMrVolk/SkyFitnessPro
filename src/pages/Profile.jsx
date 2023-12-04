@@ -1,6 +1,6 @@
 import s from '../styles/pages/Profile.module.css'
 import CoursesList from '../components/course/CoursesList/CoursesList'
-import { UserCourses } from '../components/course/CoursesList/CoursesData'
+import { UserCourses } from '../mock/CoursesData'
 
 function Profile() {
     return (
