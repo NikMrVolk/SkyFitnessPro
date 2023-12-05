@@ -1,8 +1,11 @@
-import { userCourses } from '../../mock/сoursesData'
+import { userCourses, exercises } from '../../mock/сoursesData'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
+import Modal from '../../components/course/Modal/Modal'
+import { useState } from 'react'
 
 function Profile() {
+    const [modalActive, setModalActive] = useState(true)
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
@@ -19,7 +22,20 @@ function Profile() {
 
             <div className={s.box}>
                 <h1 className={s.title}>Мои курсы</h1>
-                <CoursesList courses={userCourses} />
+                <CoursesList courses={userCourses} setActive={setModalActive} />
+                <Modal active={modalActive} setActive={setModalActive}>
+                    <h1 className={s.modalHeader}>Выберите тренировку</h1>
+                    <ul className={s.modalUl}>
+                        {exercises.map((el) => (
+                            <li className={s.modalLi}>
+                                <button className={s.modalBtn}>
+                                    {el.text} <br />
+                                    <p className={s.btnText}>{el.day}</p>
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </Modal>
             </div>
         </div>
     )
