@@ -30,7 +30,14 @@ function Header() {
                 <img src={logoPath} alt="logo" />
             </Link>
             {isPageMain ? (
-                <Button>Войти</Button>
+                 <Link to='/login' >
+                 <Button
+      text={"Войти"}
+      color={"mainpurple"}
+    
+    >
+      </Button>
+          </Link>
             ) : (
                 <div className={s.user} onClick={toggleVisibility}>
                     <div className={s.userAvatar} />
