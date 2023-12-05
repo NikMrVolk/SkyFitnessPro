@@ -42,3 +42,34 @@
     padding: 10px 20px 10px 20px;
     cursor: pointer;
 }
+
+.courseImg {
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+    .course {
+        width: 300px;
+        transition: 0.2s;
+    }
+
+    .courseName {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .courses {
+        gap: 20px;
+    }
+
+    .course {
+        width: 250px;
+        transition: 0.2s;
+    }
+
+    .courseName {
+        font-size: 24px;
+    }
+}
