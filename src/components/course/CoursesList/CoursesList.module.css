@@ -1,8 +1,8 @@
 .courses {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    /* display: flex;
-    flex-wrap: wrap; */
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); */
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
 }
