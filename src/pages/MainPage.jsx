@@ -29,7 +29,7 @@ function MainPage() {
                     />
                 </div>
             </div>
-            <CoursesList courses={AllCourses} mainPage={true} />
+            <CoursesList courses={AllCourses} isMainPage={true} />
             <footer className={s.footer}>
                 <button
                     className={s.button_two}
