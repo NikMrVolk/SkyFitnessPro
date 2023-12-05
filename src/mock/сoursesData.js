@@ -1,4 +1,4 @@
-export const UserCourses = [
+export const userCourses = [
     {
         id: 1,
         name: 'Йога',
@@ -19,7 +19,7 @@ export const UserCourses = [
     },
 ]
 
-export const AllCourses = [
+export const allCourses = [
     {
         id: 1,
         name: 'Йога',

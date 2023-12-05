@@ -1,5 +1,5 @@
-import { AllCourses } from '../mock/CoursesData'
-import CoursesList from '../components/course/CoursesList/CoursesList'
+import { allCourses } from '../../mock/сoursesData'
+import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './MainPage.module.css'
 
 function MainPage() {
@@ -29,7 +29,7 @@ function MainPage() {
                     />
                 </div>
             </div>
-            <CoursesList courses={AllCourses} isMainPage={true} />
+            <CoursesList courses={allCourses} isMainPage={true} />
             <footer className={s.footer}>
                 <button
                     className={s.button_two}

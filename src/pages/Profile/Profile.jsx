@@ -1,5 +1,5 @@
-import UserCourses from '../../components/course/UserCourses/UserCourses'
-import CoursesList from '../components/course/CoursesList/CoursesList'
+import { userCourses } from '../../mock/сoursesData'
+import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
 
 function Profile() {
@@ -19,7 +19,7 @@ function Profile() {
 
             <div className={s.box}>
                 <h1 className={s.title}>Мои курсы</h1>
-                <CoursesList courses={UserCourses} />
+                <CoursesList courses={userCourses} />
             </div>
         </div>
     )
