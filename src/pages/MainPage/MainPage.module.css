@@ -73,18 +73,6 @@
     margin-right: 140px;
 }
 
-.card {
-    width: 360px;
-    height: 480px;
-    transition: 0.3s;
-    padding-right: 37px;
-}
-.card:hover {
-    transform: scale(1.05);
-}
-.card:active {
-    transform: scale(0.95);
-}
 .footer {
     display: flex;
     padding-top: 34px;
@@ -136,10 +124,6 @@
     .main__title_sticker {
         display: none;
     }
-    .card {
-        width: 320px;
-        transition: 0.2s;
-    }
     .button {
         margin-right: 100px;
     }
@@ -165,11 +149,5 @@
             width: 150px;
             height: 25px;
         }
-    }
-    .card {
-        width: 300px;
-        transition: 0.2s;
-        padding-right: 20px;
-        align-content: center;
     }
 }

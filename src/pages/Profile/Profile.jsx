@@ -1,5 +1,6 @@
-import s from './Profile.module.css'
 import UserCourses from '../../components/course/UserCourses/UserCourses'
+import CoursesList from '../components/course/CoursesList/CoursesList'
+import s from './Profile.module.css'
 
 function Profile() {
     return (
@@ -18,7 +19,7 @@ function Profile() {
 
             <div className={s.box}>
                 <h1 className={s.title}>Мои курсы</h1>
-                <UserCourses />
+                <CoursesList courses={UserCourses} />
             </div>
         </div>
     )
