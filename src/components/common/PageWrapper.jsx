@@ -7,7 +7,7 @@ function PageWrapper({ children }) {
     const { pathname } = useLocation()
 
     const styles = [s.wrapper, 
-        pathname === MAIN_ROUTE  ? s.main : ''].join(' ')
+        pathname === MAIN_ROUTE || LOGIN_ROUTE ? s.main : ''].join(' ')
         
 
     return <div className={styles}>{children}</div>

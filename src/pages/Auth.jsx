@@ -11,7 +11,7 @@ export function Auth() {
         setShowSignupInput(true);
       };
     return (
-  <div  className={s.page}>
+<div className={s.page}>
       <div className={s.wrapper}>
                 <div className={s.modalBlock}>
                     <form className={s.form}>
@@ -54,7 +54,7 @@ export function Auth() {
                     </form>
                 </div>
                 </div>
-                </div> 
+                </div>   
     );
 }
 

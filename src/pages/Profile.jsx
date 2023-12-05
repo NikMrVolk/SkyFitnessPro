@@ -1,5 +1,6 @@
 import s from '../styles/pages/Profile.module.css'
 import UserCourses from '../components/course/UserCourses'
+import Button from '../components/UI/button/Button'
 
 function Profile() {
 
@@ -13,8 +14,8 @@ function Profile() {
                     <p className={s.userPassword}>Пароль: 4fkhdj880d</p>
                 </div>
                 <div className={s.buttons}>
-                    <button className={s.button}>Редактировать логин</button>
-                    <button className={s.button}>Редактировать пароль</button>
+                <Button text={"Редактировать логин"} color={"purple"} ></Button>
+                <Button text={"Редактировать пароль"} color={"purple"} ></Button>
                 </div>
             </div>
 
