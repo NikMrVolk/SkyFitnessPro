@@ -5,7 +5,7 @@ import Modal from '../../components/course/Modal/Modal'
 import { useState } from 'react'
 
 function Profile() {
-    const [modalActive, setModalActive] = useState(true)
+    const [modalActive, setModalActive] = useState(false)
     const [isDone, setIsDone] = useState(false)
     
     return (
