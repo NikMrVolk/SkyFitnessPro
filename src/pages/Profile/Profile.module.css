@@ -45,7 +45,6 @@
 
 .modalHeader {
     font-size: 32px;
-    font-weight: 400;
     line-height: 40px;
     margin-bottom: 40px;
 }
@@ -82,32 +81,27 @@
     align-items: center;
 }
 
-.bthHeader {
-    display: flex;
-}
-
 .modalBtnActive {
     border: 1px solid #06b16e;
     color: #06b16e;
+    position: relative;
 }
-.btnText {
-    width: 188px;
+
+.exerciseTitle {
+    max-width: 188px;
     font-size: 20px;
-    font-weight: 400;
     line-height: 115%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
 }
 
-.btnP {
+.exerciseDay {
     font-size: 16px;
-    font-weight: 400;
     line-height: 18px;
     padding-top: 6px;
+    text-align: center;
 }
 
 .modalImg {
-    padding-left: 10px;
+    position: absolute;
+    padding-left: 230px;
 }

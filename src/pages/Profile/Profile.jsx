@@ -6,7 +6,6 @@ import { useState } from 'react'
 
 function Profile() {
     const [modalActive, setModalActive] = useState(false)
-    // const [isDone, setIsDone] = useState(false)
 
     return (
         <div className={s.wrapper}>
@@ -29,27 +28,23 @@ function Profile() {
                     <h2 className={s.modalHeader}>Выберите тренировку</h2>
                     <ul className={s.modalUl}>
                         {exercises.map((el) => (
-                            <li
-                                className={s.modalLi}
-                                key={el.id}
-                                // onClick={() => setIsDone(!isDone)}
-                            >
+                            <li className={s.modalLi} key={el.id}>
                                 <div
                                     className={
                                         el.done ? s.modalBtnActive : s.modalBtn
                                     }
                                 >
-                                    <div className={s.bthHeader}>
-                                        <h3 className={s.btnText}>{el.text}</h3>
-                                        {el.done ? (
-                                            <img
-                                                className={s.modalImg}
-                                                src="../img/isDone.svg"
-                                                alt="isDone"
-                                            />
-                                        ) : null}
-                                    </div>
-                                    <p className={s.btnP}>{el.day}</p>
+                                    <h3 className={s.exerciseTitle}>
+                                        {el.text}
+                                    </h3>
+                                    {el.done && (
+                                        <img
+                                            className={s.modalImg}
+                                            src="../img/isDone.svg"
+                                            alt="isDone"
+                                        />
+                                    )}
+                                    <p className={s.exerciseDay}>{el.day}</p>
                                 </div>
                             </li>
                         ))}
