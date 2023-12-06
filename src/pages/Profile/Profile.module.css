@@ -69,17 +69,22 @@
     }
 }
 
-.modalBtn {
+.modalBtn,
+.modalBtnActive {
     width: 278px;
-    height: 76px;
     background-color: transparent;
     border-radius: 26px;
     border: 1px solid #000;
-    padding-bottom: 12px;
+    padding: 12px 20px 12px 20px;
     font-size: 20px;
     font-weight: 400;
     line-height: 115%;
     margin-bottom: 12px;
+}
+
+.modalBtnActive {
+    border: 1px solid #06b16e;
+    color: #06b16e;
 }
 
 .btnText {
@@ -87,4 +92,8 @@
     font-weight: 400;
     line-height: 18px;
     padding-top: 6px;
+}
+
+.modalImg {
+    padding-left: 10px;
 }

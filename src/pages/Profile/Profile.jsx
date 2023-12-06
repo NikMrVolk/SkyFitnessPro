@@ -6,6 +6,8 @@ import { useState } from 'react'
 
 function Profile() {
     const [modalActive, setModalActive] = useState(true)
+    const [isDone, setIsDone] = useState(false)
+    
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
@@ -27,9 +29,25 @@ function Profile() {
                     <h1 className={s.modalHeader}>Выберите тренировку</h1>
                     <ul className={s.modalUl}>
                         {exercises.map((el) => (
-                            <li className={s.modalLi}>
-                                <button className={s.modalBtn}>
-                                    {el.text} <br />
+                            <li
+                                className={s.modalLi}
+                                key={el.id}
+                                onClick={() => setIsDone(!isDone)}
+                            >
+                                <button
+                                    className={
+                                        isDone ? s.modalBtnActive : s.modalBtn
+                                    }
+                                >
+                                    {el.text}
+                                    {isDone ? (
+                                        <img
+                                            className={s.modalImg}
+                                            src="../img/isDone.svg"
+                                            alt="isDone"
+                                        />
+                                    ) : null}
+                                    <br />
                                     <p className={s.btnText}>{el.day}</p>
                                 </button>
                             </li>
