@@ -1,13 +1,13 @@
 import { userCourses, exercises } from '../../mock/сoursesData'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
-import Modal from '../../components/course/Modal/Modal'
+import Modal from '../../components/UI/modal/Modal'
 import { useState } from 'react'
 
 function Profile() {
     const [modalActive, setModalActive] = useState(false)
-    const [isDone, setIsDone] = useState(false)
-    
+    // const [isDone, setIsDone] = useState(false)
+
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
@@ -26,30 +26,31 @@ function Profile() {
                 <h1 className={s.title}>Мои курсы</h1>
                 <CoursesList courses={userCourses} setActive={setModalActive} />
                 <Modal active={modalActive} setActive={setModalActive}>
-                    <h1 className={s.modalHeader}>Выберите тренировку</h1>
+                    <h2 className={s.modalHeader}>Выберите тренировку</h2>
                     <ul className={s.modalUl}>
                         {exercises.map((el) => (
                             <li
                                 className={s.modalLi}
                                 key={el.id}
-                                onClick={() => setIsDone(!isDone)}
+                                // onClick={() => setIsDone(!isDone)}
                             >
-                                <button
+                                <div
                                     className={
-                                        isDone ? s.modalBtnActive : s.modalBtn
+                                        el.done ? s.modalBtnActive : s.modalBtn
                                     }
                                 >
-                                    {el.text}
-                                    {isDone ? (
-                                        <img
-                                            className={s.modalImg}
-                                            src="../img/isDone.svg"
-                                            alt="isDone"
-                                        />
-                                    ) : null}
-                                    <br />
-                                    <p className={s.btnText}>{el.day}</p>
-                                </button>
+                                    <div className={s.bthHeader}>
+                                        <h3 className={s.btnText}>{el.text}</h3>
+                                        {el.done ? (
+                                            <img
+                                                className={s.modalImg}
+                                                src="../img/isDone.svg"
+                                                alt="isDone"
+                                            />
+                                        ) : null}
+                                    </div>
+                                    <p className={s.btnP}>{el.day}</p>
+                                </div>
                             </li>
                         ))}
                     </ul>
