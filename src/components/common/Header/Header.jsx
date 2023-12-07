@@ -9,6 +9,7 @@ import { useState } from 'react'
 import NavMenu from '../../UI/navbar/NavMenu'
 import s from './Header.module.css'
 import Button from '../../UI/button/Button'
+// import { redirect } from 'react-router-dom'
 
 function Header() {
     const { pathname } = useLocation()
@@ -30,7 +31,15 @@ function Header() {
                 <img src={logoPath} alt="logo" />
             </Link>
             {isPageMain ? (
-                <Button>Войти</Button>
+                // return redirect("/login")
+                 <Link to='/login' >
+                 <Button
+      text={"Войти"}
+      color={"mainpurple"}
+    
+    >
+      </Button>
+          </Link>
             ) : (
                 <div className={s.user} onClick={toggleVisibility}>
                     <div className={s.userAvatar} />
