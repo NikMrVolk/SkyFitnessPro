@@ -1,11 +1,11 @@
 import s from './Button.module.css'
 
-function Button({ text, color, onClick }) {
+function Button({ text, color, ...props }) {
     return (
-      <button className={`${s.button} ${s[color]}`} onClick={onClick}>
-        {text}
-      </button>
-    );
-  }
-  
-  export default Button;
+        <button className={`${s.button} ${s[color]}`} {...props}>
+            {text}
+        </button>
+    )
+}
+
+export default Button

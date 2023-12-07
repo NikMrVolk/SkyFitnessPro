@@ -29,6 +29,10 @@
     appearance: none;
     width: 340px;
 }
+.progressInputColor {
+   color: red
+}
+
 
 .question {
     color: #000;

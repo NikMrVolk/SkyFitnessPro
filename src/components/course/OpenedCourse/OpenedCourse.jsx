@@ -12,18 +12,21 @@ const exercises = [
         id: 1,
         text: 'Наклон вперед',
         repetition: '(10 повторений)',
+        quantity: 10,
         quantityUser: 0,
     },
     {
         id: 2,
         text: 'Наклон назад',
         repetition: '(10 повторений)',
+        quantity: 10,
         quantityUser: 0,
     },
     {
         id: 3,
         text: 'Поднятие ног, согнутых в коленях',
         repetition: '(5 повторений)',
+        quantity: 5,
         quantityUser: 0,
     },
 ]
@@ -97,6 +100,7 @@ const OpenedCourse = () => {
                                 </form>
 
                                 <Button
+                                    type={'submit'}
                                     text={'Отправить'}
                                     color={'purple'}
                                     onClick={() => {
