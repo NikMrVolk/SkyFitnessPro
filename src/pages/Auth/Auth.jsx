@@ -25,7 +25,7 @@ export function Auth() {
                         <>
                             <Input
                                 placeholder="Логин"
-                                // classes={[]}
+                                classes={[s.login]}
                                 type="text"
                                 onChange={(e) => {
                                     console.log(e.target.value)
@@ -33,6 +33,7 @@ export function Auth() {
                             />
                             <Input
                                 placeholder="Пароль"
+                                classes={[s.login]}
                                 type="password"
                                 onChange={(e) => {
                                     console.log(e.target.value)
@@ -41,6 +42,7 @@ export function Auth() {
 
                             <Input
                                 placeholder="Повторите пароль"
+                                classes={[s.login]}
                                 type="password"
                                 onChange={(e) => {
                                     console.log(e.target.value)
@@ -56,6 +58,7 @@ export function Auth() {
                         <>
                             <Input
                                 placeholder="Логин"
+                                classes={[s.login]}
                                 type="text"
                                 onChange={(e) => {
                                     console.log(e.target.value)
@@ -63,6 +66,7 @@ export function Auth() {
                             />
                             <Input
                                 placeholder="Пароль"
+                                classes={[s.login]}
                                 type="password"
                                 onChange={(e) => {
                                     console.log(e.target.value)
