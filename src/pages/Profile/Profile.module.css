@@ -67,6 +67,11 @@
     }
 }
 
+.modalLi {
+    display: flex;
+    justify-content: center;
+}
+
 .modalBtn,
 .modalBtnActive {
     width: 278px;
