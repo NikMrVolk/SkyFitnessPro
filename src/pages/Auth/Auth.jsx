@@ -4,6 +4,7 @@ import Button from '../../components/UI/button/Button'
 import { MAIN_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
 import { useState } from 'react'
+import Input from '../../components/UI/input/Input'
 
 export function Auth() {
     const [isLogin, setIsLogin] = useState(false)
@@ -22,20 +23,28 @@ export function Auth() {
                     </div>
                     {isLogin ? (
                         <>
-                            <input
+                            <Input
                                 placeholder="Логин"
-                                className={s.login}
+                                // classes={[]}
                                 type="text"
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                }}
                             />
-                            <input
+                            <Input
                                 placeholder="Пароль"
-                                className={s.login}
                                 type="password"
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                }}
                             />
-                            <input
+
+                            <Input
                                 placeholder="Повторите пароль"
-                                className={s.login}
                                 type="password"
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                }}
                             />
 
                             <Button
@@ -45,15 +54,19 @@ export function Auth() {
                         </>
                     ) : (
                         <>
-                            <input
+                            <Input
                                 placeholder="Логин"
-                                className={s.login}
                                 type="text"
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                }}
                             />
-                            <input
+                            <Input
                                 placeholder="Пароль"
-                                className={s.login}
                                 type="password"
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                }}
                             />
                             <Button text={'Войти'} color={'purple'}>
                                 {' '}
