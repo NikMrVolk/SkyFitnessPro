@@ -82,5 +82,5 @@ export const exercises = [
         text: 'Гибкость спины',
         day: 'Йога на каждый день / 5 день',
         done: false,
-    },
+    }
 ]

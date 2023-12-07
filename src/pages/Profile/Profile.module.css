@@ -50,13 +50,12 @@
 }
 
 .modalUl {
-    height: 300px;
-    overflow: hidden;
-    overflow-y: scroll;
+    height: 453px;
+    overflow-y: auto;
 
     &::-webkit-scrollbar {
         width: 5px;
-    }
+    }  
 
     &::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.05);
@@ -98,10 +97,9 @@
     font-size: 16px;
     line-height: 18px;
     padding-top: 6px;
-    text-align: center;
 }
 
 .modalImg {
     position: absolute;
-    padding-left: 230px;
+    left: 239px;
 }

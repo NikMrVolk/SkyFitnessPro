@@ -21,7 +21,7 @@
 
 .content,
 .contentActive {
-    padding: 36px;
+    padding: 36px 54px;
     border-radius: 12px;
     background-color: #ffffff;
     transform: scale(0.5);
@@ -31,4 +31,7 @@
 .contentActive {
     transition: 0.4s all;
     transform: scale(1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
