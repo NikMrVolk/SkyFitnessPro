@@ -35,11 +35,6 @@
     background-color: transparent;
 }
 .login {
-    width: 278.5px;
-    border-bottom: 1px solid #d0cece;
-    font-size: 18px;
-    line-height: 24px;
-    outline: none;
     margin-bottom: 40px;
 }
 .login::placeholder {

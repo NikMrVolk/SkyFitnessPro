@@ -1,4 +1,4 @@
-import styleTitle from "../FittingCourses/FittingCourses";
+import styleTitle from "../FittingCourses/FittingCourses.module.css";
 import s from "./DirectionsCourses.module.css";
 
 export default function DirectionsCoursesInfo() {
