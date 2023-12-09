@@ -32,15 +32,10 @@
     color: #000;
 }
 
-.courseBtn {
+.btnWrapper {
     position: absolute;
     left: 30px;
     bottom: 30px;
-    border-radius: 80px;
-    background-color: #c7e957;
-    font-size: 20px;
-    padding: 10px 20px 10px 20px;
-    cursor: pointer;
 }
 
 .courseImg {
@@ -48,7 +43,7 @@
     height: 100%;
 }
 
-@media (min-width: 768px) and (max-width: 1024px){
+@media (min-width: 768px) and (max-width: 1024px) {
     .course {
         width: 300px;
         transition: 0.2s;

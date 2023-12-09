@@ -1,6 +1,13 @@
+import { redirect } from 'react-router-dom'
+import { COURSE_ROUTE } from '../../../utils/constants'
 import s from './CoursesList.module.css'
+import NavButton from '../../UI/navButton/NavButton'
 
 function CoursesList({ courses, isMainPage, setActive }) {
+    const handleClick = () => {
+        setActive(true)
+    }
+
     return (
         <div className={s.courses}>
             {courses.map((el) => (
@@ -10,12 +17,11 @@ function CoursesList({ courses, isMainPage, setActive }) {
                     {isMainPage ? (
                         <></>
                     ) : (
-                        <button
-                            className={s.courseBtn}
-                            onClick={() => setActive(true)}
-                        >
-                            Перейти →
-                        </button>
+                        <div className={s.btnWrapper}>
+                            <NavButton onClick={handleClick}>
+                                Перейти →
+                            </NavButton>
+                        </div>
                     )}
                 </div>
             ))}
