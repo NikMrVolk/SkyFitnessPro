@@ -1,5 +1,6 @@
 import { allCourses } from '../../mock/сoursesData'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
+import NavButton from '../../components/UI/navButton/NavButton'
 import s from './MainPage.module.css'
 
 function MainPage() {
@@ -31,13 +32,7 @@ function MainPage() {
             </div>
             <CoursesList courses={allCourses} isMainPage={true} />
             <footer className={s.footer}>
-                <button
-                    className={s.button_two}
-                    type="button"
-                    onClick={handleTop}
-                >
-                    Наверх ↑
-                </button>
+                <NavButton onClick={handleTop}>Наверх ↑</NavButton>
             </footer>
         </div>
     )

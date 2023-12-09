@@ -1,0 +1,19 @@
+.navButton {
+    min-width: 96px;
+    min-height: 23px;
+    padding: 10px 20px;
+    font-size: 20px;
+    line-height: 115%;
+    letter-spacing: -0.05px;
+    border-radius: 80px;
+    background: #c7e957;
+    cursor: pointer;
+}
+
+.navButton:hover {
+    background: #daf289;
+}
+
+.navButton:active {
+    background: #ebffab;
+}
