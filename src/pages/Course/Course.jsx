@@ -2,11 +2,15 @@ import HeaderCoursesInfo from '../../components/course/HeaderCourses/HeaderCours
 import FittingCoursesInfo from '../../components/course/FittingCourses/FittingCourses'
 import DirectionsCoursesInfo from '../../components/course/DirectionsCourses/DirectionsCourses'
 import SubmitApplication from '../../components/course/SubmitApplication/SubmitApplication'
+import OpenedCourse from '../../components/course/OpenedCourse/OpenedCourse'
+import { useSelector } from 'react-redux'
 import s from './Course.module.css'
 
 export default function CoursesInfoPage() {
+    const { isAuth } = useSelector((state) => state.profile)
+    console.log(isAuth)
 
-    
+    if (isAuth) return <OpenedCourse />
 
     return (
         <div className={s.coursesDiv + ' ' + s.center}>

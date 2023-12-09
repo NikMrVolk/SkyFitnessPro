@@ -5,8 +5,11 @@ import { REGISTRATION_ROUTE } from '../../utils/constants'
 import { useState } from 'react'
 import Input from '../../components/UI/input/Input'
 import s from './Auth.module.css'
+import { useDispatch } from 'react-redux'
+import { logIn } from '../../store/slices/profileSlice'
 
 export function Auth() {
+    const dispatch = useDispatch()
     const { pathname } = useLocation()
     const [value, setValue] = useState({
         login: '',
@@ -61,7 +64,12 @@ export function Auth() {
                         />
                     )}
                     <Link to={PROFILE_ROUTE}>
-                        <Button color={'purple'}>
+                        <Button
+                            color={'purple'}
+                            onClick={() => {
+                                dispatch(logIn())
+                            }}
+                        >
                             {isLogin ? 'Войти' : 'Зарегистрироваться'}
                         </Button>
                     </Link>

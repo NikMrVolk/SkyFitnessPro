@@ -76,10 +76,11 @@ const OpenedCourse = () => {
                         ))}
                     </ol>
                     <Button
-                        text={'Заполнить свой прогресс'}
                         color={'purple'}
                         onClick={() => setModalActive(true)}
-                    />
+                    >
+                        Заполнить свой прогресс
+                    </Button>
 
                     <Modal
                         active={isSubmit ? isSubmit : modalActive}
@@ -100,13 +101,13 @@ const OpenedCourse = () => {
                                 </form>
 
                                 <Button
-                                    type={'submit'}
-                                    text={'Отправить'}
                                     color={'purple'}
                                     onClick={() => {
                                         setIsSubmit(true), setModalActive(false)
                                     }}
-                                />
+                                >
+                                    Отправить
+                                </Button>
                             </div>
                         )}
 
