@@ -44,14 +44,6 @@ const OpenedCourse = () => {
     const [modalActive, setModalActive] = useState(false)
     const [isSubmit, setIsSubmit] = useState(false)
 
-    useEffect(() => {
-        console.log('modalProgressActive', modalActive)
-    }, [modalActive])
-
-    useEffect(() => {
-        console.log('exercises', exercises)
-    }, [exercises])
-
     return (
         <div>
             <h1 className={s.title}>Йога</h1>
