@@ -2,9 +2,11 @@ import HeaderCoursesInfo from '../../components/course/HeaderCourses/HeaderCours
 import FittingCoursesInfo from '../../components/course/FittingCourses/FittingCourses'
 import DirectionsCoursesInfo from '../../components/course/DirectionsCourses/DirectionsCourses'
 import SubmitApplication from '../../components/course/SubmitApplication/SubmitApplication'
-import s from './CoursesInfo.module.css'
+import s from './Course.module.css'
 
 export default function CoursesInfoPage() {
+
+    
 
     return (
         <div className={s.coursesDiv + ' ' + s.center}>

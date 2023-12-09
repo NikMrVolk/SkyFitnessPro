@@ -1,8 +1,7 @@
 import { Auth } from '../pages/Auth/Auth'
 import MainPage from '../pages/MainPage/MainPage'
-import CoursesInfoPage from '../pages/CoursesInfo/CoursesInfo'
 import Profile from '../pages/Profile/Profile'
-import OpenedCourse from '../components/course/OpenedCourse/OpenedCourse'
+import Course from '../pages/Course/Course'
 
 import {
     MAIN_ROUTE,
@@ -10,7 +9,6 @@ import {
     REGISTRATION_ROUTE,
     PROFILE_ROUTE,
     COURSE_ROUTE,
-    OPENCOURSE_ROUTE
 } from '../utils/constants'
 
 export const publicRoutes = [
@@ -27,12 +25,8 @@ export const publicRoutes = [
         path: MAIN_ROUTE,
     },
     {
-        element: <CoursesInfoPage />,
+        element: <Course />,
         path: COURSE_ROUTE,
-    },
-    {
-        element: <OpenedCourse />,
-        path: OPENCOURSE_ROUTE,
     },
 ]
 

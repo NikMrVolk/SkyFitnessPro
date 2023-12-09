@@ -7,9 +7,8 @@ import {
 } from '../../../utils/constants'
 import { useState } from 'react'
 import NavMenu from '../../UI/navbar/NavMenu'
+import LoginButton from '../../UI/loginButton/LoginButton'
 import s from './Header.module.css'
-import Button from '../../UI/button/Button'
-// import { redirect } from 'react-router-dom'
 
 function Header() {
     const { pathname } = useLocation()
@@ -31,15 +30,9 @@ function Header() {
                 <img src={logoPath} alt="logo" />
             </Link>
             {isPageMain ? (
-                // return redirect("/login")
-                 <Link to='/login' >
-                 <Button
-      text={"Войти"}
-      color={"mainpurple"}
-    
-    >
-      </Button>
-          </Link>
+                <Link to={LOGIN_ROUTE}>
+                    <LoginButton>Войти</LoginButton>
+                </Link>
             ) : (
                 <div className={s.user} onClick={toggleVisibility}>
                     <div className={s.userAvatar} />

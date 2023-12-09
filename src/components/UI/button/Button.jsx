@@ -1,9 +1,9 @@
 import s from './Button.module.css'
 
-function Button({ text, color, ...props }) {
+function Button({ children, color, onClick }) {
     return (
-        <button className={`${s.button} ${s[color]}`} {...props}>
-            {text}
+        <button className={`${s.button} ${s[color]}`} onClick={onClick}>
+            {children}
         </button>
     )
 }

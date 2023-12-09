@@ -11,7 +11,6 @@
     top: calc(50% - (439px / 2));
     opacity: 1;
     width: 366px;
-    height: 439px;
     background-color: #ffffff;
     border-radius: 12px;
     display: -webkit-box;
@@ -40,30 +39,5 @@
 .login::placeholder {
     color: #e1e1e1;
   }
-.btn {
-    padding-bottom: 20px;
-}
-.modalBtn {
-    border-radius: 46px;
-    width: 278px;
-    height: 52px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    line-height: 24px;
-    color: #fff;
-    margin-bottom: 20px;
-    border-radius: 46px;
-    background: var(--palette-purple-90, #580EA2);
 
-}
 
-.modalBtn:hover {
-    background: #3F007D;
-}
-
-.modalBtn:active {
-    background: #3b29a1;
-}

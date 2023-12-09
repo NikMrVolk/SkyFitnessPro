@@ -4,35 +4,12 @@
     height: 100vh;
 }
 
-.center {
-    padding-left: calc(50% - 600px);
-    padding-right: calc(50% - 600px);
-}
 .description {
     color: #000;
     font-variant-numeric: lining-nums proportional-nums;
     font-size: 24px;
     line-height: 32px;
     padding: 75px 0px;
-}
-
-@media (max-width: 1479px) {
-    .center {
-        padding-left: 140px;
-        padding-right: 140px;
-    }
-}
-@media (max-width: 1279px) {
-    .center {
-        padding-left: 120px;
-        padding-right: 120px;
-    }
-}
-@media (max-width: 1207px) {
-    .center {
-        padding-left: 75px;
-        padding-right: 75px;
-    }
 }
 
 @media (max-width: 1356px) {
