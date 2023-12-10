@@ -40,7 +40,7 @@ npm start
 
 ## Скриншоты
 
-### Гланыая страница
+### Главная страница
 ![Screenshot 2023-12-09 at 13 37 22](https://github.com/NikMrVolk/SkyFitnessPro/assets/98909861/d790773e-0772-48e6-a683-2a02b16c49cb)
 
 ### Страница профиля
