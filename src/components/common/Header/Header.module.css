@@ -22,6 +22,11 @@
     cursor: pointer;
 }
 
+.userName {
+    font-size: 24px;
+    line-height: 32px;
+}
+
 .userAvatar {
     width: 50px;
     height: 50px;
@@ -33,10 +38,24 @@
     .logo {
         width: 180px;
     }
+    .userName {
+        font-size: 20px;
+    }
+    .userAvatar {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
     .logo {
         width: 140px;
+    }
+    .userName {
+        font-size: 16px;
+    }
+    .userAvatar {
+        width: 30px;
+        height: 30px;
     }
 }
