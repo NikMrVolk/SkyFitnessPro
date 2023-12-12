@@ -1,7 +1,7 @@
 .menu {
     position: relative;
     display: inline-block;
-    top: 30px;
+    top: 16px;
 }
 
 .menuList {
@@ -11,6 +11,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     right: 0;
+    z-index: 1;
 }
 
 .menuItem {

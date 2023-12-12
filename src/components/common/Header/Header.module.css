@@ -22,6 +22,18 @@
     cursor: pointer;
 }
 
+.menu {
+    display: none;
+}
+
+.user:hover .menu {
+    display: block;
+}
+
+.user:hover .chevronDown {
+    display: none;
+}
+
 .userName {
     font-size: 24px;
     line-height: 32px;
@@ -34,7 +46,7 @@
     background-color: rgb(105, 105, 105);
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
     .logo {
         width: 180px;
     }
@@ -47,7 +59,7 @@
     }
 }
 
-@media (min-width: 320px) and (max-width: 767px) {
+@media (max-width: 767px) {
     .logo {
         width: 140px;
     }

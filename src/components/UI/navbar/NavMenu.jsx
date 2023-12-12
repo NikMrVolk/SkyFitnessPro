@@ -8,17 +8,14 @@ import {
 
 const navMenuItems = [
     {
-        id: 1,
         link: MAIN_ROUTE,
         name: 'Главная',
     },
     {
-        id: 2,
         link: PROFILE_ROUTE,
         name: 'Профиль',
     },
     {
-        id: 3,
         link: LOGIN_ROUTE,
         name: 'Выйти',
     },
@@ -31,7 +28,7 @@ function NavMenu() {
                 {navMenuItems.map((el) => (
                     <>
                         <NavLink to={el.link}>
-                            <li className={s.menuItem} key={el.id}>
+                            <li className={s.menuItem} key={el.link}>
                                 {el.name}
                             </li>
                         </NavLink>
