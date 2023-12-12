@@ -16,7 +16,7 @@ import { setAuth } from '../../store/slices/authSlice'
 
 export function Auth() {
     const dispatch = useDispatch()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const { pathname } = useLocation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,7 +31,7 @@ export function Auth() {
                 dispatch(setAuth({ user }))
                 console.log(user)
                 console.log(user.uid)
-                navigate({MAIN_ROUTE});
+                navigate({ PROFILE_ROUTE })
             })
             .catch((error) => {
                 console.log(error.code)
@@ -49,7 +49,7 @@ export function Auth() {
                     dispatch(setAuth({ user }))
                     console.log(user)
                     console.log(user.uid)
-                    navigate({MAIN_ROUTE});
+                    navigate({ PROFILE_ROUTE })
                 })
                 .catch((error) => {
                     console.log(error.code)
