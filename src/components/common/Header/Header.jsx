@@ -14,6 +14,8 @@ function Header() {
     const { pathname } = useLocation()
     const [visible, setVisible] = useState(false)
     const toggleVisibility = () => setVisible((e) => !e)
+    const user = JSON.parse(localStorage.getItem('auth'))
+    console.log(user?.userName)
 
     const isPageMain = pathname === MAIN_ROUTE
 
@@ -29,14 +31,14 @@ function Header() {
             <Link to={MAIN_ROUTE} className={s.logo}>
                 <img src={logoPath} alt="logo" />
             </Link>
-            {isPageMain ? (
+            {!user ? (
                 <Link to={LOGIN_ROUTE}>
                     <LoginButton>Войти</LoginButton>
                 </Link>
             ) : (
                 <div className={s.user} onClick={toggleVisibility}>
                     <div className={s.userAvatar} />
-                    <span className={s.userName}>Сергей</span>
+                    <span className={s.userName}>{user.userName}</span>
                     {/* <div>{visible && <NavMenu />}</div> */}
                     {visible ? <ChevronUp /> : <ChevronDown />}
                 </div>

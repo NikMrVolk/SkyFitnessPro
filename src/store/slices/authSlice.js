@@ -4,7 +4,7 @@ const AUTH_INFO = 'auth'
 
 function getAuthFromLocalStorage() {
     try {
-        return JSON.parse(localStorage.getItem(AUTH_INFO))
+       return JSON.parse(localStorage.getItem(AUTH_INFO))
     } catch (error) {
         console.error(error)
         return null

@@ -1,11 +1,11 @@
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
 } from 'firebase/auth'
 import Button from '../../components/UI/button/Button'
-import { LOGIN_ROUTE, PROFILE_ROUTE } from '../../utils/constants'
+import { LOGIN_ROUTE, PROFILE_ROUTE, MAIN_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
 import { useState } from 'react'
 import Input from '../../components/UI/input/Input'
@@ -16,6 +16,7 @@ import { setAuth } from '../../store/slices/authSlice'
 
 export function Auth() {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const { pathname } = useLocation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -30,6 +31,7 @@ export function Auth() {
                 dispatch(setAuth({ user }))
                 console.log(user)
                 console.log(user.uid)
+                navigate({MAIN_ROUTE});
             })
             .catch((error) => {
                 console.log(error.code)
@@ -47,6 +49,7 @@ export function Auth() {
                     dispatch(setAuth({ user }))
                     console.log(user)
                     console.log(user.uid)
+                    navigate({MAIN_ROUTE});
                 })
                 .catch((error) => {
                     console.log(error.code)
