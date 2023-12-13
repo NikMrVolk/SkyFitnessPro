@@ -28,20 +28,13 @@ function NavMenu() {
         <div className={s.menu}>
             <ul className={s.menuList}>
                 {navMenuItems.map((el) => (
-                    <>
-                        <NavLink
-                            to={el.link}
-                            className={
-                                el.link === location.pathname
-                                    ? s.activLink
-                                    : null
-                            }
-                        >
-                            <li className={s.menuItem} key={el.link}>
-                                {el.name}
-                            </li>
-                        </NavLink>
-                    </>
+                    <NavLink
+                        to={el.link}
+                        key={el.link}
+                        className={el.link === location.pathname && s.activeLink}
+                    >
+                        <li className={s.menuItem}>{el.name}</li>
+                    </NavLink>
                 ))}
             </ul>
         </div>
