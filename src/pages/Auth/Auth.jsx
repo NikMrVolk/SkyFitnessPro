@@ -28,7 +28,14 @@ export function Auth() {
 
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
-                dispatch(setAuth({ user }))
+                dispatch(
+                    setAuth({
+                        accessToken: user.accessToken,
+                        email: user.email,
+                        uid: user.uid,
+                        refreshToken: user.stsTokenManager.refreshToken,
+                    }),
+                )
                 console.log(user)
                 console.log(user.uid)
                 navigate({ PROFILE_ROUTE })
@@ -46,7 +53,14 @@ export function Auth() {
         } else {
             createUserWithEmailAndPassword(auth, email, password)
                 .then(({ user }) => {
-                    dispatch(setAuth({ user }))
+                    dispatch(
+                        setAuth({
+                            accessToken: user.accessToken,
+                            email: user.email,
+                            uid: user.uid,
+                            refreshToken: user.stsTokenManager.refreshToken,
+                        }),
+                    )
                     console.log(user)
                     console.log(user.uid)
                     navigate({ PROFILE_ROUTE })

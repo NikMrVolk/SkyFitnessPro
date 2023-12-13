@@ -24,11 +24,15 @@ export const authSlice = createSlice({
 
     reducers: {
         setAuth: (state, action) => {
-            const { user } = action.payload ?? initialState
-            state.access = user.accessToken
-            state.userName = user.email
-            state.userID = user.uid
-            state.refresh = user.stsTokenManager.refreshToken
+            const { accessToken, email, uid, refreshToken } = action.payload ?? initialState
+            // state.access = user.accessToken
+            // state.userName = user.email
+            // state.userID = user.uid
+            // state.refresh = user.stsTokenManager.refreshToken
+            state.access = accessToken
+            state.userName = email
+            state.userID = uid
+            state.refresh = refreshToken
 
             localStorage.setItem(AUTH_INFO, JSON.stringify(state))
         },
