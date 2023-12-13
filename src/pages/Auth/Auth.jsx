@@ -59,6 +59,7 @@ export function Auth() {
     }
 
     const isLogin = pathname === LOGIN_ROUTE
+    console.log(isLogin)
 
     return (
         <div className={s.page}>

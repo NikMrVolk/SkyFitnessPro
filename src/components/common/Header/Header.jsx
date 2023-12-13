@@ -39,7 +39,7 @@ function Header() {
                 <div className={s.user} onClick={toggleVisibility}>
                     <div className={s.userAvatar} />
                     <span className={s.userName}>{user.userName}</span>
-                    {/* <div>{visible && <NavMenu />}</div> */}
+                    <div>{visible && <NavMenu />}</div>
                     {visible ? <ChevronUp /> : <ChevronDown />}
                 </div>
             )}
