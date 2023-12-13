@@ -36,8 +36,6 @@ export function Auth() {
                         refreshToken: user.stsTokenManager.refreshToken,
                     }),
                 )
-                console.log(user)
-                console.log(user.uid)
                 navigate(PROFILE_ROUTE)
             })
             .catch((error) => {
@@ -61,8 +59,6 @@ export function Auth() {
                             refreshToken: user.stsTokenManager.refreshToken,
                         }),
                     )
-                    console.log(user)
-                    console.log(user.uid)
                     navigate(PROFILE_ROUTE)
                 })
                 .catch((error) => {
@@ -73,7 +69,6 @@ export function Auth() {
     }
 
     const isLogin = pathname === LOGIN_ROUTE
-    console.log(isLogin)
 
     return (
         <div className={s.page}>
