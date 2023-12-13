@@ -22,12 +22,19 @@ const navMenuItems = [
 ]
 
 function NavMenu() {
+    const currentUrl = window.location.pathname
+
     return (
         <div className={s.menu}>
             <ul className={s.menuList}>
                 {navMenuItems.map((el) => (
                     <>
-                        <NavLink to={el.link}>
+                        <NavLink
+                            to={el.link}
+                            className={
+                                el.link === currentUrl ? s.activLink : null
+                            }
+                        >
                             <li className={s.menuItem} key={el.link}>
                                 {el.name}
                             </li>
