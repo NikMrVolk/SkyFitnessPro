@@ -45,7 +45,7 @@ export const allCourses = [
         alt: 'yoga',
     },
     {
-        id: 5,
+        id: 6,
         name: 'Бодифлекс',
         img: '../img/courses/card5.svg',
         alt: 'bodyflex',

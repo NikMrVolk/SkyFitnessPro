@@ -22,6 +22,10 @@ const navMenuItems = [
 ]
 
 function NavMenu() {
+    const handleLogout = () => {
+        localStorage.removeItem('auth')
+        window.location.href = '/'
+    }
     const location = useLocation()
 
     return (

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import {
     LOGIN_ROUTE,
@@ -11,6 +12,7 @@ import s from './Header.module.css'
 
 function Header() {
     const { pathname } = useLocation()
+    const user = useSelector((state) => state.auth)
 
     const isPageMain = pathname === MAIN_ROUTE
 
@@ -26,7 +28,7 @@ function Header() {
             <Link to={MAIN_ROUTE} className={s.logo}>
                 <img src={logoPath} alt="logo" />
             </Link>
-            {isPageMain ? (
+            {!user.userName ? (
                 <Link to={LOGIN_ROUTE}>
                     <LoginButton>Войти</LoginButton>
                 </Link>

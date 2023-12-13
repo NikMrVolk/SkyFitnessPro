@@ -1,13 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
-import { privateRoutes, publicRoutes } from '../../routes/routes';
-import ProtectedRoute from './ProtectedRoute';
-
-const isAllowed = true;
+import { Route, Routes } from 'react-router-dom'
+import { privateRoutes, publicRoutes } from '../../routes/routes'
+import ProtectedRoute from './ProtectedRoute'
+import { useSelector } from 'react-redux'
 
 function AppRoutes() {
+    const user = useSelector((state) => state.auth.access)
+
     return (
         <Routes>
-            <Route element={<ProtectedRoute isAllowed={isAllowed} />}>
+            <Route element={<ProtectedRoute isAllowed={!!user} />}>
                 {privateRoutes.map((r) => (
                     <Route key={r.path} element={r.element} path={r.path} />
                 ))}
@@ -18,7 +19,7 @@ function AppRoutes() {
                 ))}
             </Route>
         </Routes>
-    );
+    )
 }
 
-export default AppRoutes;
+export default AppRoutes

@@ -1,21 +1,73 @@
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+} from 'firebase/auth'
 import Button from '../../components/UI/button/Button'
-import { LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE } from '../../utils/constants'
+import { LOGIN_ROUTE, PROFILE_ROUTE, MAIN_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
 import { useState } from 'react'
 import Input from '../../components/UI/input/Input'
 import s from './Auth.module.css'
 import { useDispatch } from 'react-redux'
 import { logIn } from '../../store/slices/profileSlice'
+import { setAuth } from '../../store/slices/authSlice'
 
 export function Auth() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { pathname } = useLocation()
-    const [value, setValue] = useState({
-        login: '',
-        password: '',
-        secondPassword: '',
-    })
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const handleLogin = async () => {
+        const auth = getAuth()
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then(({ user }) => {
+                dispatch(
+                    setAuth({
+                        accessToken: user.accessToken,
+                        email: user.email,
+                        uid: user.uid,
+                        refreshToken: user.stsTokenManager.refreshToken,
+                    }),
+                )
+                navigate(PROFILE_ROUTE)
+            })
+            .catch((error) => {
+                console.log(error.code)
+                console.log(error.message)
+            })
+    }
+
+    const handleRegister = async () => {
+        const auth = getAuth()
+        if (password !== repeatPassword) {
+            setError('Пароли не совпадают')
+        } else {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(({ user }) => {
+                    dispatch(
+                        setAuth({
+                            accessToken: user.accessToken,
+                            email: user.email,
+                            uid: user.uid,
+                            refreshToken: user.stsTokenManager.refreshToken,
+                        }),
+                    )
+                    navigate(PROFILE_ROUTE)
+                })
+                .catch((error) => {
+                    console.log(error.code)
+                    console.log(error.message)
+                })
+        }
+    }
+
     const isLogin = pathname === LOGIN_ROUTE
 
     return (
@@ -29,24 +81,16 @@ export function Auth() {
                         placeholder="Логин"
                         classes={[s.login]}
                         type="text"
-                        value={value.login}
                         onChange={(e) => {
-                            setValue({
-                                ...value,
-                                login: e.target.value,
-                            })
+                            setEmail(e.target.value)
                         }}
                     />
                     <Input
                         placeholder="Пароль"
                         classes={[s.login]}
                         type="password"
-                        value={value.password}
                         onChange={(e) => {
-                            setValue({
-                                ...value,
-                                password: e.target.value,
-                            })
+                            setPassword(e.target.value)
                         }}
                     />
                     {!isLogin && (
@@ -54,21 +98,15 @@ export function Auth() {
                             placeholder="Повторите пароль"
                             classes={[s.login]}
                             type="password"
-                            value={value.secondPassword}
                             onChange={(e) => {
-                                setValue({
-                                    ...value,
-                                    secondPassword: e.target.value,
-                                })
+                                setRepeatPassword(e.target.value)
                             }}
                         />
                     )}
                     <Link to={PROFILE_ROUTE}>
                         <Button
                             color={'purple'}
-                            onClick={() => {
-                                dispatch(logIn())
-                            }}
+                            onClick={isLogin ? handleLogin : handleRegister}
                         >
                             {isLogin ? 'Войти' : 'Зарегистрироваться'}
                         </Button>

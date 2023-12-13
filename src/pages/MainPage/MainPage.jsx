@@ -2,6 +2,7 @@ import { allCourses } from '../../mock/сoursesData'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import NavButton from '../../components/UI/navButton/NavButton'
 import s from './MainPage.module.css'
+import { useGetCoursesQuery } from '../../services/courses'
 
 function MainPage() {
     const handleTop = () => {
@@ -10,6 +11,9 @@ function MainPage() {
             behavior: 'smooth',
         })
     }
+    const { data, isError, isLoading } = useGetCoursesQuery()
+    console.log('coursesData', data)
+    console.log('isErrorCourses', isError)
 
     return (
         <div className={s.main}>
