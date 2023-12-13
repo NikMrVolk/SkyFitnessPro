@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import s from './NavMenu.module.css'
 import {
     LOGIN_ROUTE,
@@ -22,7 +22,7 @@ const navMenuItems = [
 ]
 
 function NavMenu() {
-    const currentUrl = window.location.pathname
+    const location = useLocation()
 
     return (
         <div className={s.menu}>
@@ -32,7 +32,9 @@ function NavMenu() {
                         <NavLink
                             to={el.link}
                             className={
-                                el.link === currentUrl ? s.activLink : null
+                                el.link === location.pathname
+                                    ? s.activLink
+                                    : null
                             }
                         >
                             <li className={s.menuItem} key={el.link}>
