@@ -6,15 +6,12 @@ import {
     MAIN_ROUTE,
     REGISTRATION_ROUTE,
 } from '../../../utils/constants'
-import { useState } from 'react'
 import NavMenu from '../../UI/navbar/NavMenu'
 import LoginButton from '../../UI/loginButton/LoginButton'
 import s from './Header.module.css'
 
 function Header() {
     const { pathname } = useLocation()
-    const [visible, setVisible] = useState(false)
-    const toggleVisibility = () => setVisible((e) => !e)
     const user = useSelector((state) => state.auth)
 
     const isPageMain = pathname === MAIN_ROUTE
@@ -36,11 +33,16 @@ function Header() {
                     <LoginButton>Войти</LoginButton>
                 </Link>
             ) : (
-                <div className={s.user} onClick={toggleVisibility}>
+                <div className={s.user}>
                     <div className={s.userAvatar} />
-                    <span className={s.userName}>{user.userName}</span>
-                    <div>{visible && <NavMenu />}</div>
-                    {visible ? <ChevronUp /> : <ChevronDown />}
+                    <span className={s.userName}>Сергей</span>
+                    <div className={s.chevronDown}>
+                        <ChevronDown />
+                    </div>
+                    <div className={s.menu}>
+                        <ChevronUp />
+                        <NavMenu />
+                    </div>
                 </div>
             )}
         </div>
