@@ -8,7 +8,7 @@ function AppRoutes() {
 
     return (
         <Routes>
-            <Route element={<ProtectedRoute isAllowed={!!(user)} />}>
+            <Route element={<ProtectedRoute isAllowed={!!user} />}>
                 {privateRoutes.map((r) => (
                     <Route key={r.path} element={r.element} path={r.path} />
                 ))}
