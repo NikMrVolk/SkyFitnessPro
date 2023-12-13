@@ -1,19 +1,41 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import s from './NavMenu.module.css'
+import {
+    LOGIN_ROUTE,
+    MAIN_ROUTE,
+    PROFILE_ROUTE,
+} from '../../../utils/constants'
+
+const navMenuItems = [
+    {
+        link: MAIN_ROUTE,
+        name: 'Главная',
+    },
+    {
+        link: PROFILE_ROUTE,
+        name: 'Профиль',
+    },
+    {
+        link: LOGIN_ROUTE,
+        name: 'Выйти',
+    },
+]
 
 function NavMenu() {
+    const location = useLocation()
+
     return (
         <div className={s.menu}>
             <ul className={s.menuList}>
-                <NavLink to="/">
-                    <li className={s.menuItem}>Главная</li>
-                </NavLink>
-                <NavLink to="/profile">
-                    <li className={s.menuItem}>Профиль</li>
-                </NavLink>
-                <NavLink to="/login">
-                    <li className={s.menuItem}>Выйти</li>
-                </NavLink>
+                {navMenuItems.map((el) => (
+                    <NavLink
+                        to={el.link}
+                        key={el.link}
+                        className={el.link === location.pathname && s.activeLink}
+                    >
+                        <li className={s.menuItem}>{el.name}</li>
+                    </NavLink>
+                ))}
             </ul>
         </div>
     )

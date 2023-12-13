@@ -1,26 +1,33 @@
 .menu {
-    display: block;
-    visibility: visible;
-    text-align: end;
+    position: relative;
+    display: inline-block;
+    top: 16px;
 }
 
 .menuList {
-    display: flex;
-    flex-flow: column;
     position: absolute;
+    background-color: rgba(105, 105, 105, 0.7);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    right: 0;
+    z-index: 1;
+}
+
+.activeLink {
+    font-weight: 600;
 }
 
 .menuItem {
-    padding: 5px 0;
-}
-
-.menuLink {
     font-size: 20px;
     line-height: 32px;
-    color: #000000;
+    color: #ffffff;
+    padding: 10px 16px;
+    text-align: right;
 }
 
-.menuLink:hover {
-    text-decoration: underline;
-    color: rgb(105, 105, 105);
+.menuItem:hover {
+    background-color: #bfbfbfe1;
+    color: black;
+    border-radius: 10px;
 }

@@ -7,8 +7,8 @@
 }
 
 .logo {
-    width: 220px;
-    height: 35px;
+    max-width: 220px;
+    max-height: 35px;
 }
 
 .logo img {
@@ -20,6 +20,35 @@
     align-items: center;
     gap: 14px;
     cursor: pointer;
+    position: relative;
+}
+
+.menu {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: 157px;
+}
+
+.menu,
+.chevronDown {
+    transition-property: opacity, visibility;
+    transition-duration: 0.3s;
+    transition-delay: 0.15s;
+}
+
+.user:hover .menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.user:hover .chevronDown {
+    opacity: 0;
+}
+
+.userName {
+    font-size: 24px;
+    line-height: 32px;
 }
 
 .userAvatar {
@@ -27,4 +56,30 @@
     height: 50px;
     border-radius: 50%;
     background-color: rgb(105, 105, 105);
+}
+
+@media (max-width: 1024px) {
+    .logo {
+        width: 180px;
+    }
+    .userName {
+        font-size: 20px;
+    }
+    .userAvatar {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .logo {
+        width: 140px;
+    }
+    .userName {
+        font-size: 16px;
+    }
+    .userAvatar {
+        width: 30px;
+        height: 30px;
+    }
 }
