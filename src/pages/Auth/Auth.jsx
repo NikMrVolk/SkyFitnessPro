@@ -38,7 +38,7 @@ export function Auth() {
                 )
                 console.log(user)
                 console.log(user.uid)
-                navigate({ PROFILE_ROUTE })
+                navigate(PROFILE_ROUTE)
             })
             .catch((error) => {
                 console.log(error.code)
@@ -63,7 +63,7 @@ export function Auth() {
                     )
                     console.log(user)
                     console.log(user.uid)
-                    navigate({ PROFILE_ROUTE })
+                    navigate(PROFILE_ROUTE)
                 })
                 .catch((error) => {
                     console.log(error.code)
