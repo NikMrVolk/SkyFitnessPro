@@ -1,8 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
 import { privateRoutes, publicRoutes } from '../../routes/routes'
 import ProtectedRoute from './ProtectedRoute'
+import { useSelector } from 'react-redux'
 
-function AppRoutes({ user }) {
+function AppRoutes() {
+    const user = useSelector((state) => state.auth.access)
+
     return (
         <Routes>
             <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>

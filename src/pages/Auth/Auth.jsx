@@ -111,10 +111,7 @@ export function Auth() {
                     <Link to={PROFILE_ROUTE}>
                         <Button
                             color={'purple'}
-                            onClick={() => {
-                                dispatch(logIn()),
-                                    isLogin ? handleLogin() : handleRegister()
-                            }}
+                            onClick={isLogin ? handleLogin : handleRegister}
                         >
                             {isLogin ? 'Войти' : 'Зарегистрироваться'}
                         </Button>

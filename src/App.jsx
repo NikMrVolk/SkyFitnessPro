@@ -4,12 +4,11 @@ import AppRoutes from './components/routes/AppRoutes'
 import store from './store/store'
 
 function App() {
-    const user = JSON.parse(localStorage.getItem('auth')) || null
 
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <AppRoutes user={user} />
+                <AppRoutes />
             </BrowserRouter>
         </Provider>
     )
