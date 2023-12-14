@@ -12,7 +12,7 @@ import s from './Header.module.css'
 
 function Header() {
     const { pathname } = useLocation()
-    const user = useSelector((state) => state.auth)
+    const { userName } = useSelector((state) => state.auth)
 
     const isPageMain = pathname === MAIN_ROUTE
 
@@ -28,14 +28,14 @@ function Header() {
             <Link to={MAIN_ROUTE} className={s.logo}>
                 <img src={logoPath} alt="logo" />
             </Link>
-            {!user.userName ? (
+            {!userName ? (
                 <Link to={LOGIN_ROUTE}>
                     <LoginButton>Войти</LoginButton>
                 </Link>
             ) : (
                 <div className={s.user}>
                     <div className={s.userAvatar} />
-                    <span className={s.userName}>Сергей</span>
+                    <span className={s.userName}>{userName}</span>
                     <div className={s.chevronDown}>
                         <ChevronDown />
                     </div>
