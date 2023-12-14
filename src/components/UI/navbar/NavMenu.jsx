@@ -1,10 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import s from './NavMenu.module.css'
-import {
-    LOGIN_ROUTE,
-    MAIN_ROUTE,
-    PROFILE_ROUTE,
-} from '../../../utils/constants'
+import { MAIN_ROUTE, PROFILE_ROUTE } from '../../../utils/constants'
 
 const navMenuItems = [
     {
@@ -16,7 +12,6 @@ const navMenuItems = [
         name: 'Профиль',
     },
     {
-        link: LOGIN_ROUTE,
         name: 'Выйти',
     },
 ]
@@ -34,8 +29,11 @@ function NavMenu() {
                 {navMenuItems.map((el) => (
                     <NavLink
                         to={el.link}
-                        key={el.link}
-                        className={el.link === location.pathname && s.activeLink}
+                        key={Math.random()}
+                        className={
+                            el.link === location.pathname && s.activeLink
+                        }
+                        onClick={el.name === 'Выйти' && handleLogout}
                     >
                         <li className={s.menuItem}>{el.name}</li>
                     </NavLink>

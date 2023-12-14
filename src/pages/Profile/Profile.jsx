@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { userCourses } from '../../mock/сoursesData'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
@@ -11,13 +12,14 @@ function Profile() {
     const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
     const [isChangeLogin, setIsChangeLogin] = useState(false)
+    const { userName } = useSelector((state) => state.auth)
 
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
                 <h1 className={s.title}>Мой профиль</h1>
                 <div className={s.user}>
-                    <p className={s.userLogin}>Логин: sergey.petrov96</p>
+                    <p className={s.userLogin}>Логин: {userName}</p>
                     <p className={s.userPassword}>Пароль: 4fkhdj880d</p>
                 </div>
                 <div className={s.buttons}>
