@@ -20,7 +20,7 @@ export function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-    const [error, setError] = useState('')
+    const [errorState, setErrorState] = useState('')
 
     const handleLogin = async () => {
         const auth = getAuth()
@@ -47,14 +47,15 @@ export function Auth() {
                 navigate(PROFILE_ROUTE)
             })
             .catch((error) => {
-                console.log(error.code)
-                console.log(error.message)
+                setErrorState(error.code)
+                console.log('errorCode: ', error.code)
+                console.log('errorState: ', errorState)
                 switch (error.code) {
                     case 'auth/user-not-found':
-                        setError('Такого пользователя не существует!')
+                        setErrorState('Такого пользователя не существует!')
                         break
                     case 'auth/wrong-password':
-                        setError('Неверный пароль!')
+                        setErrorState('Неверный пароль!')
                         break
                     default:
                         break
@@ -65,16 +66,16 @@ export function Auth() {
     const handleRegister = async () => {
         const auth = getAuth()
         if (!email.trim()) {
-            return setError('Введите email')
+            return setErrorState('Введите email')
         }
         if (!password.trim()) {
-            return setError('Введите пароль')
+            return setErrorState('Введите пароль')
         }
         if (password.length < 6) {
-            return setError('Пароль должен содержать не менее 6 символов')
+            return setErrorState('Пароль должен содержать не менее 6 символов')
         }
         if (password.trim() !== repeatPassword.trim()) {
-            setError('Пароли не совпадают')
+            setErrorState('Пароли не совпадают')
         } else {
             createUserWithEmailAndPassword(auth, email, password)
                 .then(({ user }) => {
@@ -93,10 +94,10 @@ export function Auth() {
                     console.log(error.message)
                     switch (error.code) {
                         case 'auth/email-already-exists':
-                            setError('Адрес электронной почты уже используется существующим пользователем')
+                            setErrorState('Адрес электронной почты уже используется существующим пользователем')
                             break
                         case 'auth/invalid-email':
-                            setError('Введен невалидный email')
+                            setErrorState('Введен невалидный email')
                             break
                         default:
                             break
@@ -107,7 +108,7 @@ export function Auth() {
     const isLogin = pathname === LOGIN_ROUTE
 
     useEffect(() => {
-        setError(null);
+        setErrorState(null);
       }, [ email, password, repeatPassword]);
     return (
         <div className={s.page}>
@@ -142,7 +143,7 @@ export function Auth() {
                             }}
                         />
                     )}
-                    {error && <div className={s.inputError}>{error} </div>}
+                    {errorState && <div className={s.inputError}>{errorState} </div>}
                     <Link to={PROFILE_ROUTE}>
                         <Button
                             color={'purple'}
