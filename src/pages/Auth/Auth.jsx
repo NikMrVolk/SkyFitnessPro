@@ -7,11 +7,10 @@ import {
 import Button from '../../components/UI/button/Button'
 import { LOGIN_ROUTE, PROFILE_ROUTE, MAIN_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Input from '../../components/UI/input/Input'
 import s from './Auth.module.css'
 import { useDispatch } from 'react-redux'
-import { logIn } from '../../store/slices/profileSlice'
 import { setAuth } from '../../store/slices/authSlice'
 
 export function Auth() {
@@ -25,7 +24,16 @@ export function Auth() {
 
     const handleLogin = async () => {
         const auth = getAuth()
-
+        if (!email.trim()) {
+            return setError('Введите email')
+        }
+        if (!password.trim()) {
+            return setError('Введите пароль')
+        }
+        if (password.length < 6) {
+            return setError('Пароль должен содержать не менее 6 символов')
+        }
+        
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 dispatch(
@@ -41,12 +49,31 @@ export function Auth() {
             .catch((error) => {
                 console.log(error.code)
                 console.log(error.message)
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        setError('Такого пользователя не существует!')
+                        break
+                    case 'auth/wrong-password':
+                        setError('Неверный пароль!')
+                        break
+                    default:
+                        break
+                }
             })
     }
 
     const handleRegister = async () => {
         const auth = getAuth()
-        if (password !== repeatPassword) {
+        if (!email.trim()) {
+            return setError('Введите email')
+        }
+        if (!password.trim()) {
+            return setError('Введите пароль')
+        }
+        if (password.length < 6) {
+            return setError('Пароль должен содержать не менее 6 символов')
+        }
+        if (password.trim() !== repeatPassword.trim()) {
             setError('Пароли не совпадают')
         } else {
             createUserWithEmailAndPassword(auth, email, password)
@@ -64,12 +91,24 @@ export function Auth() {
                 .catch((error) => {
                     console.log(error.code)
                     console.log(error.message)
+                    switch (error.code) {
+                        case 'auth/email-already-exists':
+                            setError('Адрес электронной почты уже используется существующим пользователем')
+                            break
+                        case 'auth/invalid-email':
+                            setError('Введен невалидный email')
+                            break
+                        default:
+                            break
+                    }
                 })
         }
     }
-
     const isLogin = pathname === LOGIN_ROUTE
 
+    useEffect(() => {
+        setError(null);
+      }, [ email, password, repeatPassword]);
     return (
         <div className={s.page}>
             <div className={s.wrapper}>
@@ -103,6 +142,7 @@ export function Auth() {
                             }}
                         />
                     )}
+                    {error && <div className={s.inputError}>{error} </div>}
                     <Link to={PROFILE_ROUTE}>
                         <Button
                             color={'purple'}
