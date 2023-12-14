@@ -1,10 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import s from './NavMenu.module.css'
-import {
-    LOGIN_ROUTE,
-    MAIN_ROUTE,
-    PROFILE_ROUTE,
-} from '../../../utils/constants'
+import { MAIN_ROUTE, PROFILE_ROUTE } from '../../../utils/constants'
 
 const navMenuItems = [
     {
@@ -16,7 +12,6 @@ const navMenuItems = [
         name: 'Профиль',
     },
     {
-        // link: MAIN_ROUTE,
         name: 'Выйти',
     },
 ]
