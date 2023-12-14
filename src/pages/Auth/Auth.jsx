@@ -7,7 +7,7 @@ import {
 import Button from '../../components/UI/button/Button'
 import { LOGIN_ROUTE, PROFILE_ROUTE, MAIN_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Input from '../../components/UI/input/Input'
 import s from './Auth.module.css'
 import { useDispatch } from 'react-redux'
@@ -21,7 +21,11 @@ export function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-    const [error, setError] = useState('')
+    const [errorState, setErrorState] = useState(null)
+
+    useEffect(() => {
+        console.log('errorState2: ', errorState)
+    }, [errorState])
 
     const handleLogin = async () => {
         const auth = getAuth()
@@ -39,8 +43,13 @@ export function Auth() {
                 navigate(PROFILE_ROUTE)
             })
             .catch((error) => {
-                console.log(error.code)
-                console.log(error.message)
+                if (error.code) {
+                    console.log('errorCode: ', error.code)
+                    setErrorState(error.code)
+                    console.log('errorState: ', errorState)
+                }
+
+                // console.log(error.message)
             })
     }
 
