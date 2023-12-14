@@ -16,7 +16,7 @@ const navMenuItems = [
         name: 'Профиль',
     },
     {
-        link: LOGIN_ROUTE,
+        // link: MAIN_ROUTE,
         name: 'Выйти',
     },
 ]
@@ -34,8 +34,11 @@ function NavMenu() {
                 {navMenuItems.map((el) => (
                     <NavLink
                         to={el.link}
-                        key={el.link}
-                        className={el.link === location.pathname && s.activeLink}
+                        key={Math.random()}
+                        className={
+                            el.link === location.pathname && s.activeLink
+                        }
+                        onClick={el.name === 'Выйти' && handleLogout}
                     >
                         <li className={s.menuItem}>{el.name}</li>
                     </NavLink>
