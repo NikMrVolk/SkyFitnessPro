@@ -22,6 +22,10 @@ export function Auth() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [errorState, setErrorState] = useState('')
 
+    useEffect(() => {
+        console.log('errorState2:', errorState)
+    }, [errorState])
+    
     const handleLogin = async () => {
         const auth = getAuth()
         if (!email.trim()) {
@@ -33,7 +37,7 @@ export function Auth() {
         if (password.length < 6) {
             return setError('Пароль должен содержать не менее 6 символов')
         }
-        
+
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 dispatch(
@@ -47,9 +51,13 @@ export function Auth() {
                 navigate(PROFILE_ROUTE)
             })
             .catch((error) => {
-                setErrorState(error.code)
-                console.log('errorCode: ', error.code)
-                console.log('errorState: ', errorState)
+                // setErrorState(error.code)
+                if (error.code) {
+                    console.log('errorCode: ', error.code)
+                    setErrorState(error.code)
+                    console.log('errorState: ', errorState)
+                }
+
                 switch (error.code) {
                     case 'auth/user-not-found':
                         setErrorState('Такого пользователя не существует!')
@@ -94,7 +102,9 @@ export function Auth() {
                     console.log(error.message)
                     switch (error.code) {
                         case 'auth/email-already-exists':
-                            setErrorState('Адрес электронной почты уже используется существующим пользователем')
+                            setErrorState(
+                                'Адрес электронной почты уже используется существующим пользователем',
+                            )
                             break
                         case 'auth/invalid-email':
                             setErrorState('Введен невалидный email')
@@ -108,8 +118,8 @@ export function Auth() {
     const isLogin = pathname === LOGIN_ROUTE
 
     useEffect(() => {
-        setErrorState(null);
-      }, [ email, password, repeatPassword]);
+        setErrorState(null)
+    }, [email, password, repeatPassword])
     return (
         <div className={s.page}>
             <div className={s.wrapper}>
@@ -143,7 +153,9 @@ export function Auth() {
                             }}
                         />
                     )}
-                    {errorState && <div className={s.inputError}>{errorState} </div>}
+                    {errorState && (
+                        <div className={s.inputError}>{errorState} </div>
+                    )}
                     <Link to={PROFILE_ROUTE}>
                         <Button
                             color={'purple'}
