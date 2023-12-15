@@ -1,0 +1,6 @@
+.text {
+    color: #000;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 35px;
+    position: absolute;
+}

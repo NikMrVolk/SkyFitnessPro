@@ -13,6 +13,8 @@ function Profile() {
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
     const [isChangeLogin, setIsChangeLogin] = useState(false)
     const { userName } = useSelector((state) => state.auth)
+    const { allCourses } = useSelector((state) => state.courses)
+    
 
     return (
         <div className={s.wrapper}>
@@ -45,7 +47,11 @@ function Profile() {
             </div>
             <div className={s.box}>
                 <h1 className={s.title}>Мои курсы</h1>
-                <CoursesList courses={userCourses} setActive={setModalActive} />
+                <CoursesList
+                    courses={userCourses}
+                    setActive={setModalActive}
+                    profile
+                />
                 <Modal active={modalActive} setActive={setModalActive}>
                     <ChooseDayWorkModal />
                 </Modal>

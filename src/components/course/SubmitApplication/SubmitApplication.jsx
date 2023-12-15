@@ -1,6 +1,16 @@
-import s from "./SubmitApplication.module.css";
+import s from './SubmitApplication.module.css'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
+import { LOGIN_ROUTE } from '../../../utils/constants'
+import Modal from '../../UI/modal/Modal'
+import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 
 export default function SubmitApplication() {
+    const navigate = useNavigate()
+    const { access } = useSelector((state) => state.auth)
+    const [modalActive, setModalActive] = useState(false)    
+
     return (
         <div className={s.application}>
             <div className={s.applicationContainer}>
@@ -12,10 +22,20 @@ export default function SubmitApplication() {
                 <button
                     type="submit"
                     className={s.applicationButton}
-                    onClick={() => console.log("Необходимо авторизоваться!")}
+                    onClick={() => {
+                        if (access) {
+                            setModalActive(true)
+                        } else {
+                            navigate(LOGIN_ROUTE)
+                        }
+                    }}
                 >
                     Записаться на тренировку
                 </button>
+
+                <Modal active={modalActive} setActive={setModalActive}>
+                    <SvgSuccess text="Вы успешно записались на курс!" />
+                </Modal>
             </div>
 
             <svg
@@ -299,5 +319,5 @@ export default function SubmitApplication() {
                 </defs>
             </svg>
         </div>
-    );
+    )
 }

@@ -19,7 +19,7 @@ export const userCourses = [
     },
 ]
 
-export const allCourses = [
+export const imgCourses = [
     {
         id: 1,
         name: 'Йога',

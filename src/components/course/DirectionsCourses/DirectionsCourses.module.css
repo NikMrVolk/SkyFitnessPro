@@ -1,6 +1,13 @@
-.ul {
-    columns: 2;
+.ul1,
+.ul2 {
     padding-left: 10px;
+}
+
+.ul1 {
+    columns: 1;
+}
+.ul2 {
+    columns: 2;
 }
 
 .li {
@@ -13,7 +20,6 @@
 .titlePadding {
     padding-bottom: 22px;
 }
-
 
 @media (max-width: 768px) {
     .ul {
