@@ -1,4 +1,5 @@
-import { allCourses } from '../../mock/сoursesData'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import NavButton from '../../components/UI/navButton/NavButton'
 import s from './MainPage.module.css'
@@ -12,8 +13,16 @@ function MainPage() {
         })
     }
     const { data, isError, isLoading } = useGetCoursesQuery()
-    console.log('coursesData', data)
-    console.log('isErrorCourses', isError)
+    const [allCourses, setAllCourses] = useState()
+
+    useEffect(() => {
+        if (data) {
+            console.log(`data`, data)
+            setAllCourses(Object.values(data).sort((a, b) => a.order - b.order))
+        }
+    }, [data])
+
+    console.log(`courses`, allCourses)
 
     return (
         <div className={s.main}>
