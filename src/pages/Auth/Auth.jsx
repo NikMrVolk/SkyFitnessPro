@@ -1,18 +1,23 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
 } from 'firebase/auth'
+import { toast } from 'react-toastify'
 import Button from '../../components/UI/button/Button'
-import { LOGIN_ROUTE, PROFILE_ROUTE, MAIN_ROUTE } from '../../utils/constants'
+import { LOGIN_ROUTE, PROFILE_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
 import { useState, useEffect } from 'react'
 import Input from '../../components/UI/input/Input'
 import s from './Auth.module.css'
 import { useDispatch } from 'react-redux'
-import { logIn } from '../../store/slices/profileSlice'
 import { setAuth } from '../../store/slices/authSlice'
+import {
+    samePasswords,
+    validateEmail,
+    validatePassword,
+} from '../../utils/authValidate'
 
 export function Auth() {
     const dispatch = useDispatch()
@@ -21,38 +26,36 @@ export function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-    const [errorState, setErrorState] = useState(null)
+    const [validationError, setValidationError] = useState('')
+    const isLogin = pathname === LOGIN_ROUTE
 
-    const handleLogin = async () => {
-        const auth = getAuth()
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then(({ user }) => {
-                dispatch(
-                    setAuth({
-                        accessToken: user.accessToken,
-                        email: user.email,
-                        uid: user.uid,
-                        refreshToken: user.stsTokenManager.refreshToken,
-                    }),
+    const auth = async () => {
+        const emailAfterTrim = email.trim()
+
+        if (
+            validateEmail(email, setValidationError) &&
+            validatePassword(password, setValidationError) &&
+            (isLogin ||
+                samePasswords(password, repeatPassword, setValidationError))
+        ) {
+            const auth = getAuth()
+
+            let authPromise
+            if (isLogin) {
+                authPromise = signInWithEmailAndPassword(
+                    auth,
+                    emailAfterTrim,
+                    password,
                 )
-                navigate(PROFILE_ROUTE)
-            })
-            .catch((error) => {
-                if (error.code) {
-                    console.log('errorCode: ', error.code)
-                    setErrorState(error.code)
-                    console.log('errorState: ', errorState)
-                }
-            })
-    }
-
-    const handleRegister = async () => {
-        const auth = getAuth()
-        if (password !== repeatPassword) {
-            setError('Пароли не совпадают')
-        } else {
-            createUserWithEmailAndPassword(auth, email, password)
+            } else {
+                authPromise = createUserWithEmailAndPassword(
+                    auth,
+                    emailAfterTrim,
+                    password,
+                )
+            }
+            authPromise
                 .then(({ user }) => {
                     dispatch(
                         setAuth({
@@ -62,16 +65,14 @@ export function Auth() {
                             refreshToken: user.stsTokenManager.refreshToken,
                         }),
                     )
+                    setValidationError('')
                     navigate(PROFILE_ROUTE)
                 })
-                .catch((error) => {
-                    console.log(error.code)
-                    console.log(error.message)
+                .catch((e) => {
+                    toast(e.code)
                 })
         }
     }
-
-    const isLogin = pathname === LOGIN_ROUTE
 
     return (
         <div className={s.page}>
@@ -82,7 +83,10 @@ export function Auth() {
                     </div>
                     <Input
                         placeholder="Логин"
-                        classes={[s.login]}
+                        classes={[
+                            s.login,
+                            validationError === 'email' && s.error,
+                        ]}
                         type="text"
                         onChange={(e) => {
                             setEmail(e.target.value)
@@ -90,7 +94,10 @@ export function Auth() {
                     />
                     <Input
                         placeholder="Пароль"
-                        classes={[s.login]}
+                        classes={[
+                            s.login,
+                            validationError === 'password' && s.error,
+                        ]}
                         type="password"
                         onChange={(e) => {
                             setPassword(e.target.value)
@@ -99,26 +106,27 @@ export function Auth() {
                     {!isLogin && (
                         <Input
                             placeholder="Повторите пароль"
-                            classes={[s.login]}
+                            classes={[
+                                s.login,
+                                validationError === 'password' && s.error,
+                            ]}
                             type="password"
                             onChange={(e) => {
                                 setRepeatPassword(e.target.value)
                             }}
                         />
                     )}
-                    <Link to={PROFILE_ROUTE}>
-                        <Button
-                            color={'purple'}
-                            onClick={isLogin ? handleLogin : handleRegister}
-                        >
-                            {isLogin ? 'Войти' : 'Зарегистрироваться'}
-                        </Button>
-                    </Link>
-                    <Link to={isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE}>
-                        <Button color={'light'}>
-                            {!isLogin ? 'Войти' : 'Зарегистрироваться'}
-                        </Button>
-                    </Link>
+                    <Button color={'purple'} onClick={auth}>
+                        {isLogin ? 'Войти' : 'Зарегистрироваться'}
+                    </Button>
+                    <Button
+                        color={'light'}
+                        onClick={() =>
+                            navigate(isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE)
+                        }
+                    >
+                        {!isLogin ? 'Войти' : 'Зарегистрироваться'}
+                    </Button>
                 </form>
             </div>
         </div>
