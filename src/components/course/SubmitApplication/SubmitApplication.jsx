@@ -1,6 +1,12 @@
-import s from "./SubmitApplication.module.css";
+import s from './SubmitApplication.module.css'
+import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
+import { LOGIN_ROUTE } from '../../../utils/constants'
 
 export default function SubmitApplication() {
+    const navigate = useNavigate()
+    const { access } = useSelector((state) => state.auth)
+
     return (
         <div className={s.application}>
             <div className={s.applicationContainer}>
@@ -12,7 +18,13 @@ export default function SubmitApplication() {
                 <button
                     type="submit"
                     className={s.applicationButton}
-                    onClick={() => console.log("Необходимо авторизоваться!")}
+                    onClick={() => {
+                        if (access) {
+                            alert('Вы записаны на курс!')
+                        } else {
+                            navigate(LOGIN_ROUTE)
+                        }
+                    }}
                 >
                     Записаться на тренировку
                 </button>
@@ -299,5 +311,5 @@ export default function SubmitApplication() {
                 </defs>
             </svg>
         </div>
-    );
+    )
 }
