@@ -1,6 +1,6 @@
 .page {
-    background-color: #271A58; 
-    background-size: cover ;
+    background-color: #271a58;
+    background-size: cover;
     min-height: 100vh;
 }
 
@@ -33,13 +33,11 @@
     margin-right: 73px;
     background-color: transparent;
 }
+
 .login {
     margin-bottom: 40px;
 }
-.login::placeholder {
-    color: #e1e1e1;
-  }
-  .inputError {
-    color:red;
-  }
 
+.error {
+    background: rgb(241, 156, 156);
+}
