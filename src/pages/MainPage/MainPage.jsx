@@ -21,7 +21,6 @@ function MainPage() {
 
     useEffect(() => {
         if (data) {
-            console.log(`data`, data)
             dispatch(
                 getAllCourses({
                     allCourses: Object.values(data).sort(
@@ -31,8 +30,6 @@ function MainPage() {
             )
         }
     }, [data])
-
-    console.log(`courses`, allCourses)
 
     return (
         <div className={s.main}>

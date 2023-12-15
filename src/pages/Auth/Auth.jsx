@@ -23,10 +23,6 @@ export function Auth() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [errorState, setErrorState] = useState(null)
 
-    useEffect(() => {
-        console.log('errorState2: ', errorState)
-    }, [errorState])
-
     const handleLogin = async () => {
         const auth = getAuth()
 
@@ -48,8 +44,6 @@ export function Auth() {
                     setErrorState(error.code)
                     console.log('errorState: ', errorState)
                 }
-
-                // console.log(error.message)
             })
     }
 

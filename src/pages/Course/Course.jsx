@@ -6,6 +6,7 @@ import SubmitApplication from '../../components/course/SubmitApplication/SubmitA
 import { useSelector } from 'react-redux'
 import s from './Course.module.css'
 
+
 export default function CoursesInfoPage() {
     const { id } = useParams()
 
