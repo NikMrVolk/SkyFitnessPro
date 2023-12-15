@@ -1,9 +1,16 @@
-import s from "./FittingCourses.module.css";
+import s from './FittingCourses.module.css'
+import { useGetCoursesQuery } from '../../../services/courses'
 
 export default function FittingCoursesInfo() {
+    const { data = [], isError, isLoading } = useGetCoursesQuery()
+
+    console.log(data)
+
     return (
         <div>
-            <h2 className={s.h2}>Подойдет для вас, если:</h2>
+            <h2 className={s.h2}>
+                Подойдет для вас, если:
+            </h2>
             <ul className={s.ul}>
                 <div className={s.div}>
                     {/* <div className={s.number}>1</div> */}
@@ -16,7 +23,7 @@ export default function FittingCoursesInfo() {
                     </li>
                 </div>
                 <div className={s.div}>
-                <div className={s.numberDiv}>
+                    <div className={s.numberDiv}>
                         <span className={s.numberSpan}>2</span>
                     </div>
                     <li className={s.li}>
@@ -26,7 +33,7 @@ export default function FittingCoursesInfo() {
                 </div>
 
                 <div className={s.div}>
-                <div className={s.numberDiv}>
+                    <div className={s.numberDiv}>
                         <span className={s.numberSpan}>3</span>
                     </div>
                     <li className={s.li}>
@@ -35,5 +42,5 @@ export default function FittingCoursesInfo() {
                 </div>
             </ul>
         </div>
-    );
+    )
 }
