@@ -2,7 +2,6 @@ import { allCourses } from '../../../mock/сoursesData'
 import s from './HeaderCourses.module.css'
 
 export default function HeaderCoursesInfo() {
-    console.log
     return (
         <div className={s.header}>
             <h1 className={s.title}>{allCourses[0].name}</h1>
