@@ -1,11 +1,13 @@
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import NavButton from '../../components/UI/navButton/NavButton'
 import s from './MainPage.module.css'
 import { useGetCoursesQuery } from '../../services/courses'
+import { getAllCourses } from '../../store/slices/courses'
 
 function MainPage() {
+    const dispatch = useDispatch()
     const handleTop = () => {
         window.scrollTo({
             top: 0,
@@ -13,12 +15,18 @@ function MainPage() {
         })
     }
     const { data, isError, isLoading } = useGetCoursesQuery()
-    const [allCourses, setAllCourses] = useState()
+    const { allCourses } = useSelector((state) => state.courses)
 
     useEffect(() => {
         if (data) {
             console.log(`data`, data)
-            setAllCourses(Object.values(data).sort((a, b) => a.order - b.order))
+            dispatch(
+                getAllCourses({
+                    allCourses: Object.values(data).sort(
+                        (a, b) => a.order - b.order,
+                    ),
+                }),
+            )
         }
     }, [data])
 
