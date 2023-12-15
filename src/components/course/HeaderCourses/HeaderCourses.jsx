@@ -3,7 +3,6 @@ import s from './HeaderCourses.module.css'
 import { imgCourses } from '../../../mock/сoursesData'
 
 export default function HeaderCoursesInfo({ course }) {
-    console.log(course)
     return (
         <header className={s.header}>
             <div className={s.header}>
