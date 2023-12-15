@@ -1,10 +1,10 @@
 import s from './HeaderCourses.module.css'
 
-export default function HeaderCoursesInfo() {
+export default function HeaderCoursesInfo({ course }) {
     return (
         <header className={s.header}>
             <div className={s.header}>
-                <h1 className={s.title}>Йога</h1>
+                <h1 className={s.title}>{course.nameRU}</h1>
                 <svg
                     width="100%"
                     height="100%"

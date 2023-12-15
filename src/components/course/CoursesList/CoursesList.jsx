@@ -1,10 +1,12 @@
-import { redirect } from 'react-router-dom'
 import { COURSE_ROUTE } from '../../../utils/constants'
+import { useNavigate } from 'react-router'
 import s from './CoursesList.module.css'
 import NavButton from '../../UI/navButton/NavButton'
 import { imgCourses } from '../../../mock/сoursesData'
 
 function CoursesList({ courses, isMainPage, setActive }) {
+    const navigate = useNavigate()
+
     const handleClick = () => {
         setActive(true)
     }
@@ -13,7 +15,7 @@ function CoursesList({ courses, isMainPage, setActive }) {
     return (
         <div className={s.courses}>
             {courses && courses.map((el, index) => (
-                <div className={s.course} key={Math.random()}>
+                <div className={s.course} key={Math.random()} onClick={()=> navigate(`/course/${el._id}`)}>
                     <span className={s.courseName}>{el.nameRU}</span>
                     <img className={s.courseImg} src={imgCourses[index].img} alt={imgCourses[index].alt} />
                     {isMainPage ? (
