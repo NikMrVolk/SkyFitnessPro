@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+// import { getDatabase } from 'firebase/database'
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -11,5 +12,7 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
 }
 
-const firebaseApp = initializeApp(firebaseConfig)
-export default firebaseApp
+const app = initializeApp(firebaseConfig)
+
+// const database = getDatabase(app)
+export default app

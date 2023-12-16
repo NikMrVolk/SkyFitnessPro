@@ -5,11 +5,53 @@ import { useSelector } from 'react-redux'
 import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
+import * as firebase from 'firebase/database'
+// // import 'firebase/compat/database'
+// import firebase from 'firebase/compat/app'
+// import { getDatabase, ref, set } from 'firebase/database'
 
-export default function SubmitApplication() {
+export default function SubmitApplication({ course }) {
     const navigate = useNavigate()
-    const { access } = useSelector((state) => state.auth)
-    const [modalActive, setModalActive] = useState(false)    
+    const { access, userID } = useSelector((state) => state.auth)
+    const [modalActive, setModalActive] = useState(false)
+
+    const addUserFirebase = () => {
+        const courseRef = firebase.getDatabase().ref(`courses/${course._id}`)
+        // const db = getDatabase()
+        // const courseRef = set(ref(db, `courses/${course._id}`))
+
+        courseRef.once('value', (snapshot) => {
+            const courseFirebase = snapshot.val()
+
+            // Проверяем, записан ли пользователь на этот курс
+            if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
+                // Если пользователь уже записан на курс, то ничего не делаем
+                if (course.users.includes(userID)) {
+                    console.log('Пользователь уже записан на курс')
+                    return
+                }
+
+                // Добавляем идентификатор пользователя в массив
+                course.users.push(userID)
+            } else {
+                // Создаем новый массив с идентификатором пользователя
+                course.users = [userID]
+            }
+
+            // Обновляем объект курса в базе данных
+            courseRef
+                .update(courseFirebase)
+                .then(() => {
+                    setModalActive(true)
+                })
+                .catch((error) => {
+                    console.error(
+                        'Ошибка при добавлении пользователя курс',
+                        error,
+                    )
+                })
+        })
+    }
 
     return (
         <div className={s.application}>
@@ -24,7 +66,7 @@ export default function SubmitApplication() {
                     className={s.applicationButton}
                     onClick={() => {
                         if (access) {
-                            setModalActive(true)
+                            addUserFirebase()
                         } else {
                             navigate(LOGIN_ROUTE)
                         }
