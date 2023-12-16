@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import {
     LOGIN_ROUTE,
@@ -20,6 +21,8 @@ function Header() {
         ? '/img/logo/whiteLogo.svg'
         : '/img/logo/blackLogo.svg'
 
+    const navigate = useNavigate()
+
     if (pathname === LOGIN_ROUTE || pathname === REGISTRATION_ROUTE)
         return <></>
 
@@ -29,9 +32,9 @@ function Header() {
                 <img src={logoPath} alt="logo" />
             </Link>
             {!userName ? (
-                <Link to={LOGIN_ROUTE}>
-                    <LoginButton>Войти</LoginButton>
-                </Link>
+               
+                    <LoginButton  onClick={() => navigate(LOGIN_ROUTE)}>Войти</LoginButton>
+             
             ) : (
                 <div className={s.user}>
                     <div className={s.userAvatar} />
