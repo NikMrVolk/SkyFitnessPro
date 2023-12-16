@@ -19,23 +19,23 @@ export default function SubmitApplication({ course }) {
         const courseRef = firebase.getDatabase().ref(`courses/${course._id}`)
         // const db = getDatabase()
         // const courseRef = set(ref(db, `courses/${course._id}`))
-
+        // получаем значение ref поля в Firebase, используя функцию .once('value')
         courseRef.once('value', (snapshot) => {
             const courseFirebase = snapshot.val()
 
             // Проверяем, записан ли пользователь на этот курс
             if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
                 // Если пользователь уже записан на курс, то ничего не делаем
-                if (course.users.includes(userID)) {
+                if (courseFirebase.users.includes(userID)) {
                     console.log('Пользователь уже записан на курс')
                     return
                 }
 
                 // Добавляем идентификатор пользователя в массив
-                course.users.push(userID)
+                courseFirebase.users.push(userID)
             } else {
                 // Создаем новый массив с идентификатором пользователя
-                course.users = [userID]
+                courseFirebase.users = [userID]
             }
 
             // Обновляем объект курса в базе данных
