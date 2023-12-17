@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
-import firebase from '../../../firebase'
+import app from '../../../firebase'
 
 export default function SubmitApplication({ course }) {
     const navigate = useNavigate()
@@ -13,7 +13,7 @@ export default function SubmitApplication({ course }) {
     const [modalActive, setModalActive] = useState(false)
 
     const addUserToCourse = () => {
-        const courseRef = firebase.database().ref(`courses/${course._id}`)
+        const courseRef = app.firebase.database().ref(`courses/${course._id}`)
         console.log('courseRef', courseRef)
 
         // const db = getDatabase()
