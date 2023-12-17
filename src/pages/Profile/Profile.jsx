@@ -12,9 +12,13 @@ function Profile() {
     const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
     const [isChangeLogin, setIsChangeLogin] = useState(false)
-    const { userName } = useSelector((state) => state.auth)
+    const { userName, userID } = useSelector((state) => state.auth)
     const { allCourses } = useSelector((state) => state.courses)
-    
+
+    const coursesUser = allCourses.filter((item) =>
+        item.users?.includes(userID)
+    )
+    console.log(coursesUser)
 
     return (
         <div className={s.wrapper}>
@@ -48,7 +52,7 @@ function Profile() {
             <div className={s.box}>
                 <h1 className={s.title}>Мои курсы</h1>
                 <CoursesList
-                    courses={userCourses}
+                    courses={coursesUser}
                     setActive={setModalActive}
                     profile
                 />

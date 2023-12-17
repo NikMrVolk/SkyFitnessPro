@@ -18,13 +18,15 @@ function CoursesList({ courses, isMainPage, setActive, profile = false }) {
                     <div
                         className={s.course}
                         key={Math.random()}
-                        onClick={() => !profile && navigate(`/course/${el._id}`)}
+                        onClick={() =>
+                            !profile && navigate(`/course/${el._id}`)
+                        }
                     >
                         <span className={s.courseName}>{el.nameRU}</span>
                         <img
                             className={s.courseImg}
-                            src={imgCourses[index].img}
-                            alt={imgCourses[index].alt}
+                            src={`../img/courses/${el.nameEN}.svg`}
+                            alt={el.nameRU}
                         />
                         {isMainPage ? (
                             <></>

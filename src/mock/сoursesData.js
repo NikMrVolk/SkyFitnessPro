@@ -21,39 +21,29 @@ export const userCourses = [
 
 export const imgCourses = [
     {
-        id: 1,
+        id: 'yoga',
         name: 'Йога',
-        img: '../img/courses/card1.svg',
         imgHeader: '../img/coursesHeader/card1.svg',
-        alt: 'yoga',
     },
     {
-        id: 2,
+        id: 'stretching',
         name: 'Стретчинг',
-        img: '../img/courses/card2.svg',
         imgHeader: '../img/coursesHeader/card2.svg',
-        alt: 'stretching',
     },
     {
-        id: 4,
+        id: 'danceFitness',
         name: 'Танцевальный фитнес',
-        img: '../img/courses/card3.svg',
         imgHeader: '../img/coursesHeader/card3.svg',
-        alt: 'stretching',
     },
     {
-        id: 5,
+        id: 'stepAirobic',
         name: 'Степ-аэробика',
-        img: '../img/courses/card4.svg',
         imgHeader: '../img/coursesHeader/card4.svg',
-        alt: 'yoga',
     },
     {
-        id: 6,
+        id: 'bodyflex',
         name: 'Бодифлекс',
-        img: '../img/courses/card5.svg',
         imgHeader: '../img/coursesHeader/card5.svg',
-        alt: 'bodyflex',
     },
 ]
 
