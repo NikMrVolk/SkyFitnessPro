@@ -6,7 +6,7 @@ import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 import * as firebase from 'firebase/database'
-// // import 'firebase/compat/database'
+// import 'firebase/compat/database'
 // import firebase from 'firebase/compat/app'
 // import { getDatabase, ref, set } from 'firebase/database'
 
@@ -16,10 +16,13 @@ export default function SubmitApplication({ course }) {
     const [modalActive, setModalActive] = useState(false)
 
     const addUserFirebase = () => {
-        const courseRef = firebase.getDatabase().ref(`courses/${course._id}`)
+        const courseRef = firebase.getDatabase().ref('courses/' + course._id)
         // const db = getDatabase()
-        // const courseRef = set(ref(db, `courses/${course._id}`))
-        // получаем значение ref поля в Firebase, используя функцию .once('value')
+        // const courseRef = ref(db, 'courses/' + course._id)
+       
+        // const db = getDatabase()
+        // push(ref(db, `/courses/${course._id}/users/${userID}`), userID)
+ // получаем значение ref поля в Firebase, используя функцию .once('value')
         courseRef.once('value', (snapshot) => {
             const courseFirebase = snapshot.val()
 

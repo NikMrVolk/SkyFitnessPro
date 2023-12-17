@@ -6,7 +6,6 @@ import s from './MainPage.module.css'
 import { useGetCoursesQuery } from '../../services/courses'
 import { getAllCourses } from '../../store/slices/courses'
 
-
 function MainPage() {
     const dispatch = useDispatch()
 
