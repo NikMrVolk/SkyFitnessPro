@@ -10,7 +10,7 @@ export default function HeaderCoursesInfo({ course }) {
                 <img
                     className={s.img}
                     src={imgCourses[course.order - 1].imgHeader}
-                    alt={imgCourses[course.order - 1].alt}
+                    alt={course.nameRU}
                 />
             </div>
         </header>

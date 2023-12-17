@@ -11,6 +11,13 @@ function CoursesList({ courses, isMainPage, setActive, profile = false }) {
         setActive(true)
     }
 
+    const imgCourse = ({ idCourse }) => {
+        // const imgEl = imgCourses.find((item) => item.id === idCourse)
+        const imgEl = imgCourses.filter((item) => item.id?.includes(idCourse))
+        console.log('imgEl', imgEl)
+        return imgEl.img
+    }
+
     return (
         <div className={s.courses}>
             {courses &&
@@ -18,13 +25,15 @@ function CoursesList({ courses, isMainPage, setActive, profile = false }) {
                     <div
                         className={s.course}
                         key={Math.random()}
-                        onClick={() => !profile && navigate(`/course/${el._id}`)}
+                        onClick={() =>
+                            !profile && navigate(`/course/${el._id}`)
+                        }
                     >
                         <span className={s.courseName}>{el.nameRU}</span>
                         <img
                             className={s.courseImg}
-                            src={imgCourses[index].img}
-                            alt={imgCourses[index].alt}
+                            src={`../img/courses/${el.nameEN}.svg`}
+                            alt={el.nameRU}
                         />
                         {isMainPage ? (
                             <></>
