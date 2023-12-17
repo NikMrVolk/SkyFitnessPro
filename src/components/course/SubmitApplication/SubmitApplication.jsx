@@ -5,55 +5,54 @@ import { useSelector } from 'react-redux'
 import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
-import * as firebase from 'firebase/database'
-// import 'firebase/compat/database'
-// import firebase from 'firebase/compat/app'
-// import { getDatabase, ref, set } from 'firebase/database'
+import firebase from '../../../firebase'
 
 export default function SubmitApplication({ course }) {
     const navigate = useNavigate()
     const { access, userID } = useSelector((state) => state.auth)
     const [modalActive, setModalActive] = useState(false)
 
-    const addUserFirebase = () => {
-        const courseRef = firebase.getDatabase().ref('courses/' + course._id)
+    const addUserToCourse = () => {
+        const courseRef = firebase.database().ref(`courses/${course._id}`)
+        console.log('courseRef', courseRef)
+
         // const db = getDatabase()
-        // const courseRef = ref(db, 'courses/' + course._id)
-       
+        // const courseRef = ref(getDatabase, 'courses/' + course._id)
+
         // const db = getDatabase()
         // push(ref(db, `/courses/${course._id}/users/${userID}`), userID)
- // получаем значение ref поля в Firebase, используя функцию .once('value')
-        courseRef.once('value', (snapshot) => {
-            const courseFirebase = snapshot.val()
+        // получаем значение ref поля в Firebase, используя функцию .once('value')
+        // courseRef.once('value', (snapshot) => {
+        //     const courseFirebase = snapshot.val()
 
-            // Проверяем, записан ли пользователь на этот курс
-            if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
-                // Если пользователь уже записан на курс, то ничего не делаем
-                if (courseFirebase.users.includes(userID)) {
-                    console.log('Пользователь уже записан на курс')
-                    return
-                }
+        //     // Проверяем, записан ли пользователь на этот курс
+        //     if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
+        //         // Если пользователь уже записан на курс, то ничего не делаем
+        //         if (courseFirebase.users.includes(userID)) {
+        //             console.log('Пользователь уже записан на курс')
+        //             return
+        //         }
 
-                // Добавляем идентификатор пользователя в массив
-                courseFirebase.users.push(userID)
-            } else {
-                // Создаем новый массив с идентификатором пользователя
-                courseFirebase.users = [userID]
-            }
+        //         // Добавляем идентификатор пользователя в массив
+        //         courseFirebase.users.push(userID)
+        //     } else {
+        //         // Создаем новый массив с идентификатором пользователя
+        //         courseFirebase.users = [userID]
+        //     }
 
-            // Обновляем объект курса в базе данных
-            courseRef
-                .update(courseFirebase)
-                .then(() => {
-                    setModalActive(true)
-                })
-                .catch((error) => {
-                    console.error(
-                        'Ошибка при добавлении пользователя курс',
-                        error,
-                    )
-                })
-        })
+        //     // Обновляем объект курса в базе данных
+        //     courseRef
+        //         .update(courseFirebase)
+        //         .then(() => {
+        //             setModalActive(true)
+        //         })
+        //         .catch((error) => {
+        //             console.error(
+        //                 'Ошибка при добавлении пользователя курс',
+        //                 error,
+        //             )
+        //         })
+        // })
     }
 
     return (
@@ -69,7 +68,7 @@ export default function SubmitApplication({ course }) {
                     className={s.applicationButton}
                     onClick={() => {
                         if (access) {
-                            addUserFirebase()
+                            addUserToCourse()
                         } else {
                             navigate(LOGIN_ROUTE)
                         }
