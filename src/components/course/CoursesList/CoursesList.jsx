@@ -11,13 +11,6 @@ function CoursesList({ courses, isMainPage, setActive, profile = false }) {
         setActive(true)
     }
 
-    const imgCourse = ({ idCourse }) => {
-        // const imgEl = imgCourses.find((item) => item.id === idCourse)
-        const imgEl = imgCourses.filter((item) => item.id?.includes(idCourse))
-        console.log('imgEl', imgEl)
-        return imgEl.img
-    }
-
     return (
         <div className={s.courses}>
             {courses &&
