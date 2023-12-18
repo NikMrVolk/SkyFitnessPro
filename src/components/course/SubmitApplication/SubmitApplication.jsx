@@ -1,15 +1,55 @@
 import s from './SubmitApplication.module.css'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
+import firebase from '../../../firebase'
 
-export default function SubmitApplication() {
+export default function SubmitApplication({ course }) {
     const navigate = useNavigate()
-    const { access } = useSelector((state) => state.auth)
-    const [modalActive, setModalActive] = useState(false)    
+    const { access, userID } = useSelector((state) => state.auth)
+    const [modalActive, setModalActive] = useState(false)
+
+    const addUserToCourse = () => {
+        //получаем ссылку на объект курса в firebase
+        const courseRef = firebase.database().ref(`courses/${course._id}`)
+
+        courseRef.once('value', (snapshot) => {
+            const courseFirebase = snapshot.val()
+
+            // Проверяем, записан ли пользователь на этот курс
+            if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
+                // Если пользователь уже записан на курс, то ничего не делаем
+                if (courseFirebase.users.includes(userID)) {
+                    toast('Вы уже записаны на данный курс', {
+                        className: s.error,
+                    })
+                    return
+                }
+
+                // Добавляем идентификатор пользователя в массив
+                courseFirebase.users.push(userID)
+            } else {
+                // Создаем новый массив с идентификатором пользователя
+                courseFirebase.users = [userID]
+            }
+
+            // Обновляем объект курса в базе данных
+            courseRef
+                .update(courseFirebase)
+                .then(() => {
+                    setModalActive(true)
+                })
+                .catch((error) => {
+                    toast(error, {
+                        className: s.error,
+                    })
+                })
+        })
+    }
 
     return (
         <div className={s.application}>
@@ -24,7 +64,7 @@ export default function SubmitApplication() {
                     className={s.applicationButton}
                     onClick={() => {
                         if (access) {
-                            setModalActive(true)
+                            addUserToCourse()
                         } else {
                             navigate(LOGIN_ROUTE)
                         }

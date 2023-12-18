@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import Button from '../../components/UI/button/Button'
 import { LOGIN_ROUTE, PROFILE_ROUTE } from '../../utils/constants'
 import { REGISTRATION_ROUTE } from '../../utils/constants'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Input from '../../components/UI/input/Input'
 import s from './Auth.module.css'
 import { useDispatch } from 'react-redux'
@@ -28,7 +28,6 @@ export function Auth() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [validationError, setValidationError] = useState('')
     const isLogin = pathname === LOGIN_ROUTE
-
 
     const auth = async () => {
         const emailAfterTrim = email.trim()
