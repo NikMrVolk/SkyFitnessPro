@@ -1,5 +1,6 @@
 import s from './SubmitApplication.module.css'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 import { LOGIN_ROUTE } from '../../../utils/constants'
@@ -17,7 +18,6 @@ export default function SubmitApplication({ course }) {
         const courseRef = firebase.database().ref(`courses/${course._id}`)
         console.log('courseRef', courseRef)
 
-    
         courseRef.once('value', (snapshot) => {
             const courseFirebase = snapshot.val()
 
@@ -25,7 +25,9 @@ export default function SubmitApplication({ course }) {
             if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
                 // Если пользователь уже записан на курс, то ничего не делаем
                 if (courseFirebase.users.includes(userID)) {
-                    console.log('Пользователь уже записан на курс')
+                    toast('Вы уже записаны на данный курс', {
+                        className: s.error,
+                    })
                     return
                 }
 
@@ -43,10 +45,10 @@ export default function SubmitApplication({ course }) {
                     setModalActive(true)
                 })
                 .catch((error) => {
-                    console.error(
-                        'Ошибка при добавлении пользователя курс',
-                        error,
-                    )
+                    console.log(error)
+                    toast(error, {
+                        className: s.error,
+                    })
                 })
         })
     }

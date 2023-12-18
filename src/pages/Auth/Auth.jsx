@@ -29,7 +29,6 @@ export function Auth() {
     const [validationError, setValidationError] = useState('')
     const isLogin = pathname === LOGIN_ROUTE
 
-
     const auth = async () => {
         const emailAfterTrim = email.trim()
 

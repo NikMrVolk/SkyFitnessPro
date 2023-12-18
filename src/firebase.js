@@ -1,7 +1,6 @@
 // import { initializeApp } from 'firebase/app'
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/database'
-import 'firebase/compat/firestore'
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -15,8 +14,6 @@ const firebaseConfig = {
 }
 
 const app = firebase.initializeApp(firebaseConfig)
-console.log('app', app)
-console.log('firebase', firebase)
 
 export default firebase
-// export default app
+
