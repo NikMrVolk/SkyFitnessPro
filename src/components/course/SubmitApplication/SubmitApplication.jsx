@@ -16,7 +16,6 @@ export default function SubmitApplication({ course }) {
     const addUserToCourse = () => {
         //получаем ссылку на объект курса в firebase
         const courseRef = firebase.database().ref(`courses/${course._id}`)
-        console.log('courseRef', courseRef)
 
         courseRef.once('value', (snapshot) => {
             const courseFirebase = snapshot.val()
@@ -45,7 +44,6 @@ export default function SubmitApplication({ course }) {
                     setModalActive(true)
                 })
                 .catch((error) => {
-                    console.log(error)
                     toast(error, {
                         className: s.error,
                     })
