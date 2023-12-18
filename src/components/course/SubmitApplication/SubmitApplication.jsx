@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
-import app from '../../../firebase'
+import firebase from '../../../firebase'
 
 export default function SubmitApplication({ course }) {
     const navigate = useNavigate()
@@ -13,46 +13,42 @@ export default function SubmitApplication({ course }) {
     const [modalActive, setModalActive] = useState(false)
 
     const addUserToCourse = () => {
-        const courseRef = app.firebase.database().ref(`courses/${course._id}`)
+        //получаем ссылку на объект курса в firebase
+        const courseRef = firebase.database().ref(`courses/${course._id}`)
         console.log('courseRef', courseRef)
 
-        // const db = getDatabase()
-        // const courseRef = ref(getDatabase, 'courses/' + course._id)
+    
+        courseRef.once('value', (snapshot) => {
+            const courseFirebase = snapshot.val()
 
-        // const db = getDatabase()
-        // push(ref(db, `/courses/${course._id}/users/${userID}`), userID)
-        // получаем значение ref поля в Firebase, используя функцию .once('value')
-        // courseRef.once('value', (snapshot) => {
-        //     const courseFirebase = snapshot.val()
+            // Проверяем, записан ли пользователь на этот курс
+            if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
+                // Если пользователь уже записан на курс, то ничего не делаем
+                if (courseFirebase.users.includes(userID)) {
+                    console.log('Пользователь уже записан на курс')
+                    return
+                }
 
-        //     // Проверяем, записан ли пользователь на этот курс
-        //     if (courseFirebase.users && Array.isArray(courseFirebase.users)) {
-        //         // Если пользователь уже записан на курс, то ничего не делаем
-        //         if (courseFirebase.users.includes(userID)) {
-        //             console.log('Пользователь уже записан на курс')
-        //             return
-        //         }
+                // Добавляем идентификатор пользователя в массив
+                courseFirebase.users.push(userID)
+            } else {
+                // Создаем новый массив с идентификатором пользователя
+                courseFirebase.users = [userID]
+            }
 
-        //         // Добавляем идентификатор пользователя в массив
-        //         courseFirebase.users.push(userID)
-        //     } else {
-        //         // Создаем новый массив с идентификатором пользователя
-        //         courseFirebase.users = [userID]
-        //     }
-
-        //     // Обновляем объект курса в базе данных
-        //     courseRef
-        //         .update(courseFirebase)
-        //         .then(() => {
-        //             setModalActive(true)
-        //         })
-        //         .catch((error) => {
-        //             console.error(
-        //                 'Ошибка при добавлении пользователя курс',
-        //                 error,
-        //             )
-        //         })
-        // })
+            // Обновляем объект курса в базе данных
+            courseRef
+                .update(courseFirebase)
+                .then(() => {
+                    setModalActive(true)
+                })
+                .catch((error) => {
+                    console.error(
+                        'Ошибка при добавлении пользователя курс',
+                        error,
+                    )
+                })
+        })
     }
 
     return (
