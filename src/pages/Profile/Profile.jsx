@@ -32,6 +32,7 @@ function Profile() {
                     <Button
                         color="purple"
                         onClick={() => {
+                            
                             setModalChangeDataActive(true)
                             setIsChangeLogin(true)
                         }}
@@ -41,6 +42,7 @@ function Profile() {
                     <Button
                         color="purple"
                         onClick={() => {
+                            
                             setModalChangeDataActive(true)
                             setIsChangeLogin(false)
                         }}
