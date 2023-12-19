@@ -7,11 +7,13 @@ import { LOGIN_ROUTE } from '../../../utils/constants'
 import Modal from '../../UI/modal/Modal'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 import firebase from '../../../firebase'
+import { useGetCoursesQuery } from '../../../services/courses'
 
 export default function SubmitApplication({ course }) {
     const navigate = useNavigate()
     const { access, userID } = useSelector((state) => state.auth)
     const [modalActive, setModalActive] = useState(false)
+    const { refetch } = useGetCoursesQuery()
 
     const addUserToCourse = () => {
         //получаем ссылку на объект курса в firebase
@@ -32,6 +34,7 @@ export default function SubmitApplication({ course }) {
 
                 // Добавляем идентификатор пользователя в массив
                 courseFirebase.users.push(userID)
+                refetch()
             } else {
                 // Создаем новый массив с идентификатором пользователя
                 courseFirebase.users = [userID]
