@@ -3,12 +3,13 @@ import { exercises } from '../../../mock/сoursesData'
 import s from './ChooseDayWorkModal.module.css'
 import { COURSE_ROUTE } from '../../../utils/constants'
 
-const ChooseDayWorkModal = () => {
+const ChooseDayWorkModal = ({ workOuts }) => {
+    console.log(workOuts)
     return (
         <div>
             <h2 className={s.modalHeader}>Выберите тренировку</h2>
             <ul className={s.modalUl}>
-                {exercises.map((el) => (
+                {workOuts?.map((el) => (
                     <li className={s.modalLi} key={el.id}>
                         <Link to={COURSE_ROUTE}>
                             <div
@@ -16,7 +17,7 @@ const ChooseDayWorkModal = () => {
                                     el.done ? s.modalBtnActive : s.modalBtn
                                 }
                             >
-                                <h3 className={s.exerciseTitle}>{el.text}</h3>
+                                <h3 className={s.exerciseTitle}>{el.name}</h3>
                                 {el.done && (
                                     <img
                                         className={s.modalImg}

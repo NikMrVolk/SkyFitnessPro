@@ -1,24 +1,20 @@
 import { useSelector } from 'react-redux'
-import { userCourses } from '../../mock/сoursesData'
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
 import Modal from '../../components/UI/modal/Modal'
 import { useState } from 'react'
 import Button from '../../components/UI/button/Button'
-import ChooseDayWorkModal from '../../components/modals/ChooseDayWorkModal/ChooseDayWorkModal'
 import Input from '../../components/UI/input/Input'
 
 function Profile() {
-    const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
     const [isChangeLogin, setIsChangeLogin] = useState(false)
     const { userName, userID } = useSelector((state) => state.auth)
     const { allCourses } = useSelector((state) => state.courses)
 
     const coursesUser = allCourses.filter((item) =>
-        item.users?.includes(userID)
+        item.users?.includes(userID),
     )
-    console.log(coursesUser)
 
     return (
         <div className={s.wrapper}>
@@ -50,15 +46,8 @@ function Profile() {
                 </div>
             </div>
             <div className={s.box}>
-                <h1 className={s.title}>Мои курсы</h1>
-                <CoursesList
-                    courses={coursesUser}
-                    setActive={setModalActive}
-                    profile
-                />
-                <Modal active={modalActive} setActive={setModalActive}>
-                    <ChooseDayWorkModal />
-                </Modal>
+                <h2 className={s.title}>Мои курсы</h2>
+                <CoursesList courses={coursesUser} profile />
                 <Modal
                     active={modalChangeDataActive}
                     setActive={setModalChangeDataActive}
