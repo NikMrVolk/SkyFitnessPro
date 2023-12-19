@@ -8,6 +8,7 @@ import Modal from '../../UI/modal/Modal'
 import ProgressModalItem from './ProgressItem'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 import { useSelector } from 'react-redux'
+import { progress } from '../../../mock/progressBar'
 
 const exercises = [
     {
@@ -33,30 +34,6 @@ const exercises = [
     },
 ]
 
-const progress = [
-    {
-        id: 1,
-        bgColor: '#565EEF',
-        baseBgColor: 'linear-gradient(to right, #EDECFF 60%, transparent)',
-        borderRadius: '22px 0px 0px 22px',
-        height: '36px',
-    },
-    {
-        id: 2,
-        bgColor: '#FF6D00',
-        baseBgColor: 'linear-gradient(to right, #FFF2E0 60%, transparent)',
-        borderRadius: '22px 0px 0px 22px',
-        height: '36px',
-    },
-    {
-        id: 3,
-        bgColor: '#9A48F1',
-        baseBgColor: 'linear-gradient(to right, #F9EBFF 60%, transparent)',
-        borderRadius: '22px 0px 0px 22px',
-        height: '36px',
-    },
-]
-
 const opts = {
     height: '100%',
     width: '100%',
@@ -67,6 +44,13 @@ const opts = {
 }
 
 const OpenedCourse = () => {
+    const allProgress = [10, 10, 20] // здесь должен был быть стейт
+    const userProgress = [3, 8, 9]
+
+    const result = userProgress.map(
+        (el, index) => (el * 100) / allProgress[index],
+    )
+
     const { workOut } = useSelector((state) => state.courses)
     console.log(workOut)
 
@@ -150,7 +134,7 @@ const OpenedCourse = () => {
                             <h3>{el.name.split('(')[0]}</h3>
                             <ProgressBar
                                 {...progress[index]}
-                                completed={60}
+                                completed={result[index]}
                                 className={s.progress}
                                 labelClassName={s.barLabel}
                             />
