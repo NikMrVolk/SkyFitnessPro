@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import Modal from '../../UI/modal/Modal'
 import ProgressModalItem from './ProgressItem'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
+import { useSelector } from 'react-redux'
 
 const exercises = [
     {
@@ -32,25 +33,28 @@ const exercises = [
     },
 ]
 
+const opts = {
+    height: '100%',
+    width: '100%',
+    playerVars: {
+        https: '//www.youtube.com/watch',
+        autoplay: 1,
+    },
+}
+
 const OpenedCourse = () => {
-    const opts = {
-        height: '100%',
-        width: '100%',
-        playerVars: {
-            https: '//www.youtube.com/watch',
-            autoplay: 1,
-        },
-    }
+    const { workOut } = useSelector((state) => state.courses)
+    console.log(workOut)
 
     const [modalActive, setModalActive] = useState(false)
     const [isSubmit, setIsSubmit] = useState(false)
 
     useEffect(() => {
-        console.log('modalProgressActive', modalActive)
+        // console.log('modalProgressActive', modalActive)
     }, [modalActive])
 
     useEffect(() => {
-        console.log('exercises', exercises)
+        // console.log('exercises', exercises)
     }, [exercises])
 
     return (
@@ -61,7 +65,7 @@ const OpenedCourse = () => {
             </nav>
             <div>
                 <YouTube
-                    videoId="oqe98Dxivns"
+                    videoId={workOut.video}
                     opts={opts}
                     className={s.video}
                 />
@@ -70,10 +74,8 @@ const OpenedCourse = () => {
                 <div className={s.exercises}>
                     <h2>Упражнения</h2>
                     <ol className={s.ul}>
-                        {exercises.map((el) => (
-                            <li key={el.id}>
-                                {el.text} {el.repetition}
-                            </li>
+                        {workOut.exercises.map((el) => (
+                            <li key={el.name}>{el.name}</li>
                         ))}
                     </ol>
                     <Button
@@ -119,9 +121,9 @@ const OpenedCourse = () => {
                 </div>
                 <div className={s.result}>
                     <h2>Мой прогресс по тренировке 2:</h2>
-                    {exercises.map((el) => (
-                        <div key={el.id} className={s.exercise}>
-                            <h3>{el.text}</h3>
+                    {workOut.exercises.map((el) => (
+                        <div key={el.name} className={s.exercise}>
+                            <h3>{el.name.split('(')[0]}</h3>
                             <ProgressBar
                                 completed={60}
                                 className={s.progress}
