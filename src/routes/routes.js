@@ -9,7 +9,9 @@ import {
     REGISTRATION_ROUTE,
     PROFILE_ROUTE,
     COURSE_ROUTE,
+    WORKOUT_ROUTE,
 } from '../utils/constants'
+import OpenedCourse from '../components/course/OpenedCourse/OpenedCourse'
 
 export const publicRoutes = [
     {
@@ -34,5 +36,9 @@ export const privateRoutes = [
     {
         element: <Profile />,
         path: PROFILE_ROUTE,
+    },
+    {
+        element: < OpenedCourse/>,
+        path: WORKOUT_ROUTE,
     },
 ]
