@@ -75,8 +75,15 @@
 .progress {
     width: 100%;
     max-width: 400px;
+    border-radius: 22px;
+    border: 2px solid #9a48f120;
 }
 
+.barLabel {
+    color: #fff;
+    font-size: 24px;
+    padding-right: 8px;
+}
 
 @media (min-width: 768px) {
     .title {

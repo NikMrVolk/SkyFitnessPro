@@ -33,6 +33,30 @@ const exercises = [
     },
 ]
 
+const progress = [
+    {
+        id: 1,
+        bgColor: '#565EEF',
+        baseBgColor: 'linear-gradient(to right, #EDECFF 60%, transparent)',
+        borderRadius: '22px 0px 0px 22px',
+        height: '36px',
+    },
+    {
+        id: 2,
+        bgColor: '#FF6D00',
+        baseBgColor: 'linear-gradient(to right, #FFF2E0 60%, transparent)',
+        borderRadius: '22px 0px 0px 22px',
+        height: '36px',
+    },
+    {
+        id: 3,
+        bgColor: '#9A48F1',
+        baseBgColor: 'linear-gradient(to right, #F9EBFF 60%, transparent)',
+        borderRadius: '22px 0px 0px 22px',
+        height: '36px',
+    },
+]
+
 const opts = {
     height: '100%',
     width: '100%',
@@ -61,7 +85,7 @@ const OpenedCourse = () => {
         <div>
             <h1 className={s.title}>Йога</h1>
             <nav className={s.breadCrumbs}>
-                Красота и здоровье / Йога на каждый день / 2 день
+                Красота и здоровье / {workOut.day}
             </nav>
             <div>
                 <YouTube
@@ -121,12 +145,14 @@ const OpenedCourse = () => {
                 </div>
                 <div className={s.result}>
                     <h2>Мой прогресс по тренировке 2:</h2>
-                    {workOut.exercises.map((el) => (
+                    {workOut.exercises.map((el, index) => (
                         <div key={el.name} className={s.exercise}>
                             <h3>{el.name.split('(')[0]}</h3>
                             <ProgressBar
+                                {...progress[index]}
                                 completed={60}
                                 className={s.progress}
+                                labelClassName={s.barLabel}
                             />
                         </div>
                     ))}
