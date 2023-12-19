@@ -8,6 +8,7 @@ import Modal from '../../UI/modal/Modal'
 import ProgressModalItem from './ProgressItem'
 import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 import { useSelector } from 'react-redux'
+import { progress } from '../../../mock/progressBar'
 
 const exercises = [
     {
@@ -43,6 +44,13 @@ const opts = {
 }
 
 const OpenedCourse = () => {
+    const allProgress = [10, 10, 20] // здесь должен был быть стейт
+    const userProgress = [3, 8, 9]
+
+    const result = userProgress.map(
+        (el, index) => (el * 100) / allProgress[index],
+    )
+
     const { workOut } = useSelector((state) => state.courses)
     console.log(workOut)
 
@@ -61,7 +69,7 @@ const OpenedCourse = () => {
         <div>
             <h1 className={s.title}>Йога</h1>
             <nav className={s.breadCrumbs}>
-                Красота и здоровье / Йога на каждый день / 2 день
+                Красота и здоровье / {workOut.day}
             </nav>
             <div>
                 <YouTube
@@ -121,12 +129,14 @@ const OpenedCourse = () => {
                 </div>
                 <div className={s.result}>
                     <h2>Мой прогресс по тренировке 2:</h2>
-                    {workOut.exercises.map((el) => (
+                    {workOut.exercises.map((el, index) => (
                         <div key={el.name} className={s.exercise}>
                             <h3>{el.name.split('(')[0]}</h3>
                             <ProgressBar
-                                completed={60}
+                                {...progress[index]}
+                                completed={result[index]}
                                 className={s.progress}
+                                labelClassName={s.barLabel}
                             />
                         </div>
                     ))}
