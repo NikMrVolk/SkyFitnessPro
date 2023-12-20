@@ -1,0 +1,139 @@
+.title {
+    font-size: 40px;
+    line-height: 46px;
+    margin-bottom: 40px;
+}
+
+.breadCrumbs {
+    font-size: 28px;
+    line-height: 36px;
+    margin-bottom: 40px;
+}
+
+.video {
+    aspect-ratio: 16/9;
+    margin-bottom: 75px;
+}
+
+.work {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 90px;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.exercises {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+.exercises h2 {
+    font-size: 28px;
+    line-height: 36px;
+    text-align: center;
+}
+
+.ul {
+    list-style-type: disc;
+    padding-left: 30px;
+    font-size: 20px;
+    line-height: 26px;
+}
+
+.result {
+    background: #f2f2f2;
+    border-radius: 30px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.result h2 {
+    font-size: 28px;
+    line-height: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.exercise {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.exercise h3 {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+.progress {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 22px;
+    border: 2px solid #9a48f120;
+}
+
+.barLabel {
+    color: #fff;
+    font-size: 24px;
+    padding-right: 8px;
+}
+
+.notExercise {
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 48px;
+        line-height: 56px;
+    }
+    .breadCrumbs {
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .exercises h2 {
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .ul {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .result h2 {
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .exercise h3 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .work {
+        flex-direction: row;
+    }
+    .exercises {
+        flex-direction: column;
+        align-items: start;
+    }
+    .exercise {
+        flex-direction: row;
+    }
+    .exercise h3 {
+        max-width: 230px;
+    }
+    .progress {
+        max-width: 200px;
+    }
+}

@@ -4,7 +4,6 @@ import s from './Profile.module.css'
 import Modal from '../../components/UI/modal/Modal'
 import { useState, useEffect } from 'react'
 import Button from '../../components/UI/button/Button'
-import ChooseDayWorkModal from '../../components/modals/ChooseDayWorkModal/ChooseDayWorkModal'
 import Input from '../../components/UI/input/Input'
 import {
     getAuth,
@@ -16,6 +15,7 @@ import { toast } from 'react-toastify'
 import { setAuth } from '../../store/slices/authSlice'
 
 function Profile() {
+
     const dispatch = useDispatch()
     const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
@@ -28,6 +28,7 @@ function Profile() {
     const coursesUser = allCourses.filter((item) =>
         item.users?.includes(userID),
     )
+
 
     useEffect(() => {
         if (user?.emailVerified) {
@@ -79,6 +80,7 @@ function Profile() {
             })
     }
 
+
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
@@ -98,15 +100,8 @@ function Profile() {
                 </div>
             </div>
             <div className={s.box}>
-                <h1 className={s.title}>Мои курсы</h1>
-                <CoursesList
-                    courses={coursesUser}
-                    setActive={setModalActive}
-                    profile
-                />
-                <Modal active={modalActive} setActive={setModalActive}>
-                    <ChooseDayWorkModal />
-                </Modal>
+                <h2 className={s.title}>Мои курсы</h2>
+                <CoursesList courses={coursesUser} profile />
                 <Modal
                     active={modalChangeDataActive}
                     setActive={setModalChangeDataActive}
