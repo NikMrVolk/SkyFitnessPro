@@ -10,6 +10,7 @@ const ChooseDayWorkModal = ({ workOuts }) => {
 
     const handleClick = (el) => {
         dispatch(setWorkOut(el))
+        localStorage.setItem('workOut', JSON.stringify(el))
         navigate(WORKOUT_ROUTE)
     }
 

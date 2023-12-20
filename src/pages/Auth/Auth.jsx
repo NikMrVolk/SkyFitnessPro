@@ -19,7 +19,7 @@ import {
     validatePassword,
 } from '../../utils/authValidate'
 
-export function Auth() {
+export default function Auth() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { pathname } = useLocation()

@@ -1,7 +1,8 @@
-import { Auth } from '../pages/Auth/Auth'
+import Auth from '../pages/Auth/Auth'
 import MainPage from '../pages/MainPage/MainPage'
 import Profile from '../pages/Profile/Profile'
 import Course from '../pages/Course/Course'
+import WorkOut from '../pages/WorkOut/WorkOut'
 
 import {
     MAIN_ROUTE,
@@ -11,7 +12,6 @@ import {
     COURSE_ROUTE,
     WORKOUT_ROUTE,
 } from '../utils/constants'
-import OpenedCourse from '../components/course/OpenedCourse/OpenedCourse'
 
 export const publicRoutes = [
     {
@@ -38,7 +38,7 @@ export const privateRoutes = [
         path: PROFILE_ROUTE,
     },
     {
-        element: < OpenedCourse/>,
+        element: <WorkOut />,
         path: WORKOUT_ROUTE,
     },
 ]

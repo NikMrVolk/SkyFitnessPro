@@ -4,6 +4,7 @@ const initialState = {
     allCourses: [],
     userCourses: [],
     workOut: {},
+    workOutType: {},
 }
 
 const coursesSlice = createSlice({
@@ -24,9 +25,12 @@ const coursesSlice = createSlice({
         setWorkOut: (state, action) => {
             state.workOut = action.payload
         },
+        setWorkOutType: (state, action) => {
+            state.workOutType = action.payload
+        }
     },
 })
 
-export const { setAllCourses, setUserCourse, setWorkOut } = coursesSlice.actions
+export const { setAllCourses, setUserCourse, setWorkOut, setWorkOutType } = coursesSlice.actions
 
 export default coursesSlice.reducer

@@ -1,18 +1,27 @@
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import s from './CoursesList.module.css'
 import NavButton from '../../UI/navButton/NavButton'
 import Modal from '../../UI/modal/Modal'
 import ChooseDayWorkModal from '../../modals/ChooseDayWorkModal/ChooseDayWorkModal'
 import { useState } from 'react'
+import { setWorkOutType } from '../../../store/slices/courses'
 
 function CoursesList({ courses, isMainPage, profile = false }) {
     const [modalActive, setModalActive] = useState(false)
     const [workOuts, setWorkOuts] = useState([])
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleClick = (exercise) => {
+        const chosenWorkOut = courses.filter((el) => el._id === exercise._id)[0]
+            .workouts
+        const workOutType = { nameEN: exercise.nameEN, nameRU: exercise.nameRU }
+
+        dispatch(setWorkOutType(workOutType))
+        localStorage.setItem('workOutType', JSON.stringify(workOutType))
         setModalActive(true)
-        setWorkOuts(courses.filter((el) => el._id === exercise._id)[0].workouts)
+        setWorkOuts(chosenWorkOut)
     }
 
     return (

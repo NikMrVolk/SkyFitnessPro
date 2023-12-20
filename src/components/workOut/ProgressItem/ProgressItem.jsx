@@ -1,36 +1,39 @@
-import { useState, useEffect } from 'react'
 import Input from '../../UI/input/Input'
 import s from './ProgressItem.module.css'
 
-export default function ProgressModalItem({ el }) {
+export default function ProgressModalItem({
+    el,
+    id,
+    userProgress,
+    setUserProgress,
+}) {
     const classesInput = [s.progressInput, s.progressInputColor]
-    const [value, setValue] = useState(0)
-    useEffect(()=>{
-        console.log("value", value)
-    })
+    const progressValue = progressValue[id]
+
+    const handleChange = (value) => {
+        const newProgress = [...userProgress]
+        newProgress[id] = value
+        setUserProgress([...newProgress])
+    }
 
     return (
         <label className={s.label}>
             <p className={s.question}>
-                Сколько раз вы сделали {el.text.toLowerCase()}?
+                Сколько раз вы сделали {el.name.split('(')[0].toLowerCase()}?
             </p>
             <Input
                 placeholder="Введите значение"
                 type="number"
                 classes={
-                    value > el.quantity
+                    progressValue > el.quantity
                         ? classesInput
                         : classesInput.slice(0, -1)
                 }
                 min="0"
-                max={el.quantity}
+                value={progressValue}
                 onChange={(e) => {
-                    if (
-                        e.target.value.length > 0 &&
-                        e.target.value.length < el.quantity
-                    ) {
-                        el.quantityUser = e.target.value
-                        setValue(e.target.value)
+                    if (e.target.value <= el.quantity && e.target.value >= 0) {
+                        handleChange(e.target.value)
                     }
                 }}
             />
