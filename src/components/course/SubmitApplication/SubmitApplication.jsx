@@ -9,7 +9,8 @@ import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 export default function SubmitApplication() {
     const navigate = useNavigate()
     const { access } = useSelector((state) => state.auth)
-    const [modalActive, setModalActive] = useState(false)    
+    const [modalActive, setModalActive] = useState(false)   
+
 
     return (
         <div className={s.application}>
