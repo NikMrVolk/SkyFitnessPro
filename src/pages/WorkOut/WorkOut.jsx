@@ -39,11 +39,11 @@ const WorkOut = () => {
         Math.round((el * 100) / allProgress[index]),
     )
 
-    const yogaWorkouts = allCourses.find(
+    const course = allCourses.find(
         (item) => item.nameEN === workOutType?.nameEN,
     ).workouts
-    console.log('yogaWorkouts', yogaWorkouts)
-    const indexWorkout = yogaWorkouts.findIndex(
+    
+    const indexWorkout = course.findIndex(
         (workout) => workout.name === workOut?.name,
     )
 
