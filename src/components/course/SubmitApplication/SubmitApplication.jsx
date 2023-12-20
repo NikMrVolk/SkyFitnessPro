@@ -21,6 +21,7 @@ export default function SubmitApplication({ course }) {
 
         courseRef.once('value', (snapshot) => {
             const courseFirebase = snapshot.val()
+            console.log('snapshot', snapshot)
 
             // Проверяем, записан ли пользователь на этот курс
             if (courseFirebase.users && Array.isArray(courseFirebase.users)) {

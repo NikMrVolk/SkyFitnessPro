@@ -9,6 +9,8 @@ import SvgSuccess from '../../components/UI/svgSuccess/SvgSuccess'
 import WorkOutExercise from '../../components/workOut/Exercise/WorkOutExercise'
 import sProgress from '../../components/workOut/ProgressItem/ProgressItem.module.css'
 import { setWorkOut, setWorkOutType } from '../../store/slices/courses'
+import firebase from '../../firebase'
+import { toast } from 'react-toastify'
 
 const opts = {
     height: '100%',
@@ -20,8 +22,10 @@ const opts = {
 }
 
 const WorkOut = () => {
-    const { workOut } = useSelector((state) => state.courses)
-    const { workOutType } = useSelector((state) => state.courses)
+    const { workOut, workOutType, allCourses } = useSelector(
+        (state) => state.courses,
+    )
+    const { userID } = useSelector((state) => state.auth)
     const [modalActive, setModalActive] = useState(false)
     const [isSubmit, setIsSubmit] = useState(false)
     const dispatch = useDispatch()
@@ -30,9 +34,20 @@ const WorkOut = () => {
     const [userProgress, setUserProgress] = useState(
         allProgress?.map((el) => ''),
     )
-    const result = userProgress?.map(
-        (el, index) => Math.round((el * 100) / allProgress[index]),
+    console.log('userProgress', userProgress)
+    const result = userProgress?.map((el, index) =>
+        Math.round((el * 100) / allProgress[index]),
     )
+
+    const yogaWorkouts = allCourses.find(
+        (item) => item.nameEN === workOutType?.nameEN,
+    ).workouts
+    console.log('yogaWorkouts', yogaWorkouts)
+    const indexWorkout = yogaWorkouts.findIndex(
+        (workout) => workout.name === workOut?.name,
+    )
+
+    console.log('indexWorkout', indexWorkout)
 
     useEffect(() => {
         if (!workOut.name) {
@@ -45,6 +60,70 @@ const WorkOut = () => {
             dispatch(setWorkOutType(chosenWorkOutType))
         }
     }, [])
+
+    const sendValuesProgressUser = () => {
+        userProgress.forEach((value, index) => {
+            const courseRef = firebase
+                .database()
+                .ref(
+                    `courses/${workOutType?.nameEN}/workouts/${indexWorkout}/exercises/${index}`,
+                )
+            console.log('INDEX', index)
+            console.log('VALUE', value)
+
+            courseRef.once('value', (snapshot) => {
+                const courseFirebase = snapshot.val()
+                console.log('snapshot', snapshot)
+
+                if (
+                    courseFirebase?.users &&
+                    Array.isArray(courseFirebase?.users)
+                ) {
+                    const userIndex = courseFirebase?.users.findIndex(
+                        (user) => user.userID === userID,
+                    )
+                    console.log('userIndex', userIndex)
+
+                    if (userIndex !== -1) {
+                        courseFirebase.users[userIndex] = {
+                            userID: userID,
+                            quantityUser: value,
+                        }
+                    }
+
+                    courseFirebase.users.push = {
+                        userID: userID,
+                        quantityUser: value,
+                    }
+
+                    // refetch()
+                } else {
+                   
+                    console.log('userID', userID)
+                    courseFirebase.users = [
+                        {
+                            userID: userID,
+                            quantityUser: value,
+                        },
+                    ]
+                }
+
+
+                console.log('test', test)
+                   
+                courseRef
+                    .update(courseFirebase)
+                    .then(() => {
+                        setIsSubmit(true), setModalActive(false)
+                    })
+                    .catch((error) => {
+                        toast(error, {
+                            className: s.error,
+                        })
+                    })
+            })
+        })
+    }
 
     return (
         <div>
@@ -92,7 +171,7 @@ const WorkOut = () => {
                         <Button
                             color={'purple'}
                             onClick={() => {
-                                setIsSubmit(true), setModalActive(false)
+                                sendValuesProgressUser()
                             }}
                         >
                             Отправить
