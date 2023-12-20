@@ -31,7 +31,7 @@ const WorkOut = () => {
         allProgress?.map((el) => ''),
     )
     const result = userProgress?.map(
-        (el, index) => (el * 100) / allProgress[index],
+        (el, index) => Math.round((el * 100) / allProgress[index]),
     )
 
     useEffect(() => {
