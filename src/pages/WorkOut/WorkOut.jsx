@@ -42,7 +42,7 @@ const WorkOut = () => {
     const course = allCourses.find(
         (item) => item.nameEN === workOutType?.nameEN,
     ).workouts
-    
+
     const indexWorkout = course.findIndex(
         (workout) => workout.name === workOut?.name,
     )
@@ -74,6 +74,7 @@ const WorkOut = () => {
             courseRef.once('value', (snapshot) => {
                 const courseFirebase = snapshot.val()
                 console.log('snapshot', snapshot)
+                console.log('courseFirebase', courseFirebase)
 
                 if (
                     courseFirebase?.users &&
@@ -98,7 +99,6 @@ const WorkOut = () => {
 
                     // refetch()
                 } else {
-                   
                     console.log('userID', userID)
                     courseFirebase.users = [
                         {
@@ -108,9 +108,8 @@ const WorkOut = () => {
                     ]
                 }
 
-
                 console.log('test', test)
-                   
+
                 courseRef
                     .update(courseFirebase)
                     .then(() => {
