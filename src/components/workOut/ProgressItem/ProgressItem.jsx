@@ -8,7 +8,7 @@ export default function ProgressModalItem({
     setUserProgress,
 }) {
     const classesInput = [s.progressInput, s.progressInputColor]
-    const progressValue = progressValue[id]
+    const progressValue = userProgress[id]
 
     const handleChange = (value) => {
         const newProgress = [...userProgress]
