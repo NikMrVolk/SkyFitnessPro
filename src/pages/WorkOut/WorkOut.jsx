@@ -11,6 +11,7 @@ import sProgress from '../../components/workOut/ProgressItem/ProgressItem.module
 import { setWorkOut, setWorkOutType } from '../../store/slices/courses'
 import firebase from '../../firebase'
 import { toast } from 'react-toastify'
+import { useGetCoursesQuery } from '../../services/courses'
 
 const opts = {
     height: '100%',
@@ -22,6 +23,7 @@ const opts = {
 }
 
 const WorkOut = () => {
+    const { refetch } = useGetCoursesQuery()
     const { workOut, workOutType, allCourses } = useSelector(
         (state) => state.courses,
     )
@@ -47,8 +49,6 @@ const WorkOut = () => {
         (workout) => workout.name === workOut?.name,
     )
 
-    console.log('indexWorkout', indexWorkout)
-
     useEffect(() => {
         if (!workOut.name) {
             const chosenWorkOut = JSON.parse(localStorage.getItem('workOut'))
@@ -68,13 +68,9 @@ const WorkOut = () => {
                 .ref(
                     `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
                 )
-            console.log('INDEX', index)
-            console.log('VALUE', value)
 
             courseRef.once('value', (snapshot) => {
                 const courseFirebase = snapshot.val()
-                console.log('snapshot', snapshot)
-                console.log('courseFirebase', courseFirebase)
 
                 if (
                     courseFirebase?.users &&
@@ -83,7 +79,6 @@ const WorkOut = () => {
                     const userIndex = courseFirebase?.users.findIndex(
                         (user) => user.userID === userID,
                     )
-                    console.log('userIndex', userIndex)
 
                     if (userIndex !== -1) {
                         courseFirebase.users[userIndex] = {
@@ -97,7 +92,7 @@ const WorkOut = () => {
                         quantityUser: value,
                     }
 
-                    // refetch()
+                    refetch()
                 } else {
                     console.log('userID', userID)
                     courseFirebase.users = [
