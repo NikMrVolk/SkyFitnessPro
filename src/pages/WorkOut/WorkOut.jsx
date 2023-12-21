@@ -63,58 +63,58 @@ const WorkOut = () => {
 
     const sendValuesProgressUser = () => {
         userProgress.forEach((value, index) => {
-            const courseRef = firebase
-                .database()
-                .ref(
-                    `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
-                )
-
-            courseRef.once('value', (snapshot) => {
-                const courseFirebase = snapshot.val()
-
-                if (
-                    courseFirebase?.users &&
-                    Array.isArray(courseFirebase?.users)
-                ) {
-                    const userIndex = courseFirebase?.users.findIndex(
-                        (user) => user.userID === userID,
+            if (Number(value)) {
+                const courseRef = firebase
+                    .database()
+                    .ref(
+                        `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
                     )
 
-                    if (userIndex !== -1) {
-                        courseFirebase.users[userIndex] = {
-                            userID: userID,
-                            quantityUser: value,
+                courseRef.once('value', (snapshot) => {
+                    const courseFirebase = snapshot.val()
+
+                    if (
+                        courseFirebase?.users &&
+                        Array.isArray(courseFirebase?.users)
+                    ) {
+                        const userIndex = courseFirebase?.users.findIndex(
+                            (user) => user.userID === userID,
+                        )
+
+                        if (userIndex !== -1) {
+                            courseFirebase.users[userIndex] = {
+                                userID: userID,
+                                quantityUser: Number(value),
+                            }
+                        } else {
+                            courseFirebase.users.push({
+                                userID: userID,
+                                quantityUser: Number(value),
+                            })
                         }
+
+                        refetch()
                     } else {
-                
-                        courseFirebase.users.push({
-                            userID: userID,
-                            quantityUser: value,
-                        })
+                        courseFirebase.users = [
+                            {
+                                userID: userID,
+                                quantityUser: Number(value),
+                            },
+                        ]
                     }
 
-                    refetch()
-                } else {
-                   
-                    courseFirebase.users = [
-                        {
-                            userID: userID,
-                            quantityUser: value,
-                        },
-                    ]
-                }
-
-                courseRef
-                    .update(courseFirebase)
-                    .then(() => {
-                        setIsSubmit(true), setModalActive(false)
-                    })
-                    .catch((error) => {
-                        toast(error, {
-                            className: s.error,
+                    courseRef
+                        .update(courseFirebase)
+                        .then(() => {
+                            setIsSubmit(true), setModalActive(false)
                         })
-                    })
-            })
+                        .catch((error) => {
+                            toast(error, {
+                                className: s.error,
+                            })
+                        })
+                })
+            }
         })
     }
 
