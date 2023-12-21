@@ -34,7 +34,7 @@ const WorkOut = () => {
 
     const userQuantityExercises = workOut?.exercises?.map((exercise) => {
         const user = exercise.users?.find((user) => user.userID === userID)
-        return  user?.quantityUser
+        return user ? user.quantityUser : 0
     })
 
     const allProgress = workOut?.exercises?.map((el) => el.quantity)
@@ -74,57 +74,56 @@ const WorkOut = () => {
 
     const sendValuesProgressUser = () => {
         userProgress.forEach((value, index) => {
-          
-                const courseRef = firebase
-                    .database()
-                    .ref(
-                        `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
+            const courseRef = firebase
+                .database()
+                .ref(
+                    `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
+                )
+
+            courseRef.once('value', (snapshot) => {
+                const courseFirebase = snapshot.val()
+
+                if (
+                    courseFirebase?.users &&
+                    Array.isArray(courseFirebase?.users)
+                ) {
+                    const userIndex = courseFirebase?.users.findIndex(
+                        (user) => user.userID === userID,
                     )
 
-                courseRef.once('value', (snapshot) => {
-                    const courseFirebase = snapshot.val()
-
-                    if (
-                        courseFirebase?.users &&
-                        Array.isArray(courseFirebase?.users)
-                    ) {
-                        const userIndex = courseFirebase?.users.findIndex(
-                            (user) => user.userID === userID,
-                        )
-
-                        if (userIndex !== -1) {
-                            courseFirebase.users[userIndex] = {
-                                userID: userID,
-                                quantityUser: Number(value),
-                            }
-                        } else {
-                            courseFirebase.users.push({
-                                userID: userID,
-                                quantityUser: Number(value),
-                            })
+                    if (userIndex !== -1) {
+                        courseFirebase.users[userIndex] = {
+                            userID: userID,
+                            quantityUser: Number(value),
                         }
-
-                        refetch()
                     } else {
-                        courseFirebase.users = [
-                            {
-                                userID: userID,
-                                quantityUser: Number(value),
-                            },
-                        ]
+                        courseFirebase.users.push({
+                            userID: userID,
+                            quantityUser: Number(value),
+                        })
                     }
 
-                    courseRef
-                        .update(courseFirebase)
-                        .then(() => {
-                            setIsSubmit(true), setModalActive(false)
+                    refetch()
+                } else {
+                    courseFirebase.users = [
+                        {
+                            userID: userID,
+                            quantityUser: Number(value),
+                        },
+                    ]
+                }
+
+                courseRef
+                    .update(courseFirebase)
+                    .then(() => {
+                        setIsSubmit(true), setModalActive(false)
+                    })
+                    .catch((error) => {
+                        toast(error, {
+                            className: s.error,
                         })
-                        .catch((error) => {
-                            toast(error, {
-                                className: s.error,
-                            })
-                        })
-                })
+                    })
+            })
         })
     }
 
