@@ -36,7 +36,7 @@ const WorkOut = () => {
     const [userProgress, setUserProgress] = useState(
         allProgress?.map((el) => ''),
     )
-    console.log('userProgress', userProgress)
+
     const result = userProgress?.map((el, index) =>
         Math.round((el * 100) / allProgress[index]),
     )
@@ -85,16 +85,17 @@ const WorkOut = () => {
                             userID: userID,
                             quantityUser: value,
                         }
-                    }
-
-                    courseFirebase.users.push = {
-                        userID: userID,
-                        quantityUser: value,
+                    } else {
+                
+                        courseFirebase.users.push({
+                            userID: userID,
+                            quantityUser: value,
+                        })
                     }
 
                     refetch()
                 } else {
-                    console.log('userID', userID)
+                   
                     courseFirebase.users = [
                         {
                             userID: userID,
