@@ -66,7 +66,7 @@ const WorkOut = () => {
             const courseRef = firebase
                 .database()
                 .ref(
-                    `courses/${workOutType?.nameEN}/workouts/${indexWorkout}/exercises/${index}`,
+                    `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
                 )
             console.log('INDEX', index)
             console.log('VALUE', value)
@@ -107,8 +107,6 @@ const WorkOut = () => {
                         },
                     ]
                 }
-
-                console.log('test', test)
 
                 courseRef
                     .update(courseFirebase)
