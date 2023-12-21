@@ -34,7 +34,7 @@ const WorkOut = () => {
 
     const userQuantityExercises = workOut?.exercises?.map((exercise) => {
         const user = exercise.users?.find((user) => user.userID === userID)
-        return user ? user.quantityUser : 0
+        return  user?.quantityUser
     })
 
     const allProgress = workOut?.exercises?.map((el) => el.quantity)

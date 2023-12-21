@@ -37,7 +37,7 @@ const coursesSlice = createSlice({
                         const user = exercise.users.find(
                             (user) => user.userID === auth.userID,
                         )
-                        return user ? user.quantityUser : 0
+                        return user?.quantityUser
                     },
                 )
             }
