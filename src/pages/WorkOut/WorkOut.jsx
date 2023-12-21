@@ -32,12 +32,17 @@ const WorkOut = () => {
     const [isSubmit, setIsSubmit] = useState(false)
     const dispatch = useDispatch()
 
+    const userQuantityExercises = workOut?.exercises?.map((exercise) => {
+        const user = exercise.users?.find((user) => user.userID === userID)
+        return user ? user.quantityUser : 0
+    })
+
     const allProgress = workOut?.exercises?.map((el) => el.quantity)
     const [userProgress, setUserProgress] = useState(
-        allProgress?.map((el) => ''),
+        allProgress?.map((el) => 0),
     )
 
-    const result = userProgress?.map((el, index) =>
+    const result = userQuantityExercises?.map((el, index) =>
         Math.round((el * 100) / allProgress[index]),
     )
 
@@ -61,9 +66,15 @@ const WorkOut = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (userQuantityExercises) {
+            console.log('userQuantityExercises', userQuantityExercises)
+        }
+    }, [userQuantityExercises])
+
     const sendValuesProgressUser = () => {
         userProgress.forEach((value, index) => {
-            if (Number(value)) {
+          
                 const courseRef = firebase
                     .database()
                     .ref(
@@ -114,7 +125,6 @@ const WorkOut = () => {
                             })
                         })
                 })
-            }
         })
     }
 

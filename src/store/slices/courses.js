@@ -5,6 +5,7 @@ const initialState = {
     userCourses: [],
     workOut: {},
     workOutType: {},
+    userQuantityExercises: [],
 }
 
 const coursesSlice = createSlice({
@@ -27,10 +28,24 @@ const coursesSlice = createSlice({
         },
         setWorkOutType: (state, action) => {
             state.workOutType = action.payload
-        }
+        },
+        setUserQuantityExercises: (state) => {
+            const auth = JSON.parse(localStorage.getItem('auth'))
+            if (state.workOut) {
+                state.userQuantityExercises = state.workOut?.exercises?.map(
+                    (exercise) => {
+                        const user = exercise.users.find(
+                            (user) => user.userID === auth.userID,
+                        )
+                        return user ? user.quantityUser : 0
+                    },
+                )
+            }
+        },
     },
 })
 
-export const { setAllCourses, setUserCourse, setWorkOut, setWorkOutType } = coursesSlice.actions
+export const { setAllCourses, setUserCourse, setWorkOut, setWorkOutType } =
+    coursesSlice.actions
 
 export default coursesSlice.reducer
