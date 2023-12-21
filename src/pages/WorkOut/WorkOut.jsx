@@ -102,8 +102,6 @@ const WorkOut = () => {
                             quantityUser: Number(value),
                         })
                     }
-
-                    refetch()
                 } else {
                     courseFirebase.users = [
                         {
@@ -117,6 +115,7 @@ const WorkOut = () => {
                     .update(courseFirebase)
                     .then(() => {
                         setIsSubmit(true), setModalActive(false)
+                        refetch()
                     })
                     .catch((error) => {
                         toast(error, {
