@@ -163,7 +163,7 @@ const WorkOut = () => {
                                     key={el.id}
                                     el={el}
                                     id={id}
-                                    userProgress={userProgress}
+                                    userProgress={userQuantityExercises}
                                     setUserProgress={setUserProgress}
                                 />
                             ))}
