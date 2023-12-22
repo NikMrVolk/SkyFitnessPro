@@ -1,37 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import s from './ChooseDayWorkModal.module.css'
 import { WORKOUT_ROUTE } from '../../../utils/constants'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setWorkOut } from '../../../store/slices/courses'
-import { useState } from 'react'
 
 const ChooseDayWorkModal = ({ workOuts, isDone }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    // const [isDone, setIsDone] = useState(false)
-
-    // const { allCourses, workOutType } = useSelector((state) => state.courses)
-    // const { userID } = useSelector((state) => state.auth)
-
-   
-   
-    
-
-   
-
-    // const userProgress = workOut?.exercises?.map((el) =>
-    //     el.users?.filter((user) => user.userID === userID),
-    // )
-    // console.log('userProgress', userProgress) //выводит не то
-
-    // if (JSON.stringify(allProgress) == JSON.stringify(userProgress)) {
-    //     setIsDone(true)
-    // }
-
-    const handleClick = (el) => {
+    const handleClick = (el, isDone) => {
         dispatch(setWorkOut(el))
         localStorage.setItem('workOut', JSON.stringify(el))
+        localStorage.setItem('isDone', JSON.stringify(isDone))
         navigate(WORKOUT_ROUTE)
     }
 
@@ -43,9 +23,13 @@ const ChooseDayWorkModal = ({ workOuts, isDone }) => {
                     <li
                         className={isDone[index] ? s.modalLiActive : s.modalLi}
                         key={el.day}
-                        onClick={() => handleClick(el)}
+                        onClick={() => handleClick(el, isDone[index])}
                     >
-                        <div className={isDone[index] ? s.modalBtnActive : s.modalBtn}>
+                        <div
+                            className={
+                                isDone[index] ? s.modalBtnActive : s.modalBtn
+                            }
+                        >
                             <h3 className={s.exerciseTitle}>{el.name}</h3>
                             {isDone[index] && (
                                 <img
