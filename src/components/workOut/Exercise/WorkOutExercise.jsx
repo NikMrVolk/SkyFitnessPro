@@ -6,7 +6,7 @@ import s from './WorkOutExercise.module.css'
 const WorkOutExercise = ({ workOut, result, setModalActive }) => {
     const workOutDay = workOut.day.split('/')[1].split(' ')[1]
     const isDone = JSON.parse(localStorage.getItem('isDone'))
-    
+
     return (
         <div className={s.work}>
             <div className={s.exercises}>
@@ -16,7 +16,11 @@ const WorkOutExercise = ({ workOut, result, setModalActive }) => {
                         <li key={el.name}>{el.name}</li>
                     ))}
                 </ol>
-                <Button color={'purple'} onClick={() => setModalActive(true)} disabled={isDone}>
+                <Button
+                    color={'purple'}
+                    onClick={() => setModalActive(true)}
+                    isDone={isDone}
+                >
                     Заполнить свой прогресс
                 </Button>
             </div>
