@@ -49,7 +49,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                     return isAllExercisesValid
                 })
 
-                setIsDone(allProgress)
+                 setIsDone(allProgress)
             console.log('allProgress', allProgress)
             console.log('workOutType', workOutType)
         }
