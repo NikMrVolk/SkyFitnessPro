@@ -146,13 +146,13 @@ const WorkOut = () => {
                                     'isVideoWatched',
                                     JSON.stringify([
                                         ...isVideoWatched,
-                                        indexWorkout,
+                                        workOut.video,
                                     ]),
                                 )
                             } else {
                                 localStorage.setItem(
                                     'isVideoWatched',
-                                    JSON.stringify([indexWorkout]),
+                                    JSON.stringify([workOut.video]),
                                 )
                             }
                         }

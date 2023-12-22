@@ -33,7 +33,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
         if (workOutType.nameEN) {
             const allProgress = allCourses
                 ?.find((item) => item.nameEN === workOutType.nameEN)
-                .workouts.map((workout, index) => {
+                .workouts.map((workout) => {
                     let isAllExercisesValid
 
                     if (workout.exercises) {
@@ -52,7 +52,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                             },
                         )
                     } else {
-                        isAllExercisesValid = isVideoWatched?.includes(index)
+                        isAllExercisesValid = isVideoWatched?.includes(workout.video)
                             ? true
                             : false
                     }
