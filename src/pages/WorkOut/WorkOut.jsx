@@ -9,6 +9,9 @@ import SvgSuccess from '../../components/UI/svgSuccess/SvgSuccess'
 import WorkOutExercise from '../../components/workOut/Exercise/WorkOutExercise'
 import sProgress from '../../components/workOut/ProgressItem/ProgressItem.module.css'
 import { setWorkOut, setWorkOutType } from '../../store/slices/courses'
+import firebase from '../../firebase'
+import { toast } from 'react-toastify'
+import { useGetCoursesQuery } from '../../services/courses'
 
 const opts = {
     height: '100%',
@@ -20,18 +23,35 @@ const opts = {
 }
 
 const WorkOut = () => {
-    const { workOut } = useSelector((state) => state.courses)
-    const { workOutType } = useSelector((state) => state.courses)
+    const { refetch } = useGetCoursesQuery()
+    const { workOut, workOutType, allCourses } = useSelector(
+        (state) => state.courses,
+    )
+    const { userID } = useSelector((state) => state.auth)
     const [modalActive, setModalActive] = useState(false)
     const [isSubmit, setIsSubmit] = useState(false)
     const dispatch = useDispatch()
 
+    const userQuantityExercises = workOut?.exercises?.map((exercise) => {
+        const user = exercise.users?.find((user) => user.userID === userID)
+        return user ? user.quantityUser : 0
+    })
+
     const allProgress = workOut?.exercises?.map((el) => el.quantity)
     const [userProgress, setUserProgress] = useState(
-        allProgress?.map((el) => ''),
+        allProgress?.map((el) => 0),
     )
-    const result = userProgress?.map(
-        (el, index) => Math.round((el * 100) / allProgress[index]),
+
+    const result = userQuantityExercises?.map((el, index) =>
+        Math.round((el * 100) / allProgress[index]),
+    )
+
+    const course = allCourses.find(
+        (item) => item.nameEN === workOutType?.nameEN,
+    ).workouts
+
+    const indexWorkout = course.findIndex(
+        (workout) => workout.name === workOut?.name,
     )
 
     useEffect(() => {
@@ -45,6 +65,66 @@ const WorkOut = () => {
             dispatch(setWorkOutType(chosenWorkOutType))
         }
     }, [])
+
+    useEffect(() => {
+        if (userQuantityExercises) {
+            console.log('userQuantityExercises', userQuantityExercises)
+        }
+    }, [userQuantityExercises])
+
+    const sendValuesProgressUser = () => {
+        userProgress.forEach((value, index) => {
+            const courseRef = firebase
+                .database()
+                .ref(
+                    `courses/${workOutType?.nameEN.toLowerCase()}/workouts/${indexWorkout}/exercises/${index}`,
+                )
+
+            courseRef.once('value', (snapshot) => {
+                const courseFirebase = snapshot.val()
+
+                if (
+                    courseFirebase?.users &&
+                    Array.isArray(courseFirebase?.users)
+                ) {
+                    const userIndex = courseFirebase?.users.findIndex(
+                        (user) => user.userID === userID,
+                    )
+
+                    if (userIndex !== -1) {
+                        courseFirebase.users[userIndex] = {
+                            userID: userID,
+                            quantityUser: Number(value),
+                        }
+                    } else {
+                        courseFirebase.users.push({
+                            userID: userID,
+                            quantityUser: Number(value),
+                        })
+                    }
+                } else {
+                    courseFirebase.users = [
+                        {
+                            userID: userID,
+                            quantityUser: Number(value),
+                        },
+                    ]
+                }
+
+                courseRef
+                    .update(courseFirebase)
+                    .then(() => {
+                        setIsSubmit(true), setModalActive(false)
+                        refetch()
+                    })
+                    .catch((error) => {
+                        toast(error, {
+                            className: s.error,
+                        })
+                    })
+            })
+        })
+    }
 
     return (
         <div>
@@ -92,7 +172,7 @@ const WorkOut = () => {
                         <Button
                             color={'purple'}
                             onClick={() => {
-                                setIsSubmit(true), setModalActive(false)
+                                sendValuesProgressUser()
                             }}
                         >
                             Отправить

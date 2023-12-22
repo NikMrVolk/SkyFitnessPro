@@ -5,7 +5,7 @@ import s from './WorkOutExercise.module.css'
 
 const WorkOutExercise = ({ workOut, result, setModalActive }) => {
     const workOutDay = workOut.day.split('/')[1].split(' ')[1]
-
+    
     return (
         <div className={s.work}>
             <div className={s.exercises}>
