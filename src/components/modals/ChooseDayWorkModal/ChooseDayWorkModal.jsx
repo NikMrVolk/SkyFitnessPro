@@ -5,27 +5,29 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setWorkOut } from '../../../store/slices/courses'
 import { useState } from 'react'
 
-const ChooseDayWorkModal = ({ workOuts }) => {
+const ChooseDayWorkModal = ({ workOuts, isDone }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [isDone, setIsDone] = useState(false)
+    // const [isDone, setIsDone] = useState(false)
 
-    const { workOut } = useSelector((state) => state.courses)
-    const { userID } = useSelector((state) => state.auth)
-    console.log('userID', userID)
+    // const { allCourses, workOutType } = useSelector((state) => state.courses)
+    // const { userID } = useSelector((state) => state.auth)
 
-    const allProgress = workOut?.exercises?.map((el) => el.quantity)
-    console.log('allProgress', allProgress)
+   
+   
+    
 
-    const userProgress = workOut?.exercises?.map((el) =>
-        el.users?.filter((user) => user.userID === userID),
-    )
-    console.log('userProgress', userProgress) //выводит не то
+   
 
-    if (JSON.stringify(allProgress) == JSON.stringify(userProgress)) {
-        setIsDone(true)
-    }
+    // const userProgress = workOut?.exercises?.map((el) =>
+    //     el.users?.filter((user) => user.userID === userID),
+    // )
+    // console.log('userProgress', userProgress) //выводит не то
+
+    // if (JSON.stringify(allProgress) == JSON.stringify(userProgress)) {
+    //     setIsDone(true)
+    // }
 
     const handleClick = (el) => {
         dispatch(setWorkOut(el))

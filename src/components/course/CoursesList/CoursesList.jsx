@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import s from './CoursesList.module.css'
 import NavButton from '../../UI/navButton/NavButton'
@@ -12,6 +12,10 @@ function CoursesList({ courses, isMainPage, profile = false }) {
     const [workOuts, setWorkOuts] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [isDone, setIsDone] = useState(false)
+
+    const { allCourses, workOutType } = useSelector((state) => state.courses)
+    const { userID } = useSelector((state) => state.auth)
 
     const handleClick = (exercise) => {
         const chosenWorkOut = courses.filter((el) => el._id === exercise._id)[0]
@@ -22,6 +26,18 @@ function CoursesList({ courses, isMainPage, profile = false }) {
         localStorage.setItem('workOutType', JSON.stringify(workOutType))
         setModalActive(true)
         setWorkOuts(chosenWorkOut)
+    }
+
+    const setDoneWorkouts = () => {
+        if (workOutType.nameEN) {
+            const allProgress = allCourses?.find(
+                (item) => item.nameEN === workOutType.nameEN,
+            ).workouts
+            //.workouts.exercises
+            // ?.map((el) => el.quantity)
+            console.log('allProgress', allProgress)
+            console.log('workOutType', workOutType)
+        }
     }
 
     return (
@@ -43,7 +59,11 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                         />
                         {!isMainPage && (
                             <div className={s.btnWrapper}>
-                                <NavButton onClick={() => handleClick(el)}>
+                                <NavButton
+                                    onClick={() => {
+                                        handleClick(el), setDoneWorkouts()
+                                    }}
+                                >
                                     Перейти →
                                 </NavButton>
                             </div>
@@ -51,7 +71,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                     </div>
                 ))}
             <Modal active={modalActive} setActive={setModalActive}>
-                <ChooseDayWorkModal workOuts={workOuts} />
+                <ChooseDayWorkModal workOuts={workOuts} isDone={isDone} />
             </Modal>
         </div>
     )
