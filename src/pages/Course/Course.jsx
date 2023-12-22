@@ -15,7 +15,6 @@ export default function CoursesInfoPage() {
     const { id } = useParams()
     const { data } = useGetCourseQuery(id)
     const { allCourses, course } = useSelector((state) => state.courses)
-    const course2 = allCourses.find((item) => item._id === id)
 
     useEffect(() => {
         if (data) {
@@ -32,8 +31,8 @@ export default function CoursesInfoPage() {
                     <section>
                         <FittingCoursesInfo course={course} />
                         <DirectionsCoursesInfo course={course} />
-                        <p className={s.description}>{course?.description}</p>
-                        <SubmitApplication course={course} id={id}/>
+                        <p className={s.description}>{course.description}</p>
+                        <SubmitApplication id={id}/>
                     </section>
                 </>
             )}

@@ -6,11 +6,11 @@ export default function HeaderCoursesInfo({ course }) {
     return (
         <header className={s.header}>
             <div className={s.header}>
-                <h1 className={s.title}>{course?.nameRU}</h1>
+                <h1 className={s.title}>{course.nameRU}</h1>
                 <img
                     className={s.img}
-                    src={imgCourses[course?.order - 1].imgHeader}
-                    alt={course?.nameRU}
+                    src={imgCourses[course.order - 1].imgHeader}
+                    alt={course.nameRU}
                 />
             </div>
         </header>
