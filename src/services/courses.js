@@ -12,15 +12,15 @@ export const coursesQuery = createApi({
     endpoints: (build) => ({
         getCourses: build.query({
             query: () => ({
-                 url: 'courses.json',
+                url: 'courses.json',
             }),
         }),
-        getWorkouts: build.query({
-            query: () => ({
-                url: 'workouts.json',
+        getCourse: build.query({
+            query: (id) => ({
+                url: `courses/${id}.json`,
             }),
         }),
     }),
 })
 
-export const { useGetCoursesQuery, useGetWorkoutsQuery } = coursesQuery
+export const { useGetCoursesQuery, useGetCourseQuery } = coursesQuery

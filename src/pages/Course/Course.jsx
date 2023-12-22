@@ -1,26 +1,42 @@
 import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import HeaderCoursesInfo from '../../components/course/HeaderCourses/HeaderCourses'
 import FittingCoursesInfo from '../../components/course/FittingCourses/FittingCourses'
 import DirectionsCoursesInfo from '../../components/course/DirectionsCourses/DirectionsCourses'
 import SubmitApplication from '../../components/course/SubmitApplication/SubmitApplication'
 import { useSelector } from 'react-redux'
 import s from './Course.module.css'
+import { useGetCourseQuery } from '../../services/courses'
+import { setCourse } from '../../store/slices/courses'
 
 export default function CoursesInfoPage() {
+    const dispatch = useDispatch()
     const { id } = useParams()
-    const { allCourses } = useSelector((state) => state.courses)
-    const course = allCourses.find((item) => item._id === id)
+    const { data } = useGetCourseQuery(id)
+    const { allCourses, course } = useSelector((state) => state.courses)
+    const course2 = allCourses.find((item) => item._id === id)
 
+    useEffect(() => {
+        if (data) {
+            dispatch(setCourse({ course: data }))
+        }
+    }, [data])
+   
 
     return (
         <div className={s.coursesDiv + ' ' + s.center}>
-            <HeaderCoursesInfo course={course} />
-            <section>
-                <FittingCoursesInfo course={course} />
-                <DirectionsCoursesInfo course={course} />
-                <p className={s.description}>{course.description}</p>
-                <SubmitApplication course={course} />
-            </section>
+            {course && (
+                <>
+                    <HeaderCoursesInfo course={course} />
+                    <section>
+                        <FittingCoursesInfo course={course} />
+                        <DirectionsCoursesInfo course={course} />
+                        <p className={s.description}>{course?.description}</p>
+                        <SubmitApplication course={course} id={id}/>
+                    </section>
+                </>
+            )}
         </div>
     )
 }

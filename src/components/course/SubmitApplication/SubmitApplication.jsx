@@ -9,7 +9,7 @@ import SvgSuccess from '../../UI/svgSuccess/SvgSuccess'
 import firebase from '../../../firebase'
 import { useGetCoursesQuery } from '../../../services/courses'
 
-export default function SubmitApplication({ course }) {
+export default function SubmitApplication({ id }) {
     const navigate = useNavigate()
     const { access, userID } = useSelector((state) => state.auth)
     const [modalActive, setModalActive] = useState(false)
@@ -17,7 +17,7 @@ export default function SubmitApplication({ course }) {
 
     const addUserToCourse = () => {
         //получаем ссылку на объект курса в firebase
-        const courseRef = firebase.database().ref(`courses/${course._id}`)
+        const courseRef = firebase.database().ref(`courses/${id}`)
 
         courseRef.once('value', (snapshot) => {
             const courseFirebase = snapshot.val()
@@ -46,6 +46,7 @@ export default function SubmitApplication({ course }) {
                 .update(courseFirebase)
                 .then(() => {
                     setModalActive(true)
+                    refetch()
                 })
                 .catch((error) => {
                     toast(error, {
