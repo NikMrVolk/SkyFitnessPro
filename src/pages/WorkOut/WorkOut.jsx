@@ -160,7 +160,7 @@ const WorkOut = () => {
                         <form action="#" className={sProgress.form}>
                             {workOut?.exercises?.map((el, id) => (
                                 <ProgressModalItem
-                                    key={el.id}
+                                    key={Math.round()}
                                     el={el}
                                     id={id}
                                     userProgress={userProgress}

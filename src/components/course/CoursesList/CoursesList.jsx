@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import s from './CoursesList.module.css'
 import NavButton from '../../UI/navButton/NavButton'
 import Modal from '../../UI/modal/Modal'
 import ChooseDayWorkModal from '../../modals/ChooseDayWorkModal/ChooseDayWorkModal'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { setWorkOutType } from '../../../store/slices/courses'
 
 function CoursesList({ courses, isMainPage, profile = false }) {
@@ -12,6 +12,10 @@ function CoursesList({ courses, isMainPage, profile = false }) {
     const [workOuts, setWorkOuts] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [isDone, setIsDone] = useState([])
+
+    const { allCourses, workOutType } = useSelector((state) => state.courses)
+    const { userID } = useSelector((state) => state.auth)
 
     const handleClick = (exercise) => {
         const chosenWorkOut = courses.filter((el) => el._id === exercise._id)[0]
@@ -23,6 +27,37 @@ function CoursesList({ courses, isMainPage, profile = false }) {
         setModalActive(true)
         setWorkOuts(chosenWorkOut)
     }
+
+    const setDoneWorkouts = () => {
+        if (workOutType.nameEN) {
+            const allProgress = allCourses
+                ?.find((item) => item.nameEN === workOutType.nameEN)
+                .workouts.map((workout) => {
+                    const isAllExercisesValid = workout.exercises.every(
+                        (exercise) => {
+                            const userExercise = exercise.users.find(
+                                (user) => user.userID === userID,
+                            )
+                            if (!userExercise) {
+                                return false
+                            }
+                            return (
+                                userExercise.quantityUser === exercise.quantity
+                            )
+                        },
+                    )
+                    return isAllExercisesValid
+                })
+
+                setIsDone(allProgress)
+            console.log('allProgress', allProgress)
+            console.log('workOutType', workOutType)
+        }
+    }
+
+    useEffect(() => {
+        setDoneWorkouts()
+    }, [workOutType.nameEN, allCourses])
 
     return (
         <div className={s.courses}>
@@ -43,7 +78,11 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                         />
                         {!isMainPage && (
                             <div className={s.btnWrapper}>
-                                <NavButton onClick={() => handleClick(el)}>
+                                <NavButton
+                                    onClick={() => {
+                                        handleClick(el)
+                                    }}
+                                >
                                     Перейти →
                                 </NavButton>
                             </div>
@@ -51,7 +90,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                     </div>
                 ))}
             <Modal active={modalActive} setActive={setModalActive}>
-                <ChooseDayWorkModal workOuts={workOuts} />
+                <ChooseDayWorkModal workOuts={workOuts} isDone={isDone} />
             </Modal>
         </div>
     )

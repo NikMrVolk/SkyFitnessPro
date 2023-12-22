@@ -15,6 +15,10 @@
     width: 278px;
 }
 
+.disabled {
+    opacity: 0.5;
+}
+
 .purple:hover {
     background: #3f007d;
 }

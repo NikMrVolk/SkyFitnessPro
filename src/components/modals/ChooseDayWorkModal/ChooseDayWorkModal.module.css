@@ -22,10 +22,15 @@
     }
 }
 
-.modalLi {
+.modalLi,
+.modalLiActive {
     display: flex;
     justify-content: center;
     cursor: pointer;
+    color: #000;
+}
+
+.modalLiActive {
     color: #06b16e;
 }
 
@@ -56,9 +61,11 @@
 }
 
 .exerciseDay {
+    max-width: 220px;
     font-size: 16px;
     line-height: 18px;
     padding-top: 6px;
+    text-align: center;
 }
 
 .modalImg {
