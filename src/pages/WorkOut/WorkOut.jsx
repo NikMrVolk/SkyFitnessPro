@@ -126,7 +126,6 @@ const WorkOut = () => {
         })
     }
 
-    // const [isVideoWatched, setIsVideoWatched] = useState(false);
     const isVideoWatched = JSON.parse(localStorage?.getItem('isVideoWatched'))
 
     return (
@@ -179,7 +178,7 @@ const WorkOut = () => {
                         <form action="#" className={sProgress.form}>
                             {workOut?.exercises?.map((el, id) => (
                                 <ProgressModalItem
-                                    key={Math.round()}
+                                    key={Math.random()}
                                     el={el}
                                     id={id}
                                     userProgress={userProgress}

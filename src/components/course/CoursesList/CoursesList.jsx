@@ -39,7 +39,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                     if (workout.exercises) {
                         isAllExercisesValid = workout.exercises.every(
                             (exercise) => {
-                                const userExercise = exercise?.users?.find(
+                                const userExercise = exercise.users?.find(
                                     (user) => user.userID === userID,
                                 )
                                 if (!userExercise) {
