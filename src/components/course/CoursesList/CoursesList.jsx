@@ -13,6 +13,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [isDone, setIsDone] = useState([])
+    const isVideoWatched = JSON.parse(localStorage?.getItem('isVideoWatched'))
 
     const { allCourses, workOutType } = useSelector((state) => state.courses)
     const { userID } = useSelector((state) => state.auth)
@@ -32,27 +33,34 @@ function CoursesList({ courses, isMainPage, profile = false }) {
         if (workOutType.nameEN) {
             const allProgress = allCourses
                 ?.find((item) => item.nameEN === workOutType.nameEN)
-                .workouts.map((workout) => {
-                    const isAllExercisesValid = workout.exercises?.every(
-                        (exercise) => {
-                            const userExercise = exercise?.users?.find(
-                                (user) => user.userID === userID,
-                            )
-                            if (!userExercise) {
-                                return false
-                            }
-                            return (
-                                userExercise?.quantityUser ===
-                                exercise?.quantity
-                            )
-                        },
-                    )
+                .workouts.map((workout, index) => {
+                    let isAllExercisesValid
+
+                    if (workout.exercises) {
+                        isAllExercisesValid = workout.exercises.every(
+                            (exercise) => {
+                                const userExercise = exercise?.users?.find(
+                                    (user) => user.userID === userID,
+                                )
+                                if (!userExercise) {
+                                    return false
+                                }
+                                return (
+                                    userExercise?.quantityUser ===
+                                    exercise?.quantity
+                                )
+                            },
+                        )
+                    } else {
+                        isAllExercisesValid = isVideoWatched?.includes(index)
+                            ? true
+                            : false
+                    }
+
                     return isAllExercisesValid
                 })
 
             setIsDone(allProgress)
-            console.log('allProgress', allProgress)
-            console.log('workOutType', workOutType)
         }
     }
 

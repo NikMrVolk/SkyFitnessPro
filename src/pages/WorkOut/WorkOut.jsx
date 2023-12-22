@@ -126,6 +126,9 @@ const WorkOut = () => {
         })
     }
 
+    // const [isVideoWatched, setIsVideoWatched] = useState(false);
+    const isVideoWatched = JSON.parse(localStorage?.getItem('isVideoWatched'))
+
     return (
         <div>
             <h1 className={s.title}>{workOutType.nameRU}</h1>
@@ -137,6 +140,22 @@ const WorkOut = () => {
                     videoId={workOut?.video}
                     opts={opts}
                     className={s.video}
+                    onEnd={() => {
+                        if (isVideoWatched) {
+                            localStorage.setItem(
+                                'isVideoWatched',
+                                JSON.stringify([
+                                    ...isVideoWatched,
+                                    indexWorkout,
+                                ]),
+                            )
+                        } else {
+                            localStorage.setItem(
+                                'isVideoWatched',
+                                JSON.stringify([indexWorkout]),
+                            )
+                        }
+                    }}
                 />
             </div>
             {workOut?.exercises?.length ? (
