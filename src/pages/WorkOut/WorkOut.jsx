@@ -39,7 +39,7 @@ const WorkOut = () => {
 
     const allProgress = workOut?.exercises?.map((el) => el.quantity)
     const [userProgress, setUserProgress] = useState(
-        allProgress?.map((el) => 0),
+        allProgress?.map((el) => 0) ?? [],
     )
 
     const result = userQuantityExercises?.map((el, index) =>
@@ -48,9 +48,9 @@ const WorkOut = () => {
 
     const course = allCourses.find(
         (item) => item.nameEN === workOutType?.nameEN,
-    ).workouts
+    )?.workouts
 
-    const indexWorkout = course.findIndex(
+    const indexWorkout = course?.findIndex(
         (workout) => workout.name === workOut?.name,
     )
 
