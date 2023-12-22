@@ -140,19 +140,21 @@ const WorkOut = () => {
                     opts={opts}
                     className={s.video}
                     onEnd={() => {
-                        if (isVideoWatched) {
-                            localStorage.setItem(
-                                'isVideoWatched',
-                                JSON.stringify([
-                                    ...isVideoWatched,
-                                    indexWorkout,
-                                ]),
-                            )
-                        } else {
-                            localStorage.setItem(
-                                'isVideoWatched',
-                                JSON.stringify([indexWorkout]),
-                            )
+                        if (!workOut?.exercises) {
+                            if (isVideoWatched) {
+                                localStorage.setItem(
+                                    'isVideoWatched',
+                                    JSON.stringify([
+                                        ...isVideoWatched,
+                                        indexWorkout,
+                                    ]),
+                                )
+                            } else {
+                                localStorage.setItem(
+                                    'isVideoWatched',
+                                    JSON.stringify([indexWorkout]),
+                                )
+                            }
                         }
                     }}
                 />
