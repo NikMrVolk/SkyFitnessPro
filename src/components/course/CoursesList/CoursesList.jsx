@@ -33,23 +33,24 @@ function CoursesList({ courses, isMainPage, profile = false }) {
             const allProgress = allCourses
                 ?.find((item) => item.nameEN === workOutType.nameEN)
                 .workouts.map((workout) => {
-                    const isAllExercisesValid = workout.exercises.every(
+                    const isAllExercisesValid = workout.exercises?.every(
                         (exercise) => {
-                            const userExercise = exercise.users.find(
+                            const userExercise = exercise?.users?.find(
                                 (user) => user.userID === userID,
                             )
                             if (!userExercise) {
                                 return false
                             }
                             return (
-                                userExercise.quantityUser === exercise.quantity
+                                userExercise?.quantityUser ===
+                                exercise?.quantity
                             )
                         },
                     )
                     return isAllExercisesValid
                 })
 
-                setIsDone(allProgress)
+            setIsDone(allProgress)
             console.log('allProgress', allProgress)
             console.log('workOutType', workOutType)
         }
