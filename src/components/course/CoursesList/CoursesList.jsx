@@ -4,7 +4,7 @@ import s from './CoursesList.module.css'
 import NavButton from '../../UI/navButton/NavButton'
 import Modal from '../../UI/modal/Modal'
 import ChooseDayWorkModal from '../../modals/ChooseDayWorkModal/ChooseDayWorkModal'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { setWorkOutType } from '../../../store/slices/courses'
 
 function CoursesList({ courses, isMainPage, profile = false }) {
@@ -49,11 +49,15 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                     return isAllExercisesValid
                 })
 
-                 setIsDone(allProgress)
+                setIsDone(allProgress)
             console.log('allProgress', allProgress)
             console.log('workOutType', workOutType)
         }
     }
+
+    useEffect(() => {
+        setDoneWorkouts()
+    }, [workOutType.nameEN, allCourses])
 
     return (
         <div className={s.courses}>
@@ -76,7 +80,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                             <div className={s.btnWrapper}>
                                 <NavButton
                                     onClick={() => {
-                                        handleClick(el), setDoneWorkouts()
+                                        handleClick(el)
                                     }}
                                 >
                                     Перейти →
