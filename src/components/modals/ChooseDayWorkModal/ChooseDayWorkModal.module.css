@@ -26,8 +26,12 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
+    color: #000;
+}
+.modalLiActive {   
     color: #06b16e;
 }
+
 
 .modalBtn,
 .modalBtnActive {

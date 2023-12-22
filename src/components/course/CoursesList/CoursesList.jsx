@@ -12,7 +12,7 @@ function CoursesList({ courses, isMainPage, profile = false }) {
     const [workOuts, setWorkOuts] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [isDone, setIsDone] = useState(false)
+    const [isDone, setIsDone] = useState([])
 
     const { allCourses, workOutType } = useSelector((state) => state.courses)
     const { userID } = useSelector((state) => state.auth)
@@ -48,6 +48,8 @@ function CoursesList({ courses, isMainPage, profile = false }) {
                     )
                     return isAllExercisesValid
                 })
+
+                setIsDone(allProgress)
             console.log('allProgress', allProgress)
             console.log('workOutType', workOutType)
         }

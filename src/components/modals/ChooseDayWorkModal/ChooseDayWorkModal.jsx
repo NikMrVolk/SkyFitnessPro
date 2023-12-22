@@ -39,15 +39,15 @@ const ChooseDayWorkModal = ({ workOuts, isDone }) => {
         <div>
             <h2 className={s.modalHeader}>Выберите тренировку</h2>
             <ul className={s.modalUl}>
-                {workOuts?.map((el) => (
+                {workOuts?.map((el, index) => (
                     <li
-                        className={s.modalLi}
+                        className={isDone[index] ? s.modalLiActive : s.modalLi}
                         key={el.day}
                         onClick={() => handleClick(el)}
                     >
-                        <div className={isDone ? s.modalBtnActive : s.modalBtn}>
+                        <div className={isDone[index] ? s.modalBtnActive : s.modalBtn}>
                             <h3 className={s.exerciseTitle}>{el.name}</h3>
-                            {isDone && (
+                            {isDone[index] && (
                                 <img
                                     className={s.modalImg}
                                     src="../img/isDone.svg"
