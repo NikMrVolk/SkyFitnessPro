@@ -19,6 +19,7 @@ const navMenuItems = [
 function NavMenu() {
     const handleLogout = () => {
         localStorage.removeItem('auth')
+        localStorage.removeItem('isVideoWatched')
         window.location.href = '/'
     }
     const location = useLocation()

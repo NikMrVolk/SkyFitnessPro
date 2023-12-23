@@ -31,10 +31,6 @@ export default function Auth() {
     const isLogin = pathname === LOGIN_ROUTE
     const hashPassword = bcrypt.hashSync(password, 5)
 
-    useEffect(() => {
-        console.log('password', password)
-    }, [password])
-
     const auth = async () => {
         const emailAfterTrim = email.trim()
 

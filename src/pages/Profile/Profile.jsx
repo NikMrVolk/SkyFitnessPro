@@ -13,7 +13,10 @@ import {
     updateEmail,
     onAuthStateChanged,
     verifyBeforeUpdateEmail,
+    sendEmailVerification,
     updatePassword,
+    reauthenticateWithCredential,
+    EmailAuthProvider,
 } from 'firebase/auth'
 import { setAuth } from '../../store/slices/authSlice'
 
@@ -38,6 +41,10 @@ function Profile() {
     useEffect(() => {
         console.log('comparePassword', comparePassword)
     }, [comparePassword])
+    
+    useEffect(() => {
+        console.log('oldPassword', oldPassword)
+    }, [oldPassword])
 
     const coursesUser = allCourses.filter((item) =>
         item.users?.includes(userID),
@@ -73,7 +80,7 @@ function Profile() {
     // })
 
     const handleUpdateEmail = () => {
-        return verifyBeforeUpdateEmail(user, newEmail)
+        verifyBeforeUpdateEmail(user, newEmail)
             .then(() => {
                 return updateEmail(user, newEmail)
             })
@@ -81,12 +88,6 @@ function Profile() {
                 console.log('адрес электронной почты успешно обновлен')
             })
             .catch((error) => {
-                // if (
-                //     error.message ==
-                //     'Firebase: Error (auth/requires-recent-login).'
-                // ) {
-                //     firebase.user.reauthenticate(credential)
-                // }
                 toast.success(
                     'Пожалуйста, проверьте свою электронную почту, чтобы подтвердить новый адрес электронной почты. После подтверждения новой почты повторно авторизуйтесь в приложение.',
                     { className: s.success },
@@ -104,7 +105,13 @@ function Profile() {
             toast('Пароли не совпадают', { className: s.error })
             return
         }
-        updatePassword(user, newPassword)
+
+        reauthenticateWithCredential(
+            user,
+            EmailAuthProvider.credential(user?.email, oldPassword),
+        )
+            .then(() => updatePassword(user, newPassword))
+
             .then(() =>
                 toast.success('Пароль успешно изменен', {
                     className: s.success,
