@@ -97,10 +97,12 @@ function Profile() {
     const handleUpdatePassword = () => {
         if (!comparePassword) {
             toast('Неверно введен старый пароль', { className: s.error })
+            return
         }
 
         if (newPassword !== repeatNewPassword) {
             toast('Пароли не совпадают', { className: s.error })
+            return
         }
         updatePassword(user, newPassword)
             .then(() =>
