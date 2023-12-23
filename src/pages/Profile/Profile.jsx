@@ -15,20 +15,21 @@ import { toast } from 'react-toastify'
 import { setAuth } from '../../store/slices/authSlice'
 
 function Profile() {
-
     const dispatch = useDispatch()
     const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
-    const { userName, userID } = useSelector((state) => state.auth)
+    const { userName, userID, password } = useSelector((state) => state.auth)
     const { allCourses } = useSelector((state) => state.courses)
+    const [isChangeLogin, setIsChangeLogin] = useState(false)
     const [newEmail, setNewEmail] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [repeatNewPassword, setRepeatNewPassword] = useState('')
     const auth = getAuth()
     const user = auth?.currentUser
 
     const coursesUser = allCourses.filter((item) =>
         item.users?.includes(userID),
     )
-
 
     useEffect(() => {
         if (user?.emailVerified) {
@@ -80,22 +81,32 @@ function Profile() {
             })
     }
 
-
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
                 <h1 className={s.title}>Мой профиль</h1>
                 <div className={s.user}>
                     <p className={s.userLogin}>Email: {userName}</p>
+                    <p className={s.userPassword}>Пароль: {password}</p>
                 </div>
                 <div className={s.buttons}>
                     <Button
                         color="purple"
                         onClick={() => {
                             setModalChangeDataActive(true)
+                            setIsChangeLogin(true)
                         }}
                     >
                         Редактировать email
+                    </Button>
+                    <Button
+                        color="purple"
+                        onClick={() => {
+                            setModalChangeDataActive(true)
+                            setIsChangeLogin(false)
+                        }}
+                    >
+                        Редактировать пароль
                     </Button>
                 </div>
             </div>
@@ -117,13 +128,31 @@ function Profile() {
                     >
                         <h3 className={s.textChangeData}>
                             {' '}
-                            Введите новый email:
+                            {isChangeLogin
+                                ? 'Введите новый email:'
+                                : 'Введите новый пароль:'}
                         </h3>
+
                         <Input
-                            placeholder="Логин"
+                            placeholder={isChangeLogin ? 'Email' : 'Пароль'}
                             onChange={(event) => {
-                                setNewEmail(event.target.value)
+                                isChangeLogin
+                                    ? setNewEmail(event.target.value)
+                                    : setNewPassword(event.target.value)
                             }}
+                        />
+
+                        {!isChangeLogin && (
+                            <h4 className={s.textChangeData}>
+                                Повторите новый пароль:
+                            </h4>
+                        )}
+
+                        <Input
+                            placeholder="Пароль"
+                            onChange={(event) =>
+                                setRepeatNewPassword(event.target.value)
+                            }
                         />
                         <Button
                             color="purple"
