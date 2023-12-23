@@ -16,7 +16,7 @@ const initialState = {
     refresh: null,
     userName: null,
     userID: null,
-    password: null
+    hashPassword: null
 }
 
 export const authSlice = createSlice({
@@ -25,12 +25,12 @@ export const authSlice = createSlice({
 
     reducers: {
         setAuth: (state, action) => {
-            const { accessToken, email, uid, refreshToken, password } = action.payload ?? initialState
+            const { accessToken, email, uid, refreshToken, hashPassword } = action.payload ?? initialState
             state.access = accessToken
             state.userName = email
             state.userID = uid
             state.refresh = refreshToken
-            state.password = password
+            state.hashPassword = hashPassword
 
             localStorage.setItem(AUTH_INFO, JSON.stringify(state))
         },

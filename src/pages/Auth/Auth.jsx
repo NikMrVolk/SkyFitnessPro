@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import bcrypt from 'bcryptjs'
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -28,14 +29,11 @@ export default function Auth() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [validationError, setValidationError] = useState('')
     const isLogin = pathname === LOGIN_ROUTE
+    const hashPassword = bcrypt.hashSync(password, 5)
 
     useEffect(() => {
         console.log('password', password)
     }, [password])
-    
-    useEffect(() => {
-        console.log('email', password)
-    }, [email])
 
     const auth = async () => {
         const emailAfterTrim = email.trim()
@@ -70,7 +68,7 @@ export default function Auth() {
                             email: user.email,
                             uid: user.uid,
                             refreshToken: user.stsTokenManager.refreshToken,
-                            password: password,
+                            hashPassword: hashPassword,
                         }),
                     )
                     setValidationError('')
@@ -82,6 +80,8 @@ export default function Auth() {
         }
     }
 
+   
+
     return (
         <div className={s.page}>
             <div className={s.wrapper}>
@@ -89,6 +89,7 @@ export default function Auth() {
                     <div className={s.modalLogo}>
                         <img src="/img/logo/blackLogo.svg" alt="logo" />
                     </div>
+
                     <Input
                         placeholder="Логин"
                         classes={[

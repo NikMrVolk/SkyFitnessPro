@@ -1,31 +1,43 @@
 import { useSelector, useDispatch } from 'react-redux'
+import bcrypt from 'bcryptjs'
+// const bcrypt = require('bcryptjs');
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
 import Modal from '../../components/UI/modal/Modal'
 import { useState, useEffect } from 'react'
 import Button from '../../components/UI/button/Button'
 import Input from '../../components/UI/input/Input'
+import { toast } from 'react-toastify'
 import {
     getAuth,
     updateEmail,
     onAuthStateChanged,
     verifyBeforeUpdateEmail,
+    updatePassword,
 } from 'firebase/auth'
-import { toast } from 'react-toastify'
 import { setAuth } from '../../store/slices/authSlice'
 
 function Profile() {
     const dispatch = useDispatch()
     const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
-    const { userName, userID, password } = useSelector((state) => state.auth)
+    const { userName, userID, hashPassword } = useSelector(
+        (state) => state.auth,
+    )
     const { allCourses } = useSelector((state) => state.courses)
     const [isChangeLogin, setIsChangeLogin] = useState(false)
     const [newEmail, setNewEmail] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [repeatNewPassword, setRepeatNewPassword] = useState('')
+    const [oldPassword, setOldPassword] = useState('')
     const auth = getAuth()
     const user = auth?.currentUser
+    const comparePassword = bcrypt.compareSync(oldPassword, hashPassword)
+    const hashNewPassword = bcrypt.hashSync(newPassword, 5)
+
+    useEffect(() => {
+        console.log('comparePassword', comparePassword)
+    }, [comparePassword])
 
     const coursesUser = allCourses.filter((item) =>
         item.users?.includes(userID),
@@ -40,6 +52,7 @@ function Profile() {
                     email: user.email,
                     uid: user.uid,
                     refreshToken: user.stsTokenManager.refreshToken,
+                    hashPassword: hashNewPassword,
                 }),
             )
         }
@@ -47,13 +60,13 @@ function Profile() {
 
     // onAuthStateChanged(auth, (user) => {
     //     if (user) {
-    //         console.log('user1', user)
     //         dispatch(
     //             setAuth({
     //                 accessToken: user.accessToken,
     //                 email: user.email,
     //                 uid: user.uid,
     //                 refreshToken: user.stsTokenManager.refreshToken,
+    //                 hashPassword: hashNewPassword,
     //             }),
     //         )
     //     }
@@ -81,13 +94,30 @@ function Profile() {
             })
     }
 
+    const handleUpdatePassword = () => {
+        if (!comparePassword) {
+            toast('Неверно введен старый пароль', { className: s.error })
+        }
+
+        if (newPassword !== repeatNewPassword) {
+            toast('Пароли не совпадают', { className: s.error })
+        }
+        updatePassword(user, newPassword)
+            .then(() =>
+                toast.success('Пароль успешно изменен', {
+                    className: s.success,
+                }),
+            )
+            .catch((error) => toast(error.message, { className: s.error }))
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.box}>
                 <h1 className={s.title}>Мой профиль</h1>
                 <div className={s.user}>
                     <p className={s.userLogin}>Email: {userName}</p>
-                    <p className={s.userPassword}>Пароль: {password}</p>
+                    {/* <p className={s.userPassword}>Пароль: {comparePassword}</p> */}
                 </div>
                 <div className={s.buttons}>
                     <Button
@@ -126,6 +156,21 @@ function Profile() {
                             width: '278px',
                         }}
                     >
+                        {!isChangeLogin && (
+                            <>
+                                <h4 className={s.textChangeData}>
+                                    Введите старый пароль:
+                                </h4>
+
+                                <Input
+                                    placeholder=" Введите старый пароль:"
+                                    onChange={(event) =>
+                                        setOldPassword(event.target.value)
+                                    }
+                                />
+                            </>
+                        )}
+
                         <h3 className={s.textChangeData}>
                             {' '}
                             {isChangeLogin
@@ -143,22 +188,26 @@ function Profile() {
                         />
 
                         {!isChangeLogin && (
-                            <h4 className={s.textChangeData}>
-                                Повторите новый пароль:
-                            </h4>
-                        )}
+                            <>
+                                <h4 className={s.textChangeData}>
+                                    Повторите новый пароль:
+                                </h4>
 
-                        <Input
-                            placeholder="Пароль"
-                            onChange={(event) =>
-                                setRepeatNewPassword(event.target.value)
-                            }
-                        />
+                                <Input
+                                    placeholder="Повторите новый пароль:"
+                                    onChange={(event) =>
+                                        setRepeatNewPassword(event.target.value)
+                                    }
+                                />
+                            </>
+                        )}
                         <Button
                             color="purple"
                             onClick={() => {
                                 setModalChangeDataActive(false),
-                                    handleUpdateEmail()
+                                    isChangeLogin
+                                        ? handleUpdateEmail()
+                                        : handleUpdatePassword()
                             }}
                         >
                             Cохранить
