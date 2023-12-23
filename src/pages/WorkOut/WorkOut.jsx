@@ -126,6 +126,8 @@ const WorkOut = () => {
         })
     }
 
+    const isVideoWatched = JSON.parse(localStorage?.getItem('isVideoWatched'))
+
     return (
         <div>
             <h1 className={s.title}>{workOutType.nameRU}</h1>
@@ -137,6 +139,24 @@ const WorkOut = () => {
                     videoId={workOut?.video}
                     opts={opts}
                     className={s.video}
+                    onEnd={() => {
+                        if (!workOut?.exercises) {
+                            if (isVideoWatched) {
+                                localStorage.setItem(
+                                    'isVideoWatched',
+                                    JSON.stringify([
+                                        ...isVideoWatched,
+                                        workOut.video,
+                                    ]),
+                                )
+                            } else {
+                                localStorage.setItem(
+                                    'isVideoWatched',
+                                    JSON.stringify([workOut.video]),
+                                )
+                            }
+                        }
+                    }}
                 />
             </div>
             {workOut?.exercises?.length ? (
@@ -160,7 +180,7 @@ const WorkOut = () => {
                         <form action="#" className={sProgress.form}>
                             {workOut?.exercises?.map((el, id) => (
                                 <ProgressModalItem
-                                    key={Math.round()}
+                                    key={Math.random()}
                                     el={el}
                                     id={id}
                                     userProgress={userProgress}
