@@ -32,7 +32,12 @@ const WorkOutExercise = ({ workOut, result, setModalActive }) => {
                         {(result || result === 0) && (
                             <ProgressBar
                                 {...progress[index]}
-                                completed={result[index]}
+                                completed={
+                                    result[index] <= 30 && result[index] != 0
+                                        ? 30
+                                        : result[index]
+                                }
+                                customLabel={result[index] + '%'}
                                 className={s.progress}
                                 labelClassName={s.barLabel}
                             />
