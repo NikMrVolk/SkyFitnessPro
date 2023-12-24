@@ -36,7 +36,6 @@ function Profile() {
     const auth = getAuth()
     const user = auth?.currentUser
     const comparePassword = bcrypt.compareSync(oldPassword, hashPassword)
-    const hashNewPassword = bcrypt.hashSync(newPassword, 5)
 
     useEffect(() => {
         console.log('comparePassword', comparePassword)
@@ -50,20 +49,20 @@ function Profile() {
         item.users?.includes(userID),
     )
 
-    useEffect(() => {
-        if (user?.emailVerified) {
-            // Если адрес электронной почты подтвержден, обновляем данные в локальном хранилище
-            dispatch(
-                setAuth({
-                    accessToken: user.accessToken,
-                    email: user.email,
-                    uid: user.uid,
-                    refreshToken: user.stsTokenManager.refreshToken,
-                    hashPassword: hashNewPassword,
-                }),
-            )
-        }
-    }, [user?.email, newEmail, user?.emailVerified])
+    // useEffect(() => {
+    //     if (user?.emailVerified) {
+    //         // Если адрес электронной почты подтвержден, обновляем данные в локальном хранилище
+    //         dispatch(
+    //             setAuth({
+    //                 accessToken: user.accessToken,
+    //                 email: user.email,
+    //                 uid: user.uid,
+    //                 refreshToken: user.stsTokenManager.refreshToken,
+    //                 hashPassword: hashNewPassword,
+    //             }),
+    //         )
+    //     }
+    // }, [user?.email, newEmail, user?.emailVerified])
 
     // onAuthStateChanged(auth, (user) => {
     //     if (user) {
