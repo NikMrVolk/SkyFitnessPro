@@ -43,3 +43,8 @@
    line-height: 24px;
    width: 400px;
 }
+
+.error {
+    background: rgb(241, 156, 156);
+    font-size: 25px;
+}

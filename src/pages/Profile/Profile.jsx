@@ -1,65 +1,85 @@
 import { useSelector, useDispatch } from 'react-redux'
+import bcrypt from 'bcryptjs'
+// const bcrypt = require('bcryptjs');
 import CoursesList from '../../components/course/CoursesList/CoursesList'
 import s from './Profile.module.css'
 import Modal from '../../components/UI/modal/Modal'
 import { useState, useEffect } from 'react'
 import Button from '../../components/UI/button/Button'
 import Input from '../../components/UI/input/Input'
+import { toast } from 'react-toastify'
 import {
     getAuth,
     updateEmail,
     onAuthStateChanged,
     verifyBeforeUpdateEmail,
+    sendEmailVerification,
+    updatePassword,
+    reauthenticateWithCredential,
+    EmailAuthProvider,
 } from 'firebase/auth'
-import { toast } from 'react-toastify'
 import { setAuth } from '../../store/slices/authSlice'
 
 function Profile() {
-
     const dispatch = useDispatch()
     const [modalActive, setModalActive] = useState(false)
     const [modalChangeDataActive, setModalChangeDataActive] = useState(false)
-    const { userName, userID } = useSelector((state) => state.auth)
+    const { userName, userID, hashPassword } = useSelector(
+        (state) => state.auth,
+    )
     const { allCourses } = useSelector((state) => state.courses)
+    const [isChangeLogin, setIsChangeLogin] = useState(false)
     const [newEmail, setNewEmail] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [repeatNewPassword, setRepeatNewPassword] = useState('')
+    const [oldPassword, setOldPassword] = useState('')
     const auth = getAuth()
     const user = auth?.currentUser
+    const comparePassword = bcrypt.compareSync(oldPassword, hashPassword)
+
+    useEffect(() => {
+        console.log('comparePassword', comparePassword)
+    }, [comparePassword])
+    
+    useEffect(() => {
+        console.log('oldPassword', oldPassword)
+    }, [oldPassword])
 
     const coursesUser = allCourses.filter((item) =>
         item.users?.includes(userID),
     )
 
-
-    useEffect(() => {
-        if (user?.emailVerified) {
-            // Если адрес электронной почты подтвержден, обновляем данные в локальном хранилище
-            dispatch(
-                setAuth({
-                    accessToken: user.accessToken,
-                    email: user.email,
-                    uid: user.uid,
-                    refreshToken: user.stsTokenManager.refreshToken,
-                }),
-            )
-        }
-    }, [user?.email, newEmail, user?.emailVerified])
-
-    // onAuthStateChanged(auth, (user) => {
-    //     if (user) {
-    //         console.log('user1', user)
+    // useEffect(() => {
+    //     if (user?.emailVerified) {
+    //         // Если адрес электронной почты подтвержден, обновляем данные в локальном хранилище
     //         dispatch(
     //             setAuth({
     //                 accessToken: user.accessToken,
     //                 email: user.email,
     //                 uid: user.uid,
     //                 refreshToken: user.stsTokenManager.refreshToken,
+    //                 hashPassword: hashNewPassword,
+    //             }),
+    //         )
+    //     }
+    // }, [user?.email, newEmail, user?.emailVerified])
+
+    // onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //         dispatch(
+    //             setAuth({
+    //                 accessToken: user.accessToken,
+    //                 email: user.email,
+    //                 uid: user.uid,
+    //                 refreshToken: user.stsTokenManager.refreshToken,
+    //                 hashPassword: hashNewPassword,
     //             }),
     //         )
     //     }
     // })
 
     const handleUpdateEmail = () => {
-        return verifyBeforeUpdateEmail(user, newEmail)
+        verifyBeforeUpdateEmail(user, newEmail)
             .then(() => {
                 return updateEmail(user, newEmail)
             })
@@ -67,12 +87,6 @@ function Profile() {
                 console.log('адрес электронной почты успешно обновлен')
             })
             .catch((error) => {
-                // if (
-                //     error.message ==
-                //     'Firebase: Error (auth/requires-recent-login).'
-                // ) {
-                //     firebase.user.reauthenticate(credential)
-                // }
                 toast.success(
                     'Пожалуйста, проверьте свою электронную почту, чтобы подтвердить новый адрес электронной почты. После подтверждения новой почты повторно авторизуйтесь в приложение.',
                     { className: s.success },
@@ -80,6 +94,30 @@ function Profile() {
             })
     }
 
+    const handleUpdatePassword = () => {
+        if (!comparePassword) {
+            toast('Неверно введен старый пароль', { className: s.error })
+            return
+        }
+
+        if (newPassword !== repeatNewPassword) {
+            toast('Пароли не совпадают', { className: s.error })
+            return
+        }
+
+        reauthenticateWithCredential(
+            user,
+            EmailAuthProvider.credential(user?.email, oldPassword),
+        )
+            .then(() => updatePassword(user, newPassword))
+
+            .then(() =>
+                toast.success('Пароль успешно изменен', {
+                    className: s.success,
+                }),
+            )
+            .catch((error) => toast(error.message, { className: s.error }))
+    }
 
     return (
         <div className={s.wrapper}>
@@ -87,15 +125,26 @@ function Profile() {
                 <h1 className={s.title}>Мой профиль</h1>
                 <div className={s.user}>
                     <p className={s.userLogin}>Email: {userName}</p>
+                    {/* <p className={s.userPassword}>Пароль: {comparePassword}</p> */}
                 </div>
                 <div className={s.buttons}>
                     <Button
                         color="purple"
                         onClick={() => {
                             setModalChangeDataActive(true)
+                            setIsChangeLogin(true)
                         }}
                     >
                         Редактировать email
+                    </Button>
+                    <Button
+                        color="purple"
+                        onClick={() => {
+                            setModalChangeDataActive(true)
+                            setIsChangeLogin(false)
+                        }}
+                    >
+                        Редактировать пароль
                     </Button>
                 </div>
             </div>
@@ -115,21 +164,58 @@ function Profile() {
                             width: '278px',
                         }}
                     >
+                        {!isChangeLogin && (
+                            <>
+                                <h4 className={s.textChangeData}>
+                                    Введите старый пароль:
+                                </h4>
+
+                                <Input
+                                    placeholder=" Введите старый пароль:"
+                                    onChange={(event) =>
+                                        setOldPassword(event.target.value)
+                                    }
+                                />
+                            </>
+                        )}
+
                         <h3 className={s.textChangeData}>
                             {' '}
-                            Введите новый email:
+                            {isChangeLogin
+                                ? 'Введите новый email:'
+                                : 'Введите новый пароль:'}
                         </h3>
+
                         <Input
-                            placeholder="Логин"
+                            placeholder={isChangeLogin ? 'Email' : 'Пароль'}
                             onChange={(event) => {
-                                setNewEmail(event.target.value)
+                                isChangeLogin
+                                    ? setNewEmail(event.target.value)
+                                    : setNewPassword(event.target.value)
                             }}
                         />
+
+                        {!isChangeLogin && (
+                            <>
+                                <h4 className={s.textChangeData}>
+                                    Повторите новый пароль:
+                                </h4>
+
+                                <Input
+                                    placeholder="Повторите новый пароль:"
+                                    onChange={(event) =>
+                                        setRepeatNewPassword(event.target.value)
+                                    }
+                                />
+                            </>
+                        )}
                         <Button
                             color="purple"
                             onClick={() => {
                                 setModalChangeDataActive(false),
-                                    handleUpdateEmail()
+                                    isChangeLogin
+                                        ? handleUpdateEmail()
+                                        : handleUpdatePassword()
                             }}
                         >
                             Cохранить
