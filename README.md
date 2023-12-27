@@ -1,4 +1,4 @@
-# [SkyFitnessPro](https://glittery-salmiakki-b65aa6.netlify.app/)
+# [SkyFitnessPro](https://euphonious-puffpuff-a8e2ac.netlify.app/)
 
 Сайт с курсами тренировок по йоге и подобным дисциплинам. В приложении пользователи смогут выбирать интересующий их курс и отслеживать прогресс своих тренировок на протяжении дня.
 
